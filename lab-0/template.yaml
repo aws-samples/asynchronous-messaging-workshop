@@ -13,7 +13,7 @@ Parameters:
   GitRepositoryURL:
     Description: The Git repository URL for the project we are cloning
     Type: String
-    Default: https://github.com/muellerc/wild-rydes-async-messaging.git
+    Default: https://github.com/aws-samples/asynchronous-messaging-workshop.git
 
 Resources:
   VPC:
