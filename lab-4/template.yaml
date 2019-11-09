@@ -1,0 +1,401 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  re:invent2019 ARC314-R Lab-4
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+    Runtime: python3.7
+    MemorySize: 512
+    Tracing: Active
+    Tags:
+      project: wild-rydes
+      workshop: reinvent-arc314-lab4
+      author: aws
+
+Resources:
+
+  PaymentChargeFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: charge.lambda_handler
+      CodeUri: payment_charge/
+
+  PaymentRefundFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: refund.lambda_handler
+      CodeUri: payment_refund/
+
+  AccountCreditFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: credit.lambda_handler
+      CodeUri: account_credit/
+
+  FaresTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: fareId
+        Type: String
+      Tags:
+        project: wild-rydes
+        workshop: reinvent-arc314-lab4
+        author: aws
+
+  # TODO: Add your Step Function resource here
+  WildRydesStateMachine:
+      Type: "AWS::StepFunctions::StateMachine"
+      Properties:
+        StateMachineName: !Ref "AWS::StackName"
+        RoleArn: !GetAtt StepFunctionsServiceRole.Arn
+        Tags:
+        - Key: project
+          Value: wild-rydes
+        - Key: workshop
+          Value: reinvent-arc314-lab4
+        - Key: author
+          Value: aws
+        DefinitionString: !Sub |-
+          {
+            "Comment": "StateMachine for Processing Fare Payments",
+            "StartAt": "RegisterFare",
+            "States": {
+              "RegisterFare": {
+                "Type": "Task",
+                "Resource": "arn:aws:states:::dynamodb:putItem",
+                "Parameters": {
+                  "TableName": "${FaresTable}",
+                  "Item.$": "$"
+                },
+                "TimeoutSeconds": 5,
+                "Retry": [
+                    {
+                        "ErrorEquals": [
+                            "ProvisionedThroughputExceededException",
+                            "RequestLimitExceeded",
+                            "ServiceUnavailable",
+                            "ThrottlingException"
+                        ],
+                        "IntervalSeconds": 1,
+                        "BackoffRate": 2,
+                        "MaxAttempts": 2
+                    }
+                ],
+                "Catch": [
+                    {
+                        "ErrorEquals": [
+                            "States.ALL"
+                        ],
+                        "ResultPath": "$.registerError",
+                        "Next": "NotifyFailure"
+                    }
+                ],
+                "ResultPath": "$.dynamodbResult",
+                "Next": "ChargeFare"
+              },
+              "ChargeFare": {
+                "Comment": "Add comment...",
+                "Type": "Task",
+                "Resource": "${PaymentChargeFunction.Arn}",
+                "Next": "CustomerAccountCredit",
+                "Catch": [{
+                  "ErrorEquals": [
+                    "PaymentAuthException",
+                    "PaymentChargeException"
+                  ],
+                  "Next": "SetFareStatusFailed",
+                  "ResultPath": "$.chargeError"
+                }]
+              },
+              "CustomerAccountCredit": {
+                "Comment": "Add comment...",
+                "Type": "Task",
+                "Resource": "${AccountCreditFunction.Arn}",
+                "Next": "SetFareStatusCompleted",
+                "Catch": [{
+                  "ErrorEquals": ["AccountCreditException"],
+                  "Next": "RefundFare",
+                  "ResultPath": "$.creditError"
+                }]
+              },
+              "SetFareStatusCompleted": {
+                "Type": "Task",
+                "Resource": "arn:aws:states:::dynamodb:updateItem",
+                "Parameters": {
+                  "TableName": "${FaresTable}",
+                  "Key": {
+                    "fareId": {
+                      "S.$": "$.fareId"
+                    }
+                  },
+                  "UpdateExpression": "SET fareStatus = :s",
+                  "ExpressionAttributeValues": {
+                    ":s": {
+                      "S": "completed"
+                    }
+                  }
+                },
+                "TimeoutSeconds": 5,
+                "Retry": [{
+                    "ErrorEquals": [
+                      "ProvisionedThroughputExceededException",
+                      "RequestLimitExceeded",
+                      "ServiceUnavailable",
+                      "ThrottlingException"
+                    ],
+                    "IntervalSeconds": 1,
+                    "BackoffRate": 2,
+                    "MaxAttempts": 2
+                  }
+                ],
+                "ResultPath": "$.dynamodbResult",
+                "Next": "NotifySuccess"
+              },
+              "SetFareStatusFailed": {
+                "Type": "Task",
+                "Resource": "arn:aws:states:::dynamodb:updateItem",
+                "Parameters": {
+                  "TableName": "${FaresTable}",
+                  "Key": {
+                    "fareId": {
+                      "S.$": "$.fareId"
+                    }
+                  },
+                  "UpdateExpression": "SET fareStatus = :s",
+                  "ExpressionAttributeValues": {
+                    ":s": {
+                      "S": "failed"
+                    }
+                  }
+                },
+                "TimeoutSeconds": 5,
+                "Retry": [{
+                    "ErrorEquals": [
+                      "ProvisionedThroughputExceededException",
+                      "RequestLimitExceeded",
+                      "ServiceUnavailable",
+                      "ThrottlingException"
+                    ],
+                    "IntervalSeconds": 1,
+                    "BackoffRate": 2,
+                    "MaxAttempts": 2
+                  }
+                ],
+                "ResultPath": "$.dynamodbResult",
+                "Next": "NotifyFailure"
+              },
+              "NotifySuccess": {
+                "Type": "Task",
+                "Resource": "arn:aws:states:::sns:publish",
+                "Parameters": {
+                  "Subject": "Transaction Succeeded",
+                  "Message.$": "$",
+                  "TopicArn": "${WildRydesFareProcessingTopic}",
+                  "MessageAttributes": {
+                    "IsSuccessful": {
+                      "DataType": "String",
+                      "StringValue": "true"
+                    }
+                  }
+                },
+                "ResultPath": "$.snsResult",
+                "Next": "FareProcessingSucceeded"
+              },
+              "FareProcessingSucceeded": {
+                "Type": "Succeed"
+              },
+              "RefundFare": {
+                "Comment": "Add comment...",
+                "Type": "Task",
+                "Resource": "${PaymentRefundFunction.Arn}",
+                "Next": "SetFareStatusFailed"
+              },
+              "NotifyFailure": {
+                "Type": "Task",
+                "Resource": "arn:aws:states:::sns:publish",
+                "Parameters": {
+                  "Subject": "Transaction Failed",
+                  "Message.$": "$",
+                  "TopicArn": "${WildRydesFareProcessingTopic}",
+                  "MessageAttributes": {
+                    "IsSuccessful": {
+                      "DataType": "String",
+                      "StringValue": "false"
+                    }
+                  }
+                },
+                "ResultPath": "$.snsResult",
+                "Next": "FareProcessingFailed"
+              },
+              "FareProcessingFailed": {
+                "Type": "Fail"
+              }
+            }
+          }
+
+
+  WildRydesFareProcessingTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: wild-rydes-fares
+      Tags:
+      - Key: project
+        Value: wild-rydes
+      - Key: workshop
+        Value: reinvent-arc314-lab4
+
+  WildRydesFailedTransactionsQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: wild-rydes-fares-failed
+      Tags:
+      - Key: project
+        Value: wild-rydes
+      - Key: workshop
+        Value: reinvent-arc314-lab4
+
+  WildRydesSuccessfulTransactionsQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: wild-rydes-fares-success
+      Tags:
+      - Key: project
+        Value: wild-rydes
+      - Key: workshop
+        Value: reinvent-arc314-lab4
+
+  WildRydesFaresQueuePolicy:
+      Type: AWS::SQS::QueuePolicy
+      Properties:
+        Queues:
+          - !Ref WildRydesFailedTransactionsQueue
+          - !Ref WildRydesSuccessfulTransactionsQueue
+        PolicyDocument:
+          Statement:
+            Effect: Allow
+            Principal: '*'
+            Action: sqs:*
+            Resource: '*'
+            Condition:
+              ArnEquals:
+                aws:SourceArn: !Ref WildRydesFareProcessingTopic
+
+  WildRydesFaresFailedSubscription:
+      Type: AWS::SNS::Subscription
+      Properties:
+        Endpoint: !GetAtt WildRydesFailedTransactionsQueue.Arn
+        Protocol: sqs
+        RawMessageDelivery: true
+        TopicArn: !Ref WildRydesFareProcessingTopic
+        FilterPolicy:
+          IsSuccessful:
+            - "false"
+
+  WildRydesFaresSuccessfulSubscription:
+      Type: AWS::SNS::Subscription
+      Properties:
+        Endpoint: !GetAtt WildRydesSuccessfulTransactionsQueue.Arn
+        Protocol: sqs
+        RawMessageDelivery: true
+        TopicArn: !Ref WildRydesFareProcessingTopic
+        FilterPolicy:
+          IsSuccessful:
+            - "true"
+
+  StepFunctionsServiceRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      ManagedPolicyArns:
+          - "arn:aws:iam::aws:policy/AWSStepFunctionsFullAccess"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+            -
+              Sid: "AllowStepFunctionsServiceToAssumeRole"
+              Effect: "Allow"
+              Action:
+                  - "sts:AssumeRole"
+              Principal:
+                  Service:
+                      - !Sub "states.${AWS::Region}.amazonaws.com"
+      Policies:
+        - PolicyName: "CallLambdaFunctions"
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+            - Effect: "Allow"
+              Action:
+                - "lambda:InvokeFunction"
+              Resource:
+                - !Sub ${PaymentChargeFunction.Arn}
+                - !Sub ${PaymentRefundFunction.Arn}
+                - !Sub ${AccountCreditFunction.Arn}
+        - PolicyName: "SnsServiceIntegration"
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+            - Effect: "Allow"
+              Action:
+                - "sns:Publish"
+              Resource:
+                - !Ref WildRydesFareProcessingTopic
+        - PolicyName: "SqsServiceIntegration"
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+            - Effect: "Allow"
+              Action:
+                - "sqs:SendMessage"
+              Resource:
+                - !GetAtt WildRydesFailedTransactionsQueue.Arn
+        - PolicyName: "DynamoDBServiceIntegration"
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+            - Effect: "Allow"
+              Action:
+                - dynamodb:PutItem
+                - dynamodb:GetItem
+                - dynamodb:UpdateItem
+                - dynamodb:DeleteItem
+              Resource:
+                - !GetAtt FaresTable.Arn
+
+
+Outputs:
+
+  PaymentChargeFunctionArn:
+    Description: "Payment Charge Function ARN"
+    Value: !GetAtt PaymentChargeFunction.Arn
+
+  PaymentRefundFunctionArn:
+    Description: "Payment Refund Function ARN"
+    Value: !GetAtt PaymentRefundFunction.Arn
+
+  AccountCreditFunctionArn:
+    Description: "Account Credit Function ARN"
+    Value: !GetAtt AccountCreditFunction.Arn
+
+  WildRyesFareTableArn:
+    Description: "DynamoDB fare table ARN"
+    Value: !GetAtt FaresTable.Arn
+
+  WildRydesStepFunctionArn:
+    Description: "State Machine ARN"
+    Value: !Ref WildRydesStateMachine
+
+  WildRydesFareProcessingTopic:
+    Description: "Fare Processing Topic"
+    Value: !Ref WildRydesFareProcessingTopic
+
+  WildRydesFailedTransactionsQueue:
+    Description: "SQS queue for failed transactions"
+    Value: !Ref WildRydesFailedTransactionsQueue
+
+  WildRydesSuccessfulTransactionsQueue:
+    Description: "SQS queue for successful transactions"
+    Value: !Ref WildRydesSuccessfulTransactionsQueue

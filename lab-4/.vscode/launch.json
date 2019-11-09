@@ -1,0 +1,70 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+      {
+          "name": "AccountCredit Fn",
+          "type": "python",
+          "request": "attach",
+          "port": 5890,
+          "host": "localhost",
+          "pathMappings": [
+              {
+                  "localRoot": "${workspaceFolder}/.aws-sam/build/AccountCreditFunction",
+                  "remoteRoot": "/var/task"
+              }
+          ]
+      },
+      {
+          "name": "AccountDebit Fn",
+          "type": "python",
+          "request": "attach",
+          "port": 5890,
+          "host": "localhost",
+          "pathMappings": [
+              {
+                  "localRoot": "${workspaceFolder}/.aws-sam/build/AccountDebitFunction",
+                  "remoteRoot": "/var/task"
+              }
+          ]
+      },
+      {
+          "name": "PaymentAuth Fn",
+          "type": "python",
+          "request": "attach",
+          "port": 5890,
+          "host": "localhost",
+          "pathMappings": [
+              {
+                  "localRoot": "${workspaceFolder}/.aws-sam/build/PaymentAuthFunction",
+                  "remoteRoot": "/var/task"
+              }
+          ]
+      },
+      {
+          "name": "PaymentCharge Fn",
+          "type": "python",
+          "request": "attach",
+          "port": 5890,
+          "host": "localhost",
+          "pathMappings": [
+              {
+                  "localRoot": "${workspaceFolder}/.aws-sam/build/PaymentChargeFunction",
+                  "remoteRoot": "/var/task"
+              }
+          ]
+      },
+      {
+        "name": "PaymentRefund Fn",
+        "type": "python",
+        "request": "attach",
+        "port": 5890,
+        "host": "localhost",
+        "pathMappings": [
+            {
+                "localRoot": "${workspaceFolder}/.aws-sam/build/PaymentRefundFunction",
+                "remoteRoot": "/var/task"
+            }
+        ]
+    }
+  ]
+}

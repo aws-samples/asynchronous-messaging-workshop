@@ -1,0 +1,8 @@
+{
+    "from": "Frankfurt",
+    "to": "Las Vegas",
+    "duration": "3000",
+    "distance": "1200",
+    "customer": "cmr",
+    "fare": "899.99"
+}
