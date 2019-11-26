@@ -4,6 +4,7 @@
 ### App specific ###
 packaged.yaml
 .aws-sam/
+.idea/
 
 ### Linux ###
 *~

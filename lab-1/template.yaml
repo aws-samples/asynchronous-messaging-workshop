@@ -193,6 +193,11 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
 
+  ECSServiceRole:
+    Type: AWS::IAM::ServiceLinkedRole
+    Properties:
+      AWSServiceName: ecs.amazonaws.com
+
   ECSCluster:
     Type: AWS::ECS::Cluster
     Properties:
@@ -530,7 +535,7 @@ Resources:
 
   CustomerAccountingServiceECSService:
     Type: AWS::ECS::Service
-    DependsOn: CustomerAccountingLoadBalancerListener
+    DependsOn: [CustomerAccountingLoadBalancerListener, ECSServiceRole]
     Properties:
       ServiceName: customer-accounting-service-service
       Cluster: !Ref ECSCluster
@@ -555,7 +560,7 @@ Resources:
 
   CustomerLoyaltyServiceECSService:
     Type: AWS::ECS::Service
-    DependsOn: CustomerLoyaltyLoadBalancerListener
+    DependsOn: [CustomerLoyaltyLoadBalancerListener, ECSServiceRole]
     Properties:
       ServiceName: customer-loyalty-service-service
       Cluster: !Ref ECSCluster
@@ -578,10 +583,9 @@ Resources:
           ContainerPort: 80
           TargetGroupArn: !Ref CustomerLoyaltyTargetGroup
 
-
   CustomerNotificationServiceECSService:
     Type: AWS::ECS::Service
-    DependsOn: CustomerNotifyLoadBalancerListener
+    DependsOn: [CustomerNotifyLoadBalancerListener, ECSServiceRole]
     Properties:
       ServiceName: customer-notification-service-service
       Cluster: !Ref ECSCluster
@@ -606,7 +610,7 @@ Resources:
 
   DatalakeIngestionServiceECSService:
     Type: AWS::ECS::Service
-    DependsOn: DatalakeIngestionLoadBalancerListener
+    DependsOn: [DatalakeIngestionLoadBalancerListener, ECSServiceRole]
     Properties:
       ServiceName: datalake-ingestion-service-service
       Cluster: !Ref ECSCluster
@@ -631,7 +635,7 @@ Resources:
 
   ExtraordinaryRidesServiceECSService:
     Type: AWS::ECS::Service
-    DependsOn: ExtraordinaryRidesLoadBalancerListener
+    DependsOn: [ExtraordinaryRidesLoadBalancerListener, ECSServiceRole]
     Properties:
       ServiceName: extraordinary-rides-service-service
       Cluster: !Ref ECSCluster
