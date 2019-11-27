@@ -29,7 +29,7 @@ Resources:
     Properties:
       CodeUri: unicorn-management-service/
       Handler: app.lambda_handler
-      Runtime: python3.7
+      Runtime: python3.6
       Layers:
         - !Ref PythonLayerWithBoto3
       Environment:
@@ -66,7 +66,7 @@ Resources:
     Properties:
       CodeUri: generic-backend-microservice/
       Handler: app.lambda_handler
-      Runtime: python3.7
+      Runtime: python3.6
       ReservedConcurrentExecutions: 5
       Environment:
         Variables:
@@ -86,7 +86,7 @@ Resources:
     Properties:
       CodeUri: generic-backend-microservice/
       Handler: app.lambda_handler
-      Runtime: python3.7
+      Runtime: python3.6
       ReservedConcurrentExecutions: 5
       Environment:
         Variables:
@@ -106,7 +106,7 @@ Resources:
     Properties:
       CodeUri: generic-backend-microservice/
       Handler: app.lambda_handler
-      Runtime: python3.7
+      Runtime: python3.6
       ReservedConcurrentExecutions: 5
       Environment:
         Variables:
@@ -126,7 +126,7 @@ Resources:
     Properties:
       CodeUri: generic-backend-microservice/
       Handler: app.lambda_handler
-      Runtime: python3.7
+      Runtime: python3.6
       ReservedConcurrentExecutions: 5
       Environment:
         Variables:
@@ -146,7 +146,7 @@ Resources:
     Properties:
       CodeUri: generic-backend-microservice/
       Handler: app.lambda_handler
-      Runtime: python3.7
+      Runtime: python3.6
       ReservedConcurrentExecutions: 5
       Environment:
         Variables:

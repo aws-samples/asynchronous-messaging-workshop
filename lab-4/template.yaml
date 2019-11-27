@@ -7,7 +7,7 @@ Description: >
 Globals:
   Function:
     Timeout: 3
-    Runtime: python3.7
+    Runtime: python3.6
     MemorySize: 512
     Tracing: Active
     Tags:

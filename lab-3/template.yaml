@@ -16,7 +16,7 @@ Resources:
     Properties:
       CodeUri: request-for-quotes-service/
       Handler: app.lambda_handler
-      Runtime: python3.7
+      Runtime: python3.6
       Environment:
         Variables:
           TABLE_NAME: !Ref RidesBookingTable
@@ -40,7 +40,7 @@ Resources:
     Properties:
       CodeUri: query-for-quotes-service/
       Handler: app.lambda_handler
-      Runtime: python3.7
+      Runtime: python3.6
       Environment:
         Variables:
           TABLE_NAME: !Ref RidesBookingTable
@@ -91,7 +91,7 @@ Resources:
     Properties:
       CodeUri: generic-unicorn-management-service/
       Handler: app.lambda_handler
-      Runtime: python3.7
+      Runtime: python3.6
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource1
@@ -111,7 +111,7 @@ Resources:
     Properties:
       CodeUri: generic-unicorn-management-service/
       Handler: app.lambda_handler
-      Runtime: python3.7
+      Runtime: python3.6
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource2
@@ -131,7 +131,7 @@ Resources:
     Properties:
       CodeUri: generic-unicorn-management-service/
       Handler: app.lambda_handler
-      Runtime: python3.7
+      Runtime: python3.6
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource3
@@ -151,7 +151,7 @@ Resources:
     Properties:
       CodeUri: generic-unicorn-management-service/
       Handler: app.lambda_handler
-      Runtime: python3.7
+      Runtime: python3.6
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource4
@@ -171,7 +171,7 @@ Resources:
     Properties:
       CodeUri: generic-unicorn-management-service/
       Handler: app.lambda_handler
-      Runtime: python3.7
+      Runtime: python3.6
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource5
@@ -191,7 +191,7 @@ Resources:
     Properties:
       CodeUri: generic-unicorn-management-service/
       Handler: app.lambda_handler
-      Runtime: python3.7
+      Runtime: python3.6
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource6
@@ -211,7 +211,7 @@ Resources:
     Properties:
       CodeUri: generic-unicorn-management-service/
       Handler: app.lambda_handler
-      Runtime: python3.7
+      Runtime: python3.6
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource7
@@ -231,7 +231,7 @@ Resources:
     Properties:
       CodeUri: generic-unicorn-management-service/
       Handler: app.lambda_handler
-      Runtime: python3.7
+      Runtime: python3.6
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource8
@@ -251,7 +251,7 @@ Resources:
     Properties:
       CodeUri: generic-unicorn-management-service/
       Handler: app.lambda_handler
-      Runtime: python3.7
+      Runtime: python3.6
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource9
@@ -271,7 +271,7 @@ Resources:
     Properties:
       CodeUri: generic-unicorn-management-service/
       Handler: app.lambda_handler
-      Runtime: python3.7
+      Runtime: python3.6
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource10
@@ -291,7 +291,7 @@ Resources:
     Properties:
       CodeUri: quotes-response-service/
       Handler: app.lambda_handler
-      Runtime: python3.7
+      Runtime: python3.6
       Environment:
         Variables:
           TABLE_NAME: !Ref RidesBookingTable
