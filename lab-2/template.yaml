@@ -35,12 +35,12 @@ Resources:
       Environment:
         Variables:
           TABLE_NAME: !Ref RidesTable
-#          TOPIC_ARN: !Ref RideCompleationTopic
+#          TOPIC_ARN: !Ref RideCompletionTopic
       Policies:
         - DynamoDBCrudPolicy: # https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json
             TableName: !Ref RidesTable
 #        - SNSPublishMessagePolicy: # https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json
-#            TopicName: !GetAtt RideCompleationTopic.TopicName
+#            TopicName: !GetAtt RideCompletionTopic.TopicName
       Events:
         WildRydes:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
@@ -59,7 +59,7 @@ Resources:
 #  RideCompletionTopic:
 #    Type: AWS::SNS::Topic
 #    Properties:
-#      TopicName: RideCompleationTopic
+#      TopicName: RideCompletionTopic
 
   CustomerAccountingService:
     Type: AWS::Serverless::Function
@@ -177,7 +177,7 @@ Resources:
 #            Resource: '*'
 #            Condition:
 #              ArnEquals:
-#                aws:SourceArn: !Ref RideCompleationTopic
+#                aws:SourceArn: !Ref RideCompletionTopic
 
 #  CustomerAccountingServiceQueueToRidesTopicSubscription:
 #      Type: AWS::SNS::Subscription
@@ -185,7 +185,7 @@ Resources:
 #        Endpoint: !GetAtt CustomerAccountingServiceQueue.Arn
 #        Protocol: sqs
 #        RawMessageDelivery: true
-#        TopicArn: !Ref RideCompleationTopic
+#        TopicArn: !Ref RideCompletionTopic
 
 #  CustomerLoyaltyServiceQueue:
 #    Type: AWS::SQS::Queue
@@ -203,7 +203,7 @@ Resources:
 #            Resource: '*'
 #            Condition:
 #              ArnEquals:
-#                aws:SourceArn: !Ref RideCompleationTopic
+#                aws:SourceArn: !Ref RideCompletionTopic
 
 #  CustomerLoyaltyServiceQueueToRidesTopicSubscription:
 #      Type: AWS::SNS::Subscription
@@ -211,7 +211,7 @@ Resources:
 #        Endpoint: !GetAtt CustomerLoyaltyServiceQueue.Arn
 #        Protocol: sqs
 #        RawMessageDelivery: true
-#        TopicArn: !Ref RideCompleationTopic
+#        TopicArn: !Ref RideCompletionTopic
 
 #  CustomerNotificationServiceQueue:
 #    Type: AWS::SQS::Queue
@@ -229,7 +229,7 @@ Resources:
 #            Resource: '*'
 #            Condition:
 #              ArnEquals:
-#                aws:SourceArn: !Ref RideCompleationTopic
+#                aws:SourceArn: !Ref RideCompletionTopic
 
 #  CustomerNotificationServiceQueueToRidesTopicSubscription:
 #      Type: AWS::SNS::Subscription
@@ -237,7 +237,7 @@ Resources:
 #        Endpoint: !GetAtt CustomerNotificationServiceQueue.Arn
 #        Protocol: sqs
 #        RawMessageDelivery: true
-#        TopicArn: !Ref RideCompleationTopic
+#        TopicArn: !Ref RideCompletionTopic
 
 #  DatalakeIngestionServiceQueue:
 #    Type: AWS::SQS::Queue
@@ -255,7 +255,7 @@ Resources:
 #            Resource: '*'
 #            Condition:
 #              ArnEquals:
-#                aws:SourceArn: !Ref RideCompleationTopic
+#                aws:SourceArn: !Ref RideCompletionTopic
 
 #  DatalakeIngestionServiceQueueToRidesTopicSubscription:
 #      Type: AWS::SNS::Subscription
@@ -263,7 +263,7 @@ Resources:
 #        Endpoint: !GetAtt DatalakeIngestionServiceQueue.Arn
 #        Protocol: sqs
 #        RawMessageDelivery: true
-#        TopicArn: !Ref RideCompleationTopic
+#        TopicArn: !Ref RideCompletionTopic
 
 #  ExtraordinaryRidesServiceQueue:
 #    Type: AWS::SQS::Queue
@@ -281,7 +281,7 @@ Resources:
 #            Resource: '*'
 #            Condition:
 #              ArnEquals:
-#                aws:SourceArn: !Ref RideCompleationTopic
+#                aws:SourceArn: !Ref RideCompletionTopic
 
 #  ExtraordinaryRidesServiceQueueToRidesTopicSubscription:
 #      Type: AWS::SNS::Subscription
@@ -289,7 +289,7 @@ Resources:
 #        Endpoint: !GetAtt ExtraordinaryRidesServiceQueue.Arn
 #        Protocol: sqs
 #        RawMessageDelivery: true
-#        TopicArn: !Ref RideCompleationTopic
+#        TopicArn: !Ref RideCompletionTopic
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
