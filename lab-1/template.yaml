@@ -193,12 +193,6 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
 
-  ECSServiceRole:
-    Type: AWS::IAM::ServiceLinkedRole
-    Properties:
-      AWSServiceName: ecs.amazonaws.com
-      Description: Role to enable Amazon ECS to manage your cluster.
-
   ECSCluster:
     Type: AWS::ECS::Cluster
     Properties:
@@ -536,7 +530,7 @@ Resources:
 
   CustomerAccountingServiceECSService:
     Type: AWS::ECS::Service
-    DependsOn: [CustomerAccountingLoadBalancerListener, ECSServiceRole]
+    DependsOn: CustomerAccountingLoadBalancerListener
     Properties:
       ServiceName: customer-accounting-service-service
       Cluster: !Ref ECSCluster
@@ -561,7 +555,7 @@ Resources:
 
   CustomerLoyaltyServiceECSService:
     Type: AWS::ECS::Service
-    DependsOn: [CustomerLoyaltyLoadBalancerListener, ECSServiceRole]
+    DependsOn: CustomerLoyaltyLoadBalancerListener
     Properties:
       ServiceName: customer-loyalty-service-service
       Cluster: !Ref ECSCluster
@@ -586,7 +580,7 @@ Resources:
 
   CustomerNotificationServiceECSService:
     Type: AWS::ECS::Service
-    DependsOn: [CustomerNotifyLoadBalancerListener, ECSServiceRole]
+    DependsOn: CustomerNotifyLoadBalancerListener
     Properties:
       ServiceName: customer-notification-service-service
       Cluster: !Ref ECSCluster
@@ -611,7 +605,7 @@ Resources:
 
   DatalakeIngestionServiceECSService:
     Type: AWS::ECS::Service
-    DependsOn: [DatalakeIngestionLoadBalancerListener, ECSServiceRole]
+    DependsOn: DatalakeIngestionLoadBalancerListener
     Properties:
       ServiceName: datalake-ingestion-service-service
       Cluster: !Ref ECSCluster
@@ -636,7 +630,7 @@ Resources:
 
   ExtraordinaryRidesServiceECSService:
     Type: AWS::ECS::Service
-    DependsOn: [ExtraordinaryRidesLoadBalancerListener, ECSServiceRole]
+    DependsOn: ExtraordinaryRidesLoadBalancerListener
     Properties:
       ServiceName: extraordinary-rides-service-service
       Cluster: !Ref ECSCluster
