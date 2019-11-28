@@ -56,7 +56,7 @@ Resources:
         Name: id
         Type: String
 
-#  RideCompleationTopic:
+#  RideCompletionTopic:
 #    Type: AWS::SNS::Topic
 #    Properties:
 #      TopicName: RideCompleationTopic
