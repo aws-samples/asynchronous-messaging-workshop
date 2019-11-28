@@ -290,6 +290,7 @@ Resources:
 #        Protocol: sqs
 #        RawMessageDelivery: true
 #        TopicArn: !Ref RideCompletionTopic
+#        FilterPolicy: { "fare": [{"numeric": [">=", 50]}], "distance": [{"numeric": [">=", 20]}] }
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
