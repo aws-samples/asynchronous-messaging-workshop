@@ -32,12 +32,12 @@ Resources:
       Environment:
         Variables:
           TABLE_NAME: !Ref RidesTable
-#          TOPIC_ARN: !Ref RideCompleationTopic
+#          TOPIC_ARN: !Ref RideCompletionTopic
       Policies:
         - DynamoDBCrudPolicy: # https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json
             TableName: !Ref RidesTable
 #        - SNSPublishMessagePolicy: # https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json
-#            TopicName: !GetAtt RideCompleationTopic.TopicName
+#            TopicName: !GetAtt RideCompletionTopic.TopicName
       Events:
         WildRydes:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
@@ -53,43 +53,43 @@ Resources:
         Name: id
         Type: String
 
-#  RideCompleationTopic:
+#  RideCompletionTopic:
 #    Type: AWS::SNS::Topic
 #    Properties:
-#      TopicName: RideCompleationTopic
+#      TopicName: RideCompletionTopic
 
 #  CustomerNotificationServiceSubscription:
 #    Type: AWS::SNS::Subscription
 #    Properties:
-#      TopicArn: !Ref RideCompleationTopic
+#      TopicArn: !Ref RideCompletionTopic
 #      Protocol: http
 #      Endpoint: !Sub "http://${CustomerNotifyLoadBalancer.DNSName}"
 
 #  CustomerAccountingServiceSubscription:
 #    Type: AWS::SNS::Subscription
 #    Properties:
-#      TopicArn: !Ref RideCompleationTopic
+#      TopicArn: !Ref RideCompletionTopic
 #      Protocol: http
 #      Endpoint: !Sub "http://${CustomerAccountingLoadBalancer.DNSName}"
 
 #  CustomerLoyaltyServiceSubscription:
 #    Type: AWS::SNS::Subscription
 #    Properties:
-#      TopicArn: !Ref RideCompleationTopic
+#      TopicArn: !Ref RideCompletionTopic
 #      Protocol: http
 #      Endpoint: !Sub "http://${CustomerLoyaltyLoadBalancer.DNSName}"
 
 #  DatalakeIngestionServiceSubscription:
 #    Type: AWS::SNS::Subscription
 #    Properties:
-#      TopicArn: !Ref RideCompleationTopic
+#      TopicArn: !Ref RideCompletionTopic
 #      Protocol: http
 #      Endpoint: !Sub "http://${DatalakeIngestionLoadBalancer.DNSName}"
 
 #  ExtraordinaryRidesServiceSubscription:
 #    Type: AWS::SNS::Subscription
 #    Properties:
-#      TopicArn: !Ref RideCompleationTopic
+#      TopicArn: !Ref RideCompletionTopic
 #      Protocol: http
 #      Endpoint: !Sub "http://${ExtraordinaryRidesLoadBalancer.DNSName}"
 #      FilterPolicy: { "fare": [{"numeric": [">=", 50]}], "distance": [{"numeric": [">=", 20]}] }
@@ -681,9 +681,9 @@ Outputs:
     Description: "Amazon DynamoDB table ARN for Rides table"
     Value: !Ref RidesTable
 
-#  RideCompleationTopic:
-#    Description: "Amazon SNS topic ARN for rides compleation topic"
-#    Value: !Ref RideCompleationTopic
+#  RideCompletionTopic:
+#    Description: "Amazon SNS topic ARN for rides completion topic"
+#    Value: !Ref RideCompletionTopic
 
   CustomerAccountingServiceLBURL:
     Description: "Load balancer URL for customer accounting service"
