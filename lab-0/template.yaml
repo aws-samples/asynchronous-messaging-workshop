@@ -16,6 +16,10 @@ Parameters:
     Default: https://github.com/aws-samples/asynchronous-messaging-workshop.git
 
 Resources:
+  SamTemplateArtifactS3Bucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Delete
+
   VPC:
     Type: AWS::EC2::VPC
     Properties:

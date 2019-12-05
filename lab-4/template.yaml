@@ -16,10 +16,6 @@ Globals:
       author: aws
 
 Resources:
-  SamTemplateArtifactS3Bucket:
-    Type: AWS::S3::Bucket
-    DeletionPolicy: Delete
-
   PaymentChargeFunction:
     Type: AWS::Serverless::Function
     Properties:

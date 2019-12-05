@@ -12,10 +12,6 @@ Globals:
     Timeout: 10
 
 Resources:
-  SamTemplateArtifactS3Bucket:
-    Type: AWS::S3::Bucket
-    DeletionPolicy: Delete
-
   PythonLayerWithBoto3:
       Type: AWS::Serverless::LayerVersion
       Properties:
