@@ -33,4 +33,4 @@ The Asynchronous Messaging Workshop is a collection of individual labs covering 
 
 ## Get started
 
-To get started, click [here](https://bit.ly/ARC314) to proceed to the workshop site.
+To get started, click [here](https://bit.ly/2019-arc314) to proceed to the workshop site.
