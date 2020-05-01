@@ -13,11 +13,10 @@ Resources:
       Type: AWS::Serverless::LayerVersion
       Properties:
           LayerName: PythonLayerWithBoto3
-          Description: Lambda Python 3.7 Layer with Boto3
-          ContentUri: lambda-layers/python_layer_with_boto3.zip
+          Description: Lambda Python 3.6 Layer with Boto3
+          ContentUri: lambda-layers/
           CompatibleRuntimes:
               - python3.6
-              - python3.7
           LicenseInfo: Apache 2.0
           RetentionPolicy: Retain
 
@@ -71,20 +70,6 @@ Resources:
 #      TopicArn: !Ref RideCompletionTopic
 #      Protocol: http
 #      Endpoint: !Sub "http://${CustomerAccountingLoadBalancer.DNSName}"
-
-#  CustomerLoyaltyServiceSubscription:
-#    Type: AWS::SNS::Subscription
-#    Properties:
-#      TopicArn: !Ref RideCompletionTopic
-#      Protocol: http
-#      Endpoint: !Sub "http://${CustomerLoyaltyLoadBalancer.DNSName}"
-
-#  DatalakeIngestionServiceSubscription:
-#    Type: AWS::SNS::Subscription
-#    Properties:
-#      TopicArn: !Ref RideCompletionTopic
-#      Protocol: http
-#      Endpoint: !Sub "http://${DatalakeIngestionLoadBalancer.DNSName}"
 
 #  ExtraordinaryRidesServiceSubscription:
 #    Type: AWS::SNS::Subscription
@@ -225,33 +210,6 @@ Resources:
               awslogs-region: !Ref AWS::Region
               awslogs-stream-prefix: customer-accounting-service
 
-  CustomerLoyaltyServiceECSTaskDefinition:
-    Type: AWS::ECS::TaskDefinition
-    Properties:
-      Family: customer-loyalty-service-task
-      Cpu: 512
-      Memory: 1024
-      NetworkMode: awsvpc
-      RequiresCompatibilities:
-        - FARGATE
-      ExecutionRoleArn: !Ref ECSTaskExecutionRole
-      ContainerDefinitions:
-        - Name: customer-loyalty-service-task
-          Cpu: 512
-          Memory: 1024
-          Image: !Sub '689573718314.dkr.ecr.eu-central-1.amazonaws.com/wild-rydes/generic-backend-microservice:latest'
-          Environment:
-            - Name: SERVICE_NAME
-              Value: customer-loyalty-service
-          PortMappings:
-            - ContainerPort: 80
-          LogConfiguration:
-            LogDriver: awslogs
-            Options:
-              awslogs-group: !Ref WildRidesCloudWatchLogsGroup
-              awslogs-region: !Ref AWS::Region
-              awslogs-stream-prefix: customer-loyalty-service
-
   CustomerNotificationServiceECSTaskDefinition:
     Type: AWS::ECS::TaskDefinition
     Properties:
@@ -278,33 +236,6 @@ Resources:
               awslogs-group: !Ref WildRidesCloudWatchLogsGroup
               awslogs-region: !Ref AWS::Region
               awslogs-stream-prefix: customer-notification-service
-
-  DatalakeIngestionServiceECSTaskDefinition:
-    Type: AWS::ECS::TaskDefinition
-    Properties:
-      Family: datalake-ingestion-service-task
-      Cpu: 512
-      Memory: 1024
-      NetworkMode: awsvpc
-      RequiresCompatibilities:
-        - FARGATE
-      ExecutionRoleArn: !Ref ECSTaskExecutionRole
-      ContainerDefinitions:
-        - Name: datalake-ingestion-service-task
-          Cpu: 512
-          Memory: 1024
-          Image: !Sub '689573718314.dkr.ecr.eu-central-1.amazonaws.com/wild-rydes/generic-backend-microservice:latest'
-          Environment:
-            - Name: SERVICE_NAME
-              Value: datalake-ingestion-service
-          PortMappings:
-            - ContainerPort: 80
-          LogConfiguration:
-            LogDriver: awslogs
-            Options:
-              awslogs-group: !Ref WildRidesCloudWatchLogsGroup
-              awslogs-region: !Ref AWS::Region
-              awslogs-stream-prefix: datalake-ingestion-service
 
   ExtraordinaryRidesServiceECSTaskDefinition:
     Type: AWS::ECS::TaskDefinition
@@ -372,45 +303,6 @@ Resources:
       HealthyThresholdCount: 2
       TargetType: ip
 
-  # ALB added to facade the containers for back end services - Customer loyalty
-  CustomerLoyaltyLoadBalancer:
-    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
-    Properties:
-      Name: !Sub "clslb-${AWS::StackName}"
-      Subnets:
-        - !Ref PublicSubnet1
-        - !Ref PublicSubnet2
-      SecurityGroups:
-        - !Ref SecurityGroup
-      Tags:
-        - Key: Name
-          Value: !Ref AWS::StackName
-
-  CustomerLoyaltyLoadBalancerListener:
-    Type: AWS::ElasticLoadBalancingV2::Listener
-    Properties:
-      LoadBalancerArn: !Ref CustomerLoyaltyLoadBalancer
-      Port: 80
-      Protocol: HTTP
-      DefaultActions:
-        - Type: forward
-          TargetGroupArn: !Ref CustomerLoyaltyTargetGroup
-
-  CustomerLoyaltyTargetGroup:
-    Type: AWS::ElasticLoadBalancingV2::TargetGroup
-    Properties:
-      VpcId: !Ref VPC
-      Port: 80
-      Protocol: HTTP
-      Matcher:
-        HttpCode: 200-299
-      HealthCheckIntervalSeconds: 60
-      HealthCheckPath: /
-      HealthCheckProtocol: HTTP
-      HealthCheckTimeoutSeconds: 5
-      HealthyThresholdCount: 2
-      TargetType: ip
-
   # ALB added to facade the containers for back end services - Customer notification
   CustomerNotifyLoadBalancer:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
@@ -436,45 +328,6 @@ Resources:
           TargetGroupArn: !Ref CustomerNotifyTargetGroup
 
   CustomerNotifyTargetGroup:
-    Type: AWS::ElasticLoadBalancingV2::TargetGroup
-    Properties:
-      VpcId: !Ref VPC
-      Port: 80
-      Protocol: HTTP
-      Matcher:
-        HttpCode: 200-299
-      HealthCheckIntervalSeconds: 60
-      HealthCheckPath: /
-      HealthCheckProtocol: HTTP
-      HealthCheckTimeoutSeconds: 5
-      HealthyThresholdCount: 2
-      TargetType: ip
-
-  # ALB added to facade the containers for back end services - data lake ingestion
-  DatalakeIngestionLoadBalancer:
-    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
-    Properties:
-      Name: !Sub "dislb-${AWS::StackName}"
-      Subnets:
-        - !Ref PublicSubnet1
-        - !Ref PublicSubnet2
-      SecurityGroups:
-        - !Ref SecurityGroup
-      Tags:
-        - Key: Name
-          Value: !Ref AWS::StackName
-
-  DatalakeIngestionLoadBalancerListener:
-    Type: AWS::ElasticLoadBalancingV2::Listener
-    Properties:
-      LoadBalancerArn: !Ref DatalakeIngestionLoadBalancer
-      Port: 80
-      Protocol: HTTP
-      DefaultActions:
-        - Type: forward
-          TargetGroupArn: !Ref DataLakeIngestTargetGroup
-
-  DataLakeIngestTargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
       VpcId: !Ref VPC
@@ -553,31 +406,6 @@ Resources:
           ContainerPort: 80
           TargetGroupArn: !Ref CustomerAccountingTargetGroup
 
-  CustomerLoyaltyServiceECSService:
-    Type: AWS::ECS::Service
-    DependsOn: CustomerLoyaltyLoadBalancerListener
-    Properties:
-      ServiceName: customer-loyalty-service-service
-      Cluster: !Ref ECSCluster
-      LaunchType: FARGATE
-      DeploymentConfiguration:
-        MaximumPercent: 200
-        MinimumHealthyPercent: 100
-      DesiredCount: 1
-      NetworkConfiguration:
-        AwsvpcConfiguration:
-          AssignPublicIp: ENABLED # to be able to download images from ECR
-          SecurityGroups:
-            - !Ref SecurityGroup
-          Subnets:
-            - !Ref PublicSubnet1
-            - !Ref PublicSubnet2
-      TaskDefinition: !Ref CustomerLoyaltyServiceECSTaskDefinition
-      LoadBalancers:
-        - ContainerName: "customer-loyalty-service-task"
-          ContainerPort: 80
-          TargetGroupArn: !Ref CustomerLoyaltyTargetGroup
-
   CustomerNotificationServiceECSService:
     Type: AWS::ECS::Service
     DependsOn: CustomerNotifyLoadBalancerListener
@@ -602,31 +430,6 @@ Resources:
         - ContainerName: "customer-notification-service-task"
           ContainerPort: 80
           TargetGroupArn: !Ref CustomerNotifyTargetGroup
-
-  DatalakeIngestionServiceECSService:
-    Type: AWS::ECS::Service
-    DependsOn: DatalakeIngestionLoadBalancerListener
-    Properties:
-      ServiceName: datalake-ingestion-service-service
-      Cluster: !Ref ECSCluster
-      LaunchType: FARGATE
-      DeploymentConfiguration:
-        MaximumPercent: 200
-        MinimumHealthyPercent: 100
-      DesiredCount: 1
-      NetworkConfiguration:
-        AwsvpcConfiguration:
-          AssignPublicIp: ENABLED # to be able to download images from ECR
-          SecurityGroups:
-            - !Ref SecurityGroup
-          Subnets:
-            - !Ref PublicSubnet1
-            - !Ref PublicSubnet2
-      TaskDefinition: !Ref DatalakeIngestionServiceECSTaskDefinition
-      LoadBalancers:
-        - ContainerName: "datalake-ingestion-service-task"
-          ContainerPort: 80
-          TargetGroupArn: !Ref DataLakeIngestTargetGroup
 
   ExtraordinaryRidesServiceECSService:
     Type: AWS::ECS::Service
@@ -689,17 +492,9 @@ Outputs:
     Description: "Load balancer URL for customer accounting service"
     Value: !Sub "http://${CustomerAccountingLoadBalancer.DNSName}"
 
-  CustomerLoyaltyServiceLBURL:
-    Description: "Load balancer URL for customer loyalty service"
-    Value: !Sub "http://${CustomerLoyaltyLoadBalancer.DNSName}"
-
   CustomerNotificationServiceLBURL:
     Description: "Load balancer URL for customer notify service"
     Value: !Sub "http://${CustomerNotifyLoadBalancer.DNSName}"
-
-  DatalakeIngestionServiceLBURL:
-    Description: "Load balancer URL for data lake ingest service"
-    Value: !Sub "http://${DatalakeIngestionLoadBalancer.DNSName}"
 
   ExtraordinaryRidesServiceLBURL:
     Description: "Load balancer URL for extraordinary rides service"
