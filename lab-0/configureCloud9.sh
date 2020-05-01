@@ -6,7 +6,7 @@ sudo pip uninstall aws-sam-cli -y
 sudo pip uninstall awscli -y
 sudo python -m pip uninstall pip -y
 
-sudo alternatives --set python /usr/bin/python3.6
+#sudo alternatives --set python /usr/bin/python3.6
 
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 sudo python get-pip.py
