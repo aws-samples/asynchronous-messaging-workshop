@@ -16,11 +16,10 @@ Resources:
       Type: AWS::Serverless::LayerVersion
       Properties:
           LayerName: PythonLayerWithBoto3
-          Description: Lambda Python 3.7 Layer with Boto3
-          ContentUri: lambda-layers/python_layer_with_boto3.zip
+          Description: Lambda Python 3.6 Layer with Boto3
+          ContentUri: lambda-layers/
           CompatibleRuntimes:
               - python3.6
-              - python3.7
           LicenseInfo: Apache 2.0
           RetentionPolicy: Retain
 
@@ -81,26 +80,6 @@ Resources:
 #            Queue: !GetAtt CustomerAccountingServiceQueue.Arn
 #            BatchSize: 1
 
-  CustomerLoyaltyService:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: generic-backend-microservice/
-      Handler: app.lambda_handler
-      Runtime: python3.6
-      ReservedConcurrentExecutions: 5
-      Environment:
-        Variables:
-          SERVICE_NAME: CustomerLoyaltyService
-#      Policies:
-#        - SQSPollerPolicy: # https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json
-#            QueueName: !Ref CustomerLoyaltyServiceQueue
-#      Events:
-#        CustomerLoyaltyServiceJobQueue:
-#          Type: SQS
-#          Properties:
-#            Queue: !GetAtt CustomerLoyaltyServiceQueue.Arn
-#            BatchSize: 1
-
   CustomerNotificationService:
     Type: AWS::Serverless::Function
     Properties:
@@ -119,26 +98,6 @@ Resources:
 #          Type: SQS
 #          Properties:
 #            Queue: !GetAtt CustomerNotificationServiceQueue.Arn
-#            BatchSize: 1
-
-  DatalakeIngestionService:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: generic-backend-microservice/
-      Handler: app.lambda_handler
-      Runtime: python3.6
-      ReservedConcurrentExecutions: 5
-      Environment:
-        Variables:
-          SERVICE_NAME: DatalakeIngestionService
-#      Policies:
-#        - SQSPollerPolicy: # https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json
-#            QueueName: !Ref DatalakeIngestionServiceQueue
-#      Events:
-#        DatalakeIngestionServiceJobQueue:
-#          Type: SQS
-#          Properties:
-#            Queue: !GetAtt DatalakeIngestionServiceQueue.Arn
 #            BatchSize: 1
 
   ExtraordinaryRidesService:
@@ -187,32 +146,6 @@ Resources:
 #        RawMessageDelivery: true
 #        TopicArn: !Ref RideCompletionTopic
 
-#  CustomerLoyaltyServiceQueue:
-#    Type: AWS::SQS::Queue
-
-#  CustomerLoyaltyServiceQueuePolicy:
-#      Type: AWS::SQS::QueuePolicy
-#      Properties:
-#        Queues:
-#          - !Ref CustomerLoyaltyServiceQueue
-#        PolicyDocument:
-#          Statement:
-#            Effect: Allow
-#            Principal: '*'
-#            Action: sqs:SendMessage
-#            Resource: '*'
-#            Condition:
-#              ArnEquals:
-#                aws:SourceArn: !Ref RideCompletionTopic
-
-#  CustomerLoyaltyServiceQueueToRidesTopicSubscription:
-#      Type: AWS::SNS::Subscription
-#      Properties:
-#        Endpoint: !GetAtt CustomerLoyaltyServiceQueue.Arn
-#        Protocol: sqs
-#        RawMessageDelivery: true
-#        TopicArn: !Ref RideCompletionTopic
-
 #  CustomerNotificationServiceQueue:
 #    Type: AWS::SQS::Queue
 
@@ -235,32 +168,6 @@ Resources:
 #      Type: AWS::SNS::Subscription
 #      Properties:
 #        Endpoint: !GetAtt CustomerNotificationServiceQueue.Arn
-#        Protocol: sqs
-#        RawMessageDelivery: true
-#        TopicArn: !Ref RideCompletionTopic
-
-#  DatalakeIngestionServiceQueue:
-#    Type: AWS::SQS::Queue
-
-#  DatalakeIngestionServiceQueuePolicy:
-#      Type: AWS::SQS::QueuePolicy
-#      Properties:
-#        Queues:
-#          - !Ref DatalakeIngestionServiceQueue
-#        PolicyDocument:
-#          Statement:
-#            Effect: Allow
-#            Principal: '*'
-#            Action: sqs:SendMessage
-#            Resource: '*'
-#            Condition:
-#              ArnEquals:
-#                aws:SourceArn: !Ref RideCompletionTopic
-
-#  DatalakeIngestionServiceQueueToRidesTopicSubscription:
-#      Type: AWS::SNS::Subscription
-#      Properties:
-#        Endpoint: !GetAtt DatalakeIngestionServiceQueue.Arn
 #        Protocol: sqs
 #        RawMessageDelivery: true
 #        TopicArn: !Ref RideCompletionTopic
@@ -308,17 +215,9 @@ Outputs:
     Description: "CustomerAccountingService Lambda Function ARN"
     Value: !GetAtt CustomerAccountingService.Arn
 
-  CustomerLoyaltyService:
-    Description: "CustomerLoyaltyService Lambda Function ARN"
-    Value: !GetAtt CustomerLoyaltyService.Arn
-
   CustomerNotificationService:
     Description: "CustomerNotificationService Lambda Function ARN"
     Value: !GetAtt CustomerNotificationService.Arn
-
-  DatalakeIngestionService:
-    Description: "DatalakeIngestionService Lambda Function ARN"
-    Value: !GetAtt DatalakeIngestionService.Arn
 
   ExtraordinaryRidesService:
     Description: "ExtraordinaryRidesService Lambda Function ARN"
@@ -328,17 +227,9 @@ Outputs:
 #    Description: "Amazon SQS queue ARN for the CustomerAccounting service queue"
 #    Value: !Ref CustomerAccountingServiceQueue
 
-#  CustomerLoyaltyServiceQueue:
-#    Description: "Amazon SQS queue ARN for the CustomerLoyalty service queue"
-#    Value: !Ref CustomerLoyaltyServiceQueue
-
 #  CustomerNotificationServiceQueue:
 #    Description: "Amazon SQS queue ARN for the CustomerNotification service queue"
 #    Value: !Ref CustomerNotificationServiceQueue
-
-#  DatalakeIngestionServiceQueue:
-#    Description: "Amazon SQS queue ARN for the DatalakeIngestion service queue"
-#    Value: !Ref DatalakeIngestionServiceQueue
 
 #  ExtraordinaryRidesServiceQueue:
 #    Description: "Amazon SQS queue ARN for the ExtraordinaryRides service queue"
