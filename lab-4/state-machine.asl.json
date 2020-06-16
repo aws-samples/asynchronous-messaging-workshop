@@ -6,7 +6,7 @@
       "Type": "Task",
       "Resource": "arn:aws:states:::dynamodb:putItem",
       "Parameters": {
-        "TableName": "${FaresTable}",
+        "TableName": "${FareProcessingTable}",
         "Item.$": "$"
       },
       "TimeoutSeconds": 5,
@@ -38,7 +38,7 @@
     "ChargeFare": {
       "Comment": "Add comment...",
       "Type": "Task",
-      "Resource": "${PaymentChargeFunction.Arn}",
+      "Resource": "${PaymentChargeFunctionArn}",
       "Next": "CustomerAccountCredit",
       "Catch": [{
         "ErrorEquals": [
@@ -52,7 +52,7 @@
     "CustomerAccountCredit": {
       "Comment": "Add comment...",
       "Type": "Task",
-      "Resource": "${AccountCreditFunction.Arn}",
+      "Resource": "${AccountCreditFunctionArn}",
       "Next": "SetFareStatusCompleted",
       "Catch": [{
         "ErrorEquals": ["AccountCreditException"],
@@ -64,7 +64,7 @@
       "Type": "Task",
       "Resource": "arn:aws:states:::dynamodb:updateItem",
       "Parameters": {
-        "TableName": "${FaresTable}",
+        "TableName": "${FareProcessingTable}",
         "Key": {
           "fareId": {
             "S.$": "$.fareId"
@@ -97,7 +97,7 @@
       "Type": "Task",
       "Resource": "arn:aws:states:::dynamodb:updateItem",
       "Parameters": {
-        "TableName": "${FaresTable}",
+        "TableName": "${FareProcessingTable}",
         "Key": {
           "fareId": {
             "S.$": "$.fareId"
@@ -132,7 +132,7 @@
       "Parameters": {
         "Subject": "Transaction Succeeded",
         "Message.$": "$",
-        "TopicArn": "${WildRydesFareProcessingTopic}",
+        "TopicArn": "${FareProcessingTopicArn}",
         "MessageAttributes": {
           "IsSuccessful": {
             "DataType": "String",
@@ -149,7 +149,7 @@
     "RefundFare": {
       "Comment": "Add comment...",
       "Type": "Task",
-      "Resource": "${PaymentRefundFunction.Arn}",
+      "Resource": "${PaymentRefundFunctionArn}",
       "Next": "SetFareStatusFailed"
     },
     "NotifyFailure": {
@@ -158,7 +158,7 @@
       "Parameters": {
         "Subject": "Transaction Failed",
         "Message.$": "$",
-        "TopicArn": "${WildRydesFareProcessingTopic}",
+        "TopicArn": "${FareProcessingTopicArn}",
         "MessageAttributes": {
           "IsSuccessful": {
             "DataType": "String",
