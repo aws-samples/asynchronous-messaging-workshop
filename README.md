@@ -22,15 +22,16 @@ The Asynchronous Messaging Workshop is a collection of individual labs covering 
 
 * **Level**: 300
 * **Duration**: Each lab takes 15 - 30 minutes:
-    * **Lab 0**: Set-up the workshop environment
-    * **Lab 1**: Fan-Out & Message Filtering
-    * **Lab 2**: Topic-Queue Chaining & Load Balancing
-    * **Lab 3**: Scatter-Gather Pattern
-    * **Lab 4**: Orchestration and Coordination
+  * **Lab 0**: Set-up the workshop environment
+  * **Lab 1**: Fan-Out & Message Filtering
+  * **Lab 2**: Topic-Queue Chaining & Load Balancing
+  * **Lab 3**: Scatter-Gather Pattern
+  * **Lab 4**: Orchestration and Coordination
+
 * **Prerequisites**:
-    * AWS Account
-    * AWS IAM User (with admin permissions)
+  * AWS Account
+  * AWS IAM User (with admin permissions)
 
 ## Get started
 
-To get started, click [here](https://bit.ly/2019-arc314) to proceed to the workshop site.
+To get started, click [here](https://async-messaging.workshop.aws/) to proceed to the workshop site.
