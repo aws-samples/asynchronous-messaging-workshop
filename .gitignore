@@ -247,7 +247,7 @@ $RECYCLE.BIN/
 */build/*
 
 # End of https://www.gitignore.io/api/osx,linux,python,windows,pycharm,visualstudiocode
-lab-4/.vscode/launch.json
-lab-4/.vscode/settings.json
-lab-4/samconfig.toml
+
+
 .vscode
+workshop/public
