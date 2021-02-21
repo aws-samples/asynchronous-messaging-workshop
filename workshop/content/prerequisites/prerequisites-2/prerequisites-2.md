@@ -23,7 +23,7 @@ Open your [CloudFormation Console](https://console.aws.amazon.com/cloudformation
 In your AWS Cloud9 IDE, you can close the welcome tab. In the left environment navigation window, you can see the project **wild-rydes-async-messaging** we have already checked out for you from Github. This project also contains a shell script to setup your environment. Run the following command in the **bash** tab (at the bottom of the IDE):
 
 {{< highlight bash >}}
-cd ~/environment/wild-rydes-async-messaging/lab-0
+cd ~/environment/wild-rydes-async-messaging/code/lab-0
 chmod +x configureCloud9.sh
 ./configureCloud9.sh
 

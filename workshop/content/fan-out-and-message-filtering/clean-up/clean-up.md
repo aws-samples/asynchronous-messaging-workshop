@@ -11,7 +11,7 @@ In this step, we will clean up all resources, we created during this lab, so tha
 In your Cloud9 IDE, run the following command to delete the resources we created with our AWS SAM template:
 
 {{< highlight bash >}}
-cd ~/environment/wild-rydes-async-messaging/lab-1
+cd ~/environment/wild-rydes-async-messaging/code/lab-1
 aws cloudformation delete-stack \
     --stack-name wild-rydes-async-msg-1
 
