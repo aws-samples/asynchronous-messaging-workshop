@@ -1,0 +1,5 @@
+{{ $_hugo_config := `{ "version": 1 }` }}
+<a href="https://console.aws.amazon.com/cloudformation/home?region={{ .Get 1 }}#/stacks/create/review?stackName={{ .Get 0 }}&templateURL=https://s3.amazonaws.com/{{ .Get 2 }}" target="_blank" class="btn btn-default">
+  <i class="fas fa-cloud-upload-alt"></i>
+  Launch
+</a>

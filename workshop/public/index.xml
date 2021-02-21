@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Decoupled Microservices on Wild Rydes Asynchronous Messaging Workshop</title>
+    <link>/</link>
+    <description>Recent content in Decoupled Microservices on Wild Rydes Asynchronous Messaging Workshop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Configure AWS Cloud9</title>
+      <link>/prerequisites/prerequisites-2/prerequisites-2.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/prerequisites/prerequisites-2/prerequisites-2.html</guid>
+      <description>Ad blockers, javascript disabler, and tracking blockers should be disabled for the cloud9 domain, or connecting to the workspace might be impacted. Cloud9 requires third-party-cookies. You can whitelist the specific domains.
+ 1. Browse to your AWS Cloud9 development environment Open your CloudFormation Console and select the stack at the bottom (the name could vary). The Outputs tab exposes the Cloud9DevEnvUrl parameter. Click at the corresponding URL in the value column and open your AWS Cloud9 development environment in a new tab.</description>
+    </item>
+    
+    <item>
+      <title>Bootstrap the Initial State</title>
+      <link>/fan-out-and-message-filtering/bootstrap-initial-state/bootstrap-initial-state.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/bootstrap-initial-state/bootstrap-initial-state.html</guid>
+      <description>First, we will setup the initial state, including the integrating of the Unicorn Management Service (leveraging Amazon API Gateway and AWS Lambda), the Rides Store (leveraging Amazon DynamoDB) and all 5 backend services listed above (leveraging AWS Fargate behind Application Load Balancer).
+1. Browse to your AWS Cloud9 IDE Browse to your AWS Cloud9 Console and find the environment called WildRydesAsyncMessaging. Click the Open IDE button to navigate to your AWS Cloud9 IDE.</description>
+    </item>
+    
+    <item>
+      <title>Create the Amazon SNS topic</title>
+      <link>/fan-out-and-message-filtering/create-sns-topic/create-sns-topic.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/create-sns-topic/create-sns-topic.html</guid>
+      <description>In this step, you can chose whether you want to create the Amazon SNS topic via the AWS console or AWS SAM. Just select the corresponding tab below and follow the instructions:
+You can chose, whether you would like to use the AWS Console or AWS SAM for this lab. Once you have chosen, stick to it until the end of this lab and don&amp;rsquo;t switch in between!
+  Console SAM  1.</description>
+    </item>
+    
+    <item>
+      <title>Create Customer Notification Service Subscription</title>
+      <link>/fan-out-and-message-filtering/create-customer-notification-service-subscription/create-customer-notification-service-subscription.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/create-customer-notification-service-subscription/create-customer-notification-service-subscription.html</guid>
+      <description>Now we are ready to configure the subscription for the customer notification service:
+ Console SAM  1. Create a new subscription After selecting the topic RideCompletionTopic, click the Create subscription button in the bottom right corner.
+  Detailed description     2. Configure the subscription In the next page, select HTTP as the subscription protocol.
+To look-up the subscription endpint, navigate back to your CloudFormation console, select the stack wild-rydes-async-msg-1 and select the Outputs tab.</description>
+    </item>
+    
+    <item>
+      <title>Create Customer Accounting Service Subscription</title>
+      <link>/fan-out-and-message-filtering/create-customer-accounting-service-subscription/create-customer-accounting-service-subscription.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/create-customer-accounting-service-subscription/create-customer-accounting-service-subscription.html</guid>
+      <description>Now we are ready to configure the subscription for the customer accounting service:
+ Console SAM  1. Create a new subscription After selecting the topic RideCompletionTopic, click the Create subscription button in the bottom right corner.
+  Detailed description     2. Configure the subscription In the next page, select HTTP as the subscription protocol.
+To look-up the subscription endpoint, navigate back to your CloudFormation console, select the stack wild-rydes-async-msg-1 and select the Outputs tab.</description>
+    </item>
+    
+    <item>
+      <title>Create Customer Loyalty Service Subscription</title>
+      <link>/fan-out-and-message-filtering/create-customer-loyalty-service-subscription/create-customer-loyalty-service-subscription.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/create-customer-loyalty-service-subscription/create-customer-loyalty-service-subscription.html</guid>
+      <description>Now we are ready to configure the subscription for the customer loyalty service:
+ Console SAM  1. Create a new subscription After selecting the topic RideCompletionTopic, click the Create subscription button in the bottom right corner.
+  Detailed description     2. Configure the subscription In the next page, select HTTP as the subscription protocol.
+To look-up the subscription endpoint, navigate back to your CloudFormation console, select the stack wild-rydes-async-msg-1 and select the Outputs tab.</description>
+    </item>
+    
+    <item>
+      <title>Create Datalake Ingestion Service Subscription</title>
+      <link>/fan-out-and-message-filtering/create-datalake-ingestion-service-subscription/create-datalake-ingestion-service-subscription.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/create-datalake-ingestion-service-subscription/create-datalake-ingestion-service-subscription.html</guid>
+      <description>Now we are ready to configure the subscription for the datalake ingestion service:
+ Console SAM  1. Create a new subscription After selecting the topic RideCompletionTopic, click the Create subscription button in the bottom right corner.
+  Detailed description     2. Configure the subscription In the next page, select HTTP as the subscription protocol.
+To look-up the subscription endpoint, navigate back to your CloudFormation console, select the stack wild-rydes-async-msg-1 and select the Outputs tab.</description>
+    </item>
+    
+    <item>
+      <title>Create Extraordinary Rides Service Subscription</title>
+      <link>/fan-out-and-message-filtering/create-extraordinary-rides-service-subscription/create-extraordinary-rides-service-subscription.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/create-extraordinary-rides-service-subscription/create-extraordinary-rides-service-subscription.html</guid>
+      <description>Now we are ready to configure the subscription for the extraordinary rides service:
+ Console SAM  1. Create a new subscription After selecting the topic RideCompletionTopic, click the Create subscription button in the bottom right corner.
+  Detailed description     2. Configure the subscription In the next page, select HTTP as the subscription protocol.
+To look-up the subscription endpoint, navigate back to your CloudFormation console, select the stack wild-rydes-async-msg-1 and select the Outputs tab.</description>
+    </item>
+    
+    <item>
+      <title>Update Unicorn Management Service</title>
+      <link>/fan-out-and-message-filtering/update-unicorn-management-service/update-unicorn-management-service.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/update-unicorn-management-service/update-unicorn-management-service.html</guid>
+      <description>After creating the Amazon SNS topic and all the subscriptions, the current architecture looks like the following on:
+The last missing part to complete the architecture is calling our Amazon SNS topic from our Unicorn Management Service.
+ Console SAM  1. Grant additional IAM permissions to Lambda In your Amazon IAM console, select Roles in the left navigation. Use the filter text box to find the role with the name wild-rydes-async-msg-1-SubmitRideCompletionFunctio-&amp;hellip; (assuming your have chosen wild-rydes-async-msg-1 as your stack name).</description>
+    </item>
+    
+    <item>
+      <title>Test Fan-Out and Message Filtering</title>
+      <link>/fan-out-and-message-filtering/test-fan-out-and-message-filtering/test-fan-out-and-message-filtering.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/test-fan-out-and-message-filtering/test-fan-out-and-message-filtering.html</guid>
+      <description>In this step, we will validate that the Amazon SNS topic is publishing all messages to all subscribers. Because a subscriber can also fail processing a message, we also want to validate that Amazon SNS is redelivering the message, so that we will not miss a single message.
+1. Look up the API Gateway endpoint To look-up the API Gateway endpoint URL for the submit-ride-completion function, run the following command:</description>
+    </item>
+    
+    <item>
+      <title>Clean up</title>
+      <link>/fan-out-and-message-filtering/clean-up/clean-up.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/clean-up/clean-up.html</guid>
+      <description>In this step, we will clean up all resources, we created during this lab, so that no further cost will occur.
+1. Delete the AWS SAM template In your Cloud9 IDE, run the following command to delete the resources we created with our AWS SAM template:
+cd ~/environment/wild-rydes-async-messaging/lab-1 aws cloudformation delete-stack \  --stack-name wild-rydes-async-msg-1 2. Delete the AWS Lambda created Amazon CloudWatch Log Group Follow this deep link to list the Amazon CloudWatch Log Groups with the name /aws/lambda/wild-rydes, AWS Lambda created during this lab.</description>
+    </item>
+    
+    <item>
+      <title>Bootstrap the Initial State</title>
+      <link>/topic-queue-chaining-and-load-balancer/bootstrap-initial-state/bootstrap-initial-state.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/bootstrap-initial-state/bootstrap-initial-state.html</guid>
+      <description>First, we will setup the initial state, including the integrating of the Unicorn Management Service (leveraging Amazon API Gateway and AWS Lambda), the Rides Store (leveraging Amazon DynamoDB) and all 5 backend services (leveraging AWS Lambda).
+1. Browse to your AWS Cloud9 IDE Browse to your AWS Cloud9 Console and select the environment called WildRydesAsyncMessaging.
+  Detailed description     2. Build the lab artifacts from source We provide you with an AWS SAM template which we will use to bootstrap the initial state.</description>
+    </item>
+    
+    <item>
+      <title>Create the Amazon SNS topic</title>
+      <link>/topic-queue-chaining-and-load-balancer/create-sns-topic/create-sns-topic.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/create-sns-topic/create-sns-topic.html</guid>
+      <description>In this step, you can chose whether you want to create the Amazon SNS topic via the AWS console or AWS SAM. Just select the corresponding tab below and follow the instructions:
+You can chose, whether you would like to use the AWS Console or AWS SAM for this lab. Once you have chosen, stick to it until the end of this lab and don&amp;rsquo;t switch in between!
+  Console SAM  1.</description>
+    </item>
+    
+    <item>
+      <title>Create Customer Notification Service Subscription</title>
+      <link>/topic-queue-chaining-and-load-balancer/create-customer-notification-service-subscription/create-customer-notification-service-subscription.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/create-customer-notification-service-subscription/create-customer-notification-service-subscription.html</guid>
+      <description>In this step, we will create an Amazon SQS queue for the Customer Notification Service and add a subscription to the Amazon SNS topic we created before:
+ Console SAM  1. Create a new Amazon SQS queue In your Amazon SQS console, select Create New Queue in top left corner or click Get Started Now in the center of the page, if it&amp;rsquo;s your first queue in this region.</description>
+    </item>
+    
+    <item>
+      <title>Create Customer Accounting Service Subscription</title>
+      <link>/topic-queue-chaining-and-load-balancer/create-customer-accounting-service-subscription/create-customer-accounting-service-subscription.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/create-customer-accounting-service-subscription/create-customer-accounting-service-subscription.html</guid>
+      <description>In this step, we will create an Amazon SQS queue for the Customer Accounting Service and add a subscription to the Amazon SNS topic we created before:
+ Console SAM  1. Create a new Amazon SQS queue In your Amazon SQS console, select Create New Queue in top left corner or click Get Started Now in the center of the page, if it&amp;rsquo;s your first queue in this region.</description>
+    </item>
+    
+    <item>
+      <title>Create Customer Loyalty Service Subscription</title>
+      <link>/topic-queue-chaining-and-load-balancer/create-customer-loyalty-service-subscription/create-customer-loyalty-service-subscription.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/create-customer-loyalty-service-subscription/create-customer-loyalty-service-subscription.html</guid>
+      <description>In this step, we will create an Amazon SQS queue for the Customer Loyalty Service and add a subscription to the Amazon SNS topic we created before:
+ Console SAM  1. Create a new Amazon SQS queue In your Amazon SQS console, select Create New Queue in top left corner or click Get Started Now in the center of the page, if it&amp;rsquo;s your first queue in this region.</description>
+    </item>
+    
+    <item>
+      <title>Create Datalake Ingestion Service Subscription</title>
+      <link>/topic-queue-chaining-and-load-balancer/create-datalake-ingestion-service-subscription/create-datalake-ingestion-service-subscription.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/create-datalake-ingestion-service-subscription/create-datalake-ingestion-service-subscription.html</guid>
+      <description>In this step, we will create an Amazon SQS queue for the Datalake Ingestion Service and add a subscription to the Amazon SNS topic we created before:
+ Console SAM  1. Create a new Amazon SQS queue In your Amazon SQS console, select Create New Queue in top left corner or click Get Started Now in the center of the page, if it&amp;rsquo;s your first queue in this region.</description>
+    </item>
+    
+    <item>
+      <title>Create Extraordinary Rides Service Subscription</title>
+      <link>/topic-queue-chaining-and-load-balancer/create-extraordinary-rides-service-subscription/create-extraordinary-rides-service-subscription.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/create-extraordinary-rides-service-subscription/create-extraordinary-rides-service-subscription.html</guid>
+      <description>In this step, we will create an Amazon SQS queue for the Extraordinary Rides Service and add a subscription to the Amazon SNS topic we created before:
+ Console SAM  1. Create a new Amazon SQS queue In your Amazon SQS console, select Create New Queue in top left corner or click Get Started Now in the center of the page, if it&amp;rsquo;s your first queue in this region.</description>
+    </item>
+    
+    <item>
+      <title>Update Unicorn Management Service</title>
+      <link>/topic-queue-chaining-and-load-balancer/update-unicorn-management-service/update-unicorn-management-service.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/update-unicorn-management-service/update-unicorn-management-service.html</guid>
+      <description>After creating the Amazon SNS topic, all the Amazon SQS queues and the subscriptions, the current architecture looks like the following on:
+The last missing part to complete the architecture is calling our Amazon SNS topic from our Unicorn Management Service.
+ Console SAM  1. Grant additional IAM permissions to Lambda In your Amazon IAM console, select Roles in the left navigation. Use the filter text box to find the role with the name wild-rydes-async-msg-2-SubmitRideCompletionFunctio-&amp;hellip; (assuming your have chosen wild-rydes-async-msg-2 as your stack name).</description>
+    </item>
+    
+    <item>
+      <title>Test Topic-Queue Chaining &amp; Load Balancing</title>
+      <link>/topic-queue-chaining-and-load-balancer/test-topic-queue-chaining-and-load-balancer/test-topic-queue-chaining-and-load-balancing.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/test-topic-queue-chaining-and-load-balancer/test-topic-queue-chaining-and-load-balancing.html</guid>
+      <description>In this step, we will validate that the Amazon SNS topic is publishing all messages to all subscribers. Because a subscriber can also fail processing a message, we also want to validate that Amazon SNS is redelivering the message, so that we will not miss a single message.
+1. Look up the API Gateway endpoint To look-up the API Gateway endpoint URL for the submit-ride-completion function, run the following command:</description>
+    </item>
+    
+    <item>
+      <title>Clean up</title>
+      <link>/topic-queue-chaining-and-load-balancer/clean-up/clean-up.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/clean-up/clean-up.html</guid>
+      <description>In this step, we will clean up all resources, we created during this lab, so that no further cost will occur.
+1. Delete the AWS SAM template In your Cloud9 IDE, run the following command to delete the resources we created with our AWS SAM template:
+cd ~/environment/wild-rydes-async-messaging/lab-2 aws cloudformation delete-stack \  --stack-name wild-rydes-async-msg-2 2. Delete the AWS Lambda created Amazon CloudWatch Log Group Follow this deep link to list all Amazon CloudWatch Log Groups with the prefix /aws/lambda/wild-rydes-async-msg-2, AWS Lambda created during this lab.</description>
+    </item>
+    
+    <item>
+      <title>Bootstrap the Initial State</title>
+      <link>/scatter-gather/bootstrap-initial-state.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/scatter-gather/bootstrap-initial-state.html</guid>
+      <description>First, we will build the SAM deployment template to create the deployment package for the python functions. The AWS Serverless Application Model (AWS SAM) is an open-source framework that you can use to build serverless applications on AWS.It will also generate deployment artifacts that target Lambda&amp;rsquo;s execution environment. It also helps with creating artifacts needed for running the tests using sam local. The inputs and outputs from the service are shown in the picture below.</description>
+    </item>
+    
+    <item>
+      <title>Test Scatter-Gather</title>
+      <link>/scatter-gather/test-scatter-and-gather.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/scatter-gather/test-scatter-and-gather.html</guid>
+      <description>1. Get API Gateway endpoint to send request for quotes The lab 3 SAM template created two separate API gateway endpoints. They will be shown under the outputs tab of the cloudformation stack once deployment is completed. RideBookingApiSubmitInstantRideRfqEndpoint is the API endpoint to submit request for quotes and RideBookingApiQueryInstantRideRfqEndpoint is used to query the response from various ride operators. You can run the following command to retrieve the RideBookingApiSubmitInstantRideRfqEndpoint API Gateway Endpoint URL.</description>
+    </item>
+    
+    <item>
+      <title>Cleanup</title>
+      <link>/scatter-gather/cleanup/clean-up.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/scatter-gather/cleanup/clean-up.html</guid>
+      <description>In this step, we will clean up all resources, we created during this lab, so that no further cost will occur.
+1. Delete the AWS SAM template In your Cloud9 IDE, run the following command to delete the resources we created with our AWS SAM template:
+cd ~/environment/wild-rydes-async-messaging/lab-3 aws cloudformation delete-stack \  --stack-name wild-rydes-async-msg-3 2. Delete the AWS Lambda created Amazon CloudWatch Log Group Run the following command to delete all the log groups associated with the labs.</description>
+    </item>
+    
+    <item>
+      <title>Bootstrap the Initial State</title>
+      <link>/orchestration-and-coordination/bootstrap-initial-state/bootstrap-initial-state.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/orchestration-and-coordination/bootstrap-initial-state/bootstrap-initial-state.html</guid>
+      <description>1. Browse to your AWS Cloud9 IDE Browse to your AWS Cloud9 Console and select the environment called WildRydesAsyncMessaging.
+  Screenshot     Once the editor is open, navigate into the lab-4 directory
+cd ~/environment/wild-rydes-async-messaging/lab-4 2. Build the lab artifacts from source We provide you with an AWS SAM template which we will use to bootstrap the initial state. In the bash tab (at the bottom) in you AWS Cloud9 IDE, run the following commands to build the lab code:</description>
+    </item>
+    
+    <item>
+      <title>Build Guide</title>
+      <link>/orchestration-and-coordination/build-guide/build-guide.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/orchestration-and-coordination/build-guide/build-guide.html</guid>
+      <description>Once you have bootstrapped this workshop, you will be presented with AWS Step Function State Machine, as a starting point wild-rydes-async-msg-4. The bootstrap created two state machine resources wild-rydes-async-msg-4-start-here and wild-rydes-async-msg-4-completed. Use the &amp;ldquo;wild-rydes-async-msg-4start-here&amp;rdquo; state machine to begin your work. You can use the completed state machine as a reference if you get stuck.
+The AWS Lambda functions, Amazon DynamoDB table, and Amazon SNS topic with Amazon SQS subscriptions have been created for you during the bootstrapping process, and you can find their resources in the AWS CloudFormation Output panel.</description>
+    </item>
+    
+    <item>
+      <title>Executing and Testing</title>
+      <link>/orchestration-and-coordination/executing/executing.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/orchestration-and-coordination/executing/executing.html</guid>
+      <description>Executing the state machine To begin testing your application, open the state machine and click Start execution
+Copy and paste the fare payload into the Input field and click Start Execution. An execution will be successful if you invoke it with the following payload (you are free to update the values):
+{ &amp;#34;customerId&amp;#34;: &amp;#34;3&amp;#34;, &amp;#34;fareId&amp;#34;: &amp;#34;wr_563&amp;#34;, &amp;#34;fareAmount&amp;#34;: &amp;#34;$20.00&amp;#34;, &amp;#34;cc&amp;#34;: &amp;#34;2424 2424 2424 2424&amp;#34;, &amp;#34;expiryDate&amp;#34;: &amp;#34;12/22&amp;#34;, &amp;#34;cvv&amp;#34;: &amp;#34;111&amp;#34; } Testing failures You can easily force custom exceptions from the Lambda functions by appending one of the following suffixes to the customerId.</description>
+    </item>
+    
+    <item>
+      <title>Clean up</title>
+      <link>/orchestration-and-coordination/clean-up/clean-up.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/orchestration-and-coordination/clean-up/clean-up.html</guid>
+      <description>In this step, we will clean up all resources, we created during this lab, so that no further cost will occur.
+1. Delete the AWS SAM template In your Cloud9 IDE, run the following command to delete the resources we created with our AWS SAM template:
+cd ~/environment/wild-rydes-async-messaging/lab-4 aws cloudformation delete-stack \  --stack-name wild-rydes-async-msg-4 2. Delete the AWS Lambda created Amazon CloudWatch Log Group Follow this deep link to list the Amazon CloudWatch Log Groups with the name /aws/lambda/wild-rydes, AWS Lambda created during this lab.</description>
+    </item>
+    
+    <item>
+      <title>Console</title>
+      <link>/fan-out-and-message-filtering/clean-up/clean-up-console.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/clean-up/clean-up-console.html</guid>
+      <description>3. Delete the Amazon S3 bucket In your Amazon S3 console, filter for the bucket you have created to upload your code artifacts with AWS SAM, select the bucket and click the Delete button in the top.
+  Detailed description     4. Delete the Amazon SNS topic In your Amazon SNS console, select Topic in the left navigation pane, select the RideCompletionTopic and click the Delete button in the top right corner.</description>
+    </item>
+    
+    <item>
+      <title>Console</title>
+      <link>/fan-out-and-message-filtering/create-customer-accounting-service-subscription/create-customer-accounting-service-subscription-console.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/create-customer-accounting-service-subscription/create-customer-accounting-service-subscription-console.html</guid>
+      <description>1. Create a new subscription After selecting the topic RideCompletionTopic, click the Create subscription button in the bottom right corner.
+  Detailed description     2. Configure the subscription In the next page, select HTTP as the subscription protocol.
+To look-up the subscription endpoint, navigate back to your CloudFormation console, select the stack wild-rydes-async-msg-1 and select the Outputs tab. Select the value, corresponding to the key CustomerAccountingServiceLBURL. It should look similar like http://caslb-.</description>
+    </item>
+    
+    <item>
+      <title>Console</title>
+      <link>/fan-out-and-message-filtering/create-customer-loyalty-service-subscription/create-customer-loyalty-service-subscription-console.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/create-customer-loyalty-service-subscription/create-customer-loyalty-service-subscription-console.html</guid>
+      <description>1. Create a new subscription After selecting the topic RideCompletionTopic, click the Create subscription button in the bottom right corner.
+  Detailed description     2. Configure the subscription In the next page, select HTTP as the subscription protocol.
+To look-up the subscription endpoint, navigate back to your CloudFormation console, select the stack wild-rydes-async-msg-1 and select the Outputs tab. Select the value, corresponding to the key CustomerLoyaltyServiceLBURL. It should look similar like http://clslb-.</description>
+    </item>
+    
+    <item>
+      <title>Console</title>
+      <link>/fan-out-and-message-filtering/create-customer-notification-service-subscription/create-customer-notification-service-subscription-console.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/create-customer-notification-service-subscription/create-customer-notification-service-subscription-console.html</guid>
+      <description>1. Create a new subscription After selecting the topic RideCompletionTopic, click the Create subscription button in the bottom right corner.
+  Detailed description     2. Configure the subscription In the next page, select HTTP as the subscription protocol.
+To look-up the subscription endpint, navigate back to your CloudFormation console, select the stack wild-rydes-async-msg-1 and select the Outputs tab. Select the value, corresponding to the key CustomerNotificationServiceLBURL. It should look similar like http://cnslb-.</description>
+    </item>
+    
+    <item>
+      <title>Console</title>
+      <link>/fan-out-and-message-filtering/create-datalake-ingestion-service-subscription/create-datalake-ingestion-service-subscription-console.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/create-datalake-ingestion-service-subscription/create-datalake-ingestion-service-subscription-console.html</guid>
+      <description>1. Create a new subscription After selecting the topic RideCompletionTopic, click the Create subscription button in the bottom right corner.
+  Detailed description     2. Configure the subscription In the next page, select HTTP as the subscription protocol.
+To look-up the subscription endpoint, navigate back to your CloudFormation console, select the stack wild-rydes-async-msg-1 and select the Outputs tab. Select the value, corresponding to the key DatalakeIngestionServiceLBURL. It should look similar like http://dislb-.</description>
+    </item>
+    
+    <item>
+      <title>Console</title>
+      <link>/fan-out-and-message-filtering/create-extraordinary-rides-service-subscription/create-extraordinary-rides-service-subscription-console.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/create-extraordinary-rides-service-subscription/create-extraordinary-rides-service-subscription-console.html</guid>
+      <description>1. Create a new subscription After selecting the topic RideCompletionTopic, click the Create subscription button in the bottom right corner.
+  Detailed description     2. Configure the subscription In the next page, select HTTP as the subscription protocol.
+To look-up the subscription endpoint, navigate back to your CloudFormation console, select the stack wild-rydes-async-msg-1 and select the Outputs tab. Select the value, corresponding to the key ExtraordinaryRidesServiceLBURL. It should look similar like http://erslb-.</description>
+    </item>
+    
+    <item>
+      <title>Console</title>
+      <link>/fan-out-and-message-filtering/create-sns-topic/create-sns-topic-console.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/create-sns-topic/create-sns-topic-console.html</guid>
+      <description>1. Browse to the Amazon SNS console In your Amazon SNS console, select Topic in the left navigation pane and click the Create topic button in the top right corner.
+  Detailed description     2. Create the Ride Completion Topic Enter the topic name RideCompletionTopic and leave the default values. Scroll to the bottom of the page and click Create topic.
+  Detailed description     </description>
+    </item>
+    
+    <item>
+      <title>Console</title>
+      <link>/fan-out-and-message-filtering/update-unicorn-management-service/update-unicorn-management-service-console.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/update-unicorn-management-service/update-unicorn-management-service-console.html</guid>
+      <description>1. Grant additional IAM permissions to Lambda In your Amazon IAM console, select Roles in the left navigation. Use the filter text box to find the role with the name wild-rydes-async-msg-1-SubmitRideCompletionFunctio-&amp;hellip; (assuming your have chosen wild-rydes-async-msg-1 as your stack name).
+  Detailed description     Click on the role name and click Add inline policy to attache another one.
+  Detailed description     Select the JSON tab and passed the following policy statement into it, after you have substitute &amp;laquo;&amp;hellip;&amp;raquo; with the correct values.</description>
+    </item>
+    
+    <item>
+      <title>Console</title>
+      <link>/orchestration-and-coordination/clean-up/clean-up-console.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/orchestration-and-coordination/clean-up/clean-up-console.html</guid>
+      <description>Delete the Amazon S3 bucket In your Amazon S3 console, filter for the bucket you have created to upload your code artifacts with AWS SAM, select the bucket and click the Delete button in the top.
+  Detailed description     You are done!</description>
+    </item>
+    
+    <item>
+      <title>Console</title>
+      <link>/scatter-gather/cleanup/clean-up-console.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/scatter-gather/cleanup/clean-up-console.html</guid>
+      <description>3. Delete the Amazon S3 bucket In your Amazon S3 console, filter for the bucket you have created to upload your code artifacts with AWS SAM, select the bucket and click the Delete button in the top.
+  Detailed description     You are done!</description>
+    </item>
+    
+    <item>
+      <title>Console</title>
+      <link>/topic-queue-chaining-and-load-balancer/clean-up/clean-up-console.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/clean-up/clean-up-console.html</guid>
+      <description>4. Delete the Amazon SNS topic In your Amazon SNS console, select Topic in the left navigation pane, select the RideCompletionTopic and click the Delete button in the top right corner.
+  Detailed description     You are done!</description>
+    </item>
+    
+    <item>
+      <title>Console</title>
+      <link>/topic-queue-chaining-and-load-balancer/create-customer-accounting-service-subscription/create-customer-accounting-service-subscription-console.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/create-customer-accounting-service-subscription/create-customer-accounting-service-subscription-console.html</guid>
+      <description>1. Create a new Amazon SQS queue In your Amazon SQS console, select Create New Queue in top left corner or click Get Started Now in the center of the page, if it&amp;rsquo;s your first queue in this region.
+  Detailed description     Enter CustomerAccountingServiceQueue as Queue Name, make sure Standard Queue is highlighted and click Quick-Create Queue.
+  Screenshot     2. Create a new subscription After selecting the queue CustomerAccountingServiceQueue, click the Queue Actions drop down in the top left corner and chose Subscribe Queue to SNS Topic.</description>
+    </item>
+    
+    <item>
+      <title>Console</title>
+      <link>/topic-queue-chaining-and-load-balancer/create-customer-loyalty-service-subscription/create-customer-loyalty-service-subscription-console.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/create-customer-loyalty-service-subscription/create-customer-loyalty-service-subscription-console.html</guid>
+      <description>1. Create a new Amazon SQS queue In your Amazon SQS console, select Create New Queue in top left corner or click Get Started Now in the center of the page, if it&amp;rsquo;s your first queue in this region.
+  Detailed description     Enter CustomerLoyaltyServiceQueue as Queue Name, make sure Standard Queue is highlighted and click Quick-Create Queue.
+  Detailed description     2.</description>
+    </item>
+    
+    <item>
+      <title>Console</title>
+      <link>/topic-queue-chaining-and-load-balancer/create-customer-notification-service-subscription/create-customer-notification-service-subscription-console.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/create-customer-notification-service-subscription/create-customer-notification-service-subscription-console.html</guid>
+      <description>1. Create a new Amazon SQS queue In your Amazon SQS console, select Create New Queue in top left corner or click Get Started Now in the center of the page, if it&amp;rsquo;s your first queue in this region.
+  Detailed description     Enter CustomerNotificationServiceQueue as Queue Name, make sure Standard Queue is highlighted and click Quick-Create Queue.
+  Detailed description     2.</description>
+    </item>
+    
+    <item>
+      <title>Console</title>
+      <link>/topic-queue-chaining-and-load-balancer/create-datalake-ingestion-service-subscription/create-datalake-ingestion-service-subscription-console.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/create-datalake-ingestion-service-subscription/create-datalake-ingestion-service-subscription-console.html</guid>
+      <description>1. Create a new Amazon SQS queue In your Amazon SQS console, select Create New Queue in top left corner or click Get Started Now in the center of the page, if it&amp;rsquo;s your first queue in this region.
+  Detailed description     Enter DatalakeIngestionServiceQueue as Queue Name, make sure Standard Queue is highlighted and click Quick-Create Queue.
+  Detailed description     2.</description>
+    </item>
+    
+    <item>
+      <title>Console</title>
+      <link>/topic-queue-chaining-and-load-balancer/create-extraordinary-rides-service-subscription/create-extraordinary-rides-service-subscription-console.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/create-extraordinary-rides-service-subscription/create-extraordinary-rides-service-subscription-console.html</guid>
+      <description>1. Create a new Amazon SQS queue In your Amazon SQS console, select Create New Queue in top left corner or click Get Started Now in the center of the page, if it&amp;rsquo;s your first queue in this region.
+  Detailed description     Enter ExtraordinaryRidesServiceQueue as Queue Name, make sure Standard Queue is highlighted and click Quick-Create Queue.
+  Detailed description     2.</description>
+    </item>
+    
+    <item>
+      <title>Console</title>
+      <link>/topic-queue-chaining-and-load-balancer/create-sns-topic/create-sns-topic-console.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/create-sns-topic/create-sns-topic-console.html</guid>
+      <description>1. Browse to the Amazon SNS console In your Amazon SNS console, select Topic in the left navigation pane and click the Create topic button in the top right corner.
+  Detailed description     2. Create the Ride Completion Topic Enter the topic name RideCompletionTopic and leave the default values. Scroll to the bottom of the page and click Create topic.
+  Detailed description     </description>
+    </item>
+    
+    <item>
+      <title>Console</title>
+      <link>/topic-queue-chaining-and-load-balancer/update-unicorn-management-service/update-unicorn-management-service-console.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/update-unicorn-management-service/update-unicorn-management-service-console.html</guid>
+      <description>1. Grant additional IAM permissions to Lambda In your Amazon IAM console, select Roles in the left navigation. Use the filter text box to find the role with the name wild-rydes-async-msg-2-SubmitRideCompletionFunctio-&amp;hellip; (assuming your have chosen wild-rydes-async-msg-2 as your stack name).
+  Detailed description     Click on the role name and click Add inline policy to attache another one.
+  Detailed description     Select the JSON tab and passed the following policy statement into it, after you have substitute &amp;laquo;&amp;hellip;&amp;raquo; with the correct values.</description>
+    </item>
+    
+    <item>
+      <title>Ireland</title>
+      <link>/prerequisites/prerequisites-1/eu-central-1.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/prerequisites/prerequisites-1/eu-central-1.html</guid>
+      <description>Create your AWS Cloud9 Environment by launching this CloudFormation template in Frankfurt, with clicking on the below Launch button.
+   AWS CloudFormation launch template Launch in Frankfurt     AWS Cloud9 IDE  Launch     </description>
+    </item>
+    
+    <item>
+      <title>Ireland</title>
+      <link>/prerequisites/prerequisites-1/eu-west-1.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/prerequisites/prerequisites-1/eu-west-1.html</guid>
+      <description>Create your AWS Cloud9 Environment by launching this CloudFormation template in Ireland, with clicking on the below Launch button.
+   AWS CloudFormation launch template Launch in Ireland     AWS Cloud9 IDE  Launch     </description>
+    </item>
+    
+    <item>
+      <title>Ohio</title>
+      <link>/prerequisites/prerequisites-1/us-east-2.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/prerequisites/prerequisites-1/us-east-2.html</guid>
+      <description>Create your AWS Cloud9 Environment by launching this CloudFormation template in Ohio, with clicking on the below Launch button.
+   AWS CloudFormation launch template Launch in Ohio     AWS Cloud9 IDE  Launch     </description>
+    </item>
+    
+    <item>
+      <title>Oregon</title>
+      <link>/prerequisites/prerequisites-1/us-west-2.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/prerequisites/prerequisites-1/us-west-2.html</guid>
+      <description>Create your AWS Cloud9 Environment by launching this CloudFormation template in Oregon, with clicking on the below Launch button.
+   AWS CloudFormation launch template Launch in Oregon     AWS Cloud9 IDE  Launch     </description>
+    </item>
+    
+    <item>
+      <title>SAM</title>
+      <link>/fan-out-and-message-filtering/clean-up/clean-up-sam.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/clean-up/clean-up-sam.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SAM</title>
+      <link>/fan-out-and-message-filtering/create-customer-accounting-service-subscription/create-customer-accounting-service-subscription-sam.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/create-customer-accounting-service-subscription/create-customer-accounting-service-subscription-sam.html</guid>
+      <description>1. Update the AWS SAM template In your Cloud9 IDE for this workshop, open the SAM template file wild-rydes-async-messaging/lab-1/template.yaml. In the Resources section, add the definition for the Amazon SNS subscription for the CustomerAccountingService. You can find the AWS CloudFormation documentation to do so here.
+  Cheat Sheet   CustomerAccountingServiceSubscription: Type: AWS::SNS::Subscription Properties: TopicArn: !Ref RideCompletionTopic Protocol: http Endpoint: !Sub &amp;#34;http://${CustomerAccountingLoadBalancer.DNSName}&amp;#34;      Detailed description     2.</description>
+    </item>
+    
+    <item>
+      <title>SAM</title>
+      <link>/fan-out-and-message-filtering/create-customer-loyalty-service-subscription/create-customer-loyalty-service-subscription-sam.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/create-customer-loyalty-service-subscription/create-customer-loyalty-service-subscription-sam.html</guid>
+      <description>1. Update the AWS SAM template In your Cloud9 IDE for this workshop, open the SAM template file wild-rydes-async-messaging/lab-1/template.yaml. In the Resources section, add the definition for the Amazon SNS subscription for the CustomerLoyaltyService. You can find the AWS CloudFormation documentation to do so here.
+  Cheat Sheet   CustomerLoyaltyServiceSubscription: Type: AWS::SNS::Subscription Properties: TopicArn: !Ref RideCompletionTopic Protocol: http Endpoint: !Sub &amp;#34;http://${CustomerLoyaltyLoadBalancer.DNSName}&amp;#34;      Detailed description     2.</description>
+    </item>
+    
+    <item>
+      <title>SAM</title>
+      <link>/fan-out-and-message-filtering/create-customer-notification-service-subscription/create-customer-notification-service-subscription-sam.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/create-customer-notification-service-subscription/create-customer-notification-service-subscription-sam.html</guid>
+      <description>1. Update the AWS SAM template In your Cloud9 IDE for this workshop, open the SAM template file &amp;lsquo;wild-rydes-async-messaging/lab-1/template.yaml&amp;rsquo;. In the Resources section, add the definition for the Amazon SNS subscription for the CustomerNotificationService. You can find the AWS CloudFormation documentation to do so here.
+  Cheat Sheet   CustomerNotificationServiceSubscription: Type: AWS::SNS::Subscription Properties: TopicArn: !Ref RideCompletionTopic Protocol: http Endpoint: !Sub &amp;#34;http://${CustomerNotifyLoadBalancer.DNSName}&amp;#34;      Detailed description     2.</description>
+    </item>
+    
+    <item>
+      <title>SAM</title>
+      <link>/fan-out-and-message-filtering/create-datalake-ingestion-service-subscription/create-datalake-ingestion-service-subscription-sam.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/create-datalake-ingestion-service-subscription/create-datalake-ingestion-service-subscription-sam.html</guid>
+      <description>1. Update the AWS SAM template In your Cloud9 IDE for this workshop, open the SAM template file &amp;lsquo;wild-rydes-async-messaging/lab-1/template.yaml&amp;rsquo;. In the Resources section, add the definition for the Amazon SNS subscription for the DatalakeIngestionService. You can find the AWS CloudFormation documentation to do so here.
+  Cheat Sheet   DatalakeIngestionServiceSubscription: Type: AWS::SNS::Subscription Properties: TopicArn: !Ref RideCompletionTopic Protocol: http Endpoint: !Sub &amp;#34;http://${DatalakeIngestionLoadBalancer.DNSName}&amp;#34;      Detailed description     2.</description>
+    </item>
+    
+    <item>
+      <title>SAM</title>
+      <link>/fan-out-and-message-filtering/create-extraordinary-rides-service-subscription/create-extraordinary-rides-service-subscription-sam.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/create-extraordinary-rides-service-subscription/create-extraordinary-rides-service-subscription-sam.html</guid>
+      <description>1. Update the AWS SAM template In your Cloud9 IDE for this workshop, open the SAM template file &amp;lsquo;wild-rydes-async-messaging/lab-1/template.yaml&amp;rsquo;. In the Resources section, add the definition for the Amazon SNS subscription for the ExtraordinaryRidesService. You can find the AWS CloudFormation documentation to do so here.
+Don&amp;rsquo;t forget to provide the subscription filter policy!
+  Cheat Sheet   ExtraordinaryRidesServiceSubscription: Type: AWS::SNS::Subscription Properties: TopicArn: !Ref RideCompletionTopic Protocol: http Endpoint: !Sub &amp;#34;http://${ExtraordinaryRidesLoadBalancer.</description>
+    </item>
+    
+    <item>
+      <title>SAM</title>
+      <link>/fan-out-and-message-filtering/create-sns-topic/create-sns-topic-sam.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/create-sns-topic/create-sns-topic-sam.html</guid>
+      <description>1. Update the AWS SAM template In your Cloud9 IDE for this workshop, open the SAM template file wild-rydes-async-messaging/lab-1/template.yaml. In the Resources section, add the definition for an Amazon SNS topic with the name RideCompletionTopic. You can find the AWS CloudFormation documentation to do so here.
+  Cheat Sheet    RideCompletionTopic: Type: AWS::SNS::Topic Properties: TopicName: RideCompletionTopic      Detailed description     2.</description>
+    </item>
+    
+    <item>
+      <title>SAM</title>
+      <link>/fan-out-and-message-filtering/update-unicorn-management-service/update-unicorn-management-service-sam.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/fan-out-and-message-filtering/update-unicorn-management-service/update-unicorn-management-service-sam.html</guid>
+      <description>1. Grant additional IAM permissions to Lambda In your Cloud9 IDE for this workshop, open the SAM template file wild-rydes-async-messaging/lab-1/template.yaml. In the Resources section, look for the SubmitRideCompletionFunction definition. It already contains one policies entry called DynamoDBCrudPolicy. Directly below, add a policy entry which grants Amazon SNS publish message permission. You can look up the supported policies here.
+  Cheat Sheet   - SNSPublishMessagePolicy: TopicName: !GetAtt RideCompletionTopic.TopicName      Detailed description     2.</description>
+    </item>
+    
+    <item>
+      <title>SAM</title>
+      <link>/orchestration-and-coordination/clean-up/clean-up-sam.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/orchestration-and-coordination/clean-up/clean-up-sam.html</guid>
+      <description>Delete the Amazon S3 bucket In your Cloud9 IDE, run the following command to delete the Amazon S3 bucket we created earlier:
+aws s3 rb s3://${BUCKET_NAME} —-force You are done!</description>
+    </item>
+    
+    <item>
+      <title>SAM</title>
+      <link>/scatter-gather/cleanup/clean-up-sam.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/scatter-gather/cleanup/clean-up-sam.html</guid>
+      <description>3. Delete the Amazon S3 bucket In your Cloud9 IDE, run the following command to delete the Amazon S3 bucket we created earlier:
+aws s3 rb s3://${BUCKET_NAME} —-force You are done!</description>
+    </item>
+    
+    <item>
+      <title>SAM</title>
+      <link>/topic-queue-chaining-and-load-balancer/clean-up/clean-up-sam.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/clean-up/clean-up-sam.html</guid>
+      <description>3. Delete the Amazon S3 bucket In your Cloud9 IDE, run the following command to delete the Amazon S3 bucket we created earlier:
+aws s3 rb s3://${BUCKET_NAME} —-force You are done!</description>
+    </item>
+    
+    <item>
+      <title>SAM</title>
+      <link>/topic-queue-chaining-and-load-balancer/create-customer-accounting-service-subscription/create-customer-accounting-service-subscription-sam.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/create-customer-accounting-service-subscription/create-customer-accounting-service-subscription-sam.html</guid>
+      <description>1. Update the AWS SAM template In your Cloud9 IDE for this workshop, open the SAM template file wild-rydes-async-messaging/lab-2/template.yaml. In the Resources section, add the definition for an Amazon SQS queue with the name CustomerAccountingServiceQueue, the CustomerAccountingService will use to consume messages from. You can find the AWS CloudFormation documentation to do so here.
+  Cheat Sheet   CustomerAccountingServiceQueue: Type: AWS::SQS::Queue    The next step, before we can define the subscription, is granting our Amazon SNS topic the permissions to publish messages into this Amazon SQS queue.</description>
+    </item>
+    
+    <item>
+      <title>SAM</title>
+      <link>/topic-queue-chaining-and-load-balancer/create-customer-loyalty-service-subscription/create-customer-loyalty-service-subscription-sam.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/create-customer-loyalty-service-subscription/create-customer-loyalty-service-subscription-sam.html</guid>
+      <description>1. Update the AWS SAM template In your Cloud9 IDE for this workshop, open the SAM template file wild-rydes-async-messaging/lab-2/template.yaml. In the Resources section, add the definition for an Amazon SQS queue with the name CustomerLoyaltyServiceQueue, the CustomerLoyaltyService will use to consume messages from. You can find the AWS CloudFormation documentation to do so here.
+  Cheat Sheet   CustomerLoyaltyServiceQueue: Type: AWS::SQS::Queue    The next step, before we can define the subscription, is granting our Amazon SNS topic the permissions to publish messages into this Amazon SQS queue.</description>
+    </item>
+    
+    <item>
+      <title>SAM</title>
+      <link>/topic-queue-chaining-and-load-balancer/create-customer-notification-service-subscription/create-customer-notification-service-subscription-sam.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/create-customer-notification-service-subscription/create-customer-notification-service-subscription-sam.html</guid>
+      <description>1. Update the AWS SAM template In your Cloud9 IDE for this workshop, open the SAM template file &amp;lsquo;wild-rydes-async-messaging/lab-2/template.yaml&amp;rsquo;. In the Resources section, add the definition for an Amazon SQS queue with the name CustomerNotificationServiceQueue, the CustomerNotificationService will use to consume messages from. You can find the AWS CloudFormation documentation to do so here.
+  Cheat Sheet   CustomerNotificationServiceQueue: Type: AWS::SQS::Queue    The next step, before we can define the subscription, is granting our Amazon SNS topic the permissions to publish messages into this Amazon SQS queue.</description>
+    </item>
+    
+    <item>
+      <title>SAM</title>
+      <link>/topic-queue-chaining-and-load-balancer/create-datalake-ingestion-service-subscription/create-datalake-ingestion-service-subscription-sam.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/create-datalake-ingestion-service-subscription/create-datalake-ingestion-service-subscription-sam.html</guid>
+      <description>1. Update the AWS SAM template In your Cloud9 IDE for this workshop, open the SAM template file wild-rydes-async-messaging/lab-2/template.yaml. In the Resources section, add the definition for an Amazon SQS queue with the name DatalakeIngestionServiceQueue, the DatalakeIngestionService will use to consume messages from. You can find the AWS CloudFormation documentation to do so here.
+  Cheat Sheet   DatalakeIngestionServiceQueue: Type: AWS::SQS::Queue    The next step, before we can define the subscription, is granting our Amazon SNS topic the permissions to publish messages into this Amazon SQS queue.</description>
+    </item>
+    
+    <item>
+      <title>SAM</title>
+      <link>/topic-queue-chaining-and-load-balancer/create-extraordinary-rides-service-subscription/create-extraordinary-rides-service-subscription-sam.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/create-extraordinary-rides-service-subscription/create-extraordinary-rides-service-subscription-sam.html</guid>
+      <description>1. Update the AWS SAM template In your Cloud9 IDE for this workshop, open the SAM template file wild-rydes-async-messaging/lab-2/template.yaml. In the Resources section, add the definition for an Amazon SQS queue with the name ExtraordinaryRidesServiceQueue, the ExtraordinaryRidesService will use to consume messages from. You can find the AWS CloudFormation documentation to do so here.
+  Cheat Sheet   ExtraordinaryRidesServiceQueue: Type: AWS::SQS::Queue    The next step, before we can define the subscription, is granting our Amazon SNS topic the permissions to publish messages into this Amazon SQS queue.</description>
+    </item>
+    
+    <item>
+      <title>SAM</title>
+      <link>/topic-queue-chaining-and-load-balancer/create-sns-topic/create-sns-topic-sam.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/create-sns-topic/create-sns-topic-sam.html</guid>
+      <description>1. Update the AWS SAM template In your Cloud9 IDE for this workshop, open the SAM template file wild-rydes-async-messaging/lab-2/template.yaml. In the Resources section, add the definition for an Amazon SNS topic with the name RideCompletionTopic. You can find the AWS CloudFormation documentation to do so here.
+  Cheat Sheet    RideCompletionTopic: Type: AWS::SNS::Topic Properties: TopicName: RideCompletionTopic      Detailed description     2.</description>
+    </item>
+    
+    <item>
+      <title>SAM</title>
+      <link>/topic-queue-chaining-and-load-balancer/update-unicorn-management-service/update-unicorn-management-service-sam.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/topic-queue-chaining-and-load-balancer/update-unicorn-management-service/update-unicorn-management-service-sam.html</guid>
+      <description>1. Grant additional IAM permissions to Lambda In your Cloud9 IDE for this workshop, open the SAM template file wild-rydes-async-messaging/lab-2/template.yaml. In the Resources section, look for the SubmitRideCompletionFunction definition. It already contains one policies entry called DynamoDBCrudPolicy. Directly below, add a policy entry which grants Amazon SNS publish message permission. You can look up the supported policies here.
+  Cheat Sheet   - SNSPublishMessagePolicy: TopicName: !GetAtt RideCompletionTopic.TopicName      Detailed description     2.</description>
+    </item>
+    
+    <item>
+      <title>Singapore</title>
+      <link>/prerequisites/prerequisites-1/ap-southeast-1.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/prerequisites/prerequisites-1/ap-southeast-1.html</guid>
+      <description>Create your AWS Cloud9 Environment by launching this CloudFormation template in Singapore, with clicking on the below Launch button.
+   AWS CloudFormation launch template Launch in Singapore     AWS Cloud9 IDE  Launch     </description>
+    </item>
+    
+  </channel>
+</rss>

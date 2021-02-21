@@ -1,0 +1,2079 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<html lang="en" class="js csstransforms3d">
+<head>
+  <meta charset="utf-8">
+  <meta property="og:title" content="Wild Rydes Asynchronous Messaging Workshop" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="generator" content="Hugo 0.74.3" />
+  <meta name="description" content="Wild Rydes Asynchronous Messaging Workshop">
+<meta name="author" content="Jane Architect">
+
+  <link rel="shortcut icon" href="https://a0.awsstatic.com/libra-css/images/site/fav/favicon.ico" type="image/ico" />
+<link rel="icon" href="https://a0.awsstatic.com/libra-css/images/site/fav/favicon.ico" type="image/ico" />
+
+  <title>Test Scatter-Gather :: Wild Rydes Asynchronous Messaging Workshop</title>
+
+  
+  <link href="../css/nucleus.css" rel="stylesheet">
+  <link href="../css/fontawesome-all.min.css" rel="stylesheet">
+  <link href="../css/hybrid.css" rel="stylesheet">
+  <link href="../css/featherlight.min.css" rel="stylesheet">
+  <link href="../css/perfect-scrollbar.min.css" rel="stylesheet">
+  <link href="../css/auto-complete.css" rel="stylesheet">
+  <link href="../css/atom-one-dark-reasonable.css" rel="stylesheet">
+  <link href="../css/theme.css" rel="stylesheet">
+  <link href="../css/hugo-theme.css" rel="stylesheet">
+  
+  <link href="../css/theme-aws.css" rel="stylesheet">
+  
+  <link href="../css/jquery-ui.min.css" rel="stylesheet">
+  <script src="../js/jquery-3.3.1.min.js"></script>
+  <script src="../js/jquery-ui-1.12.1.min.js"></script>
+  
+
+  <style>
+    :root #header + #content > #left > #rlblock_left{
+        display:none !important;
+    }
+    
+      :not(pre) > code + span.copy-to-clipboard {
+          display: none;
+      }
+    
+  </style>
+  
+</head>
+
+<body class="" data-url="../scatter-gather/test-scatter-and-gather.html">
+  <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <div>
+    <a href="../" title="Go home">
+        <img style="vertical-align:middle" src="../images/logo.png" height="70px" />
+    </a>
+</div>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="../js/lunr.min.js"></script>
+<script type="text/javascript" src="../js/auto-complete.js"></script>
+<script type="text/javascript">
+    
+        var baseurl = "";
+    
+</script>
+<script type="text/javascript" src="../js/search.js"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/prerequisites.html" title="Workshop Prerequisites" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../prerequisites.html">
+          Workshop Prerequisites
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/prerequisites/prerequisites-1.html" title="Bootstrap AWS Cloud9" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../prerequisites/prerequisites-1.html">
+          Bootstrap AWS Cloud9
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/prerequisites/prerequisites-2/prerequisites-2.html" title="Configure AWS Cloud9" class="dd-item ">
+        <a href="../prerequisites/prerequisites-2/prerequisites-2.html">
+        Configure AWS Cloud9
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/choose-your-own-advanture.html" title="Choose Your Own Adventure" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../choose-your-own-advanture.html">
+          Choose Your Own Adventure
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/fan-out-and-message-filtering.html" title="Fan-Out &amp; Message Filtering" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../fan-out-and-message-filtering.html">
+          Lab-1: Fan-Out &amp; Message Filtering
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/fan-out-and-message-filtering/bootstrap-initial-state/bootstrap-initial-state.html" title="Bootstrap the Initial State" class="dd-item ">
+        <a href="../fan-out-and-message-filtering/bootstrap-initial-state/bootstrap-initial-state.html">
+        1 Bootstrap the Initial State
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/fan-out-and-message-filtering/create-sns-topic/create-sns-topic.html" title="Create the Amazon SNS topic" class="dd-item ">
+        <a href="../fan-out-and-message-filtering/create-sns-topic/create-sns-topic.html">
+        2 Create the Amazon SNS topic
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/fan-out-and-message-filtering/create-customer-notification-service-subscription/create-customer-notification-service-subscription.html" title="Create Customer Notification Service Subscription" class="dd-item ">
+        <a href="../fan-out-and-message-filtering/create-customer-notification-service-subscription/create-customer-notification-service-subscription.html">
+        3 Create Customer Notification Service Subscription
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/fan-out-and-message-filtering/create-customer-accounting-service-subscription/create-customer-accounting-service-subscription.html" title="Create Customer Accounting Service Subscription" class="dd-item ">
+        <a href="../fan-out-and-message-filtering/create-customer-accounting-service-subscription/create-customer-accounting-service-subscription.html">
+        4 Create Customer Accounting Service Subscription
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/fan-out-and-message-filtering/create-customer-loyalty-service-subscription/create-customer-loyalty-service-subscription.html" title="Create Customer Loyalty Service Subscription" class="dd-item ">
+        <a href="../fan-out-and-message-filtering/create-customer-loyalty-service-subscription/create-customer-loyalty-service-subscription.html">
+        5 Create Customer Loyalty Service Subscription
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/fan-out-and-message-filtering/create-datalake-ingestion-service-subscription/create-datalake-ingestion-service-subscription.html" title="Create Datalake Ingestion Service Subscription" class="dd-item ">
+        <a href="../fan-out-and-message-filtering/create-datalake-ingestion-service-subscription/create-datalake-ingestion-service-subscription.html">
+        6 Create Datalake Ingestion Service Subscription
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/fan-out-and-message-filtering/create-extraordinary-rides-service-subscription/create-extraordinary-rides-service-subscription.html" title="Create Extraordinary Rides Service Subscription" class="dd-item ">
+        <a href="../fan-out-and-message-filtering/create-extraordinary-rides-service-subscription/create-extraordinary-rides-service-subscription.html">
+        7 Create Extraordinary Rides Service Subscription
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/fan-out-and-message-filtering/update-unicorn-management-service/update-unicorn-management-service.html" title="Update Unicorn Management Service" class="dd-item ">
+        <a href="../fan-out-and-message-filtering/update-unicorn-management-service/update-unicorn-management-service.html">
+        8 Update Unicorn Management Service
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/fan-out-and-message-filtering/test-fan-out-and-message-filtering/test-fan-out-and-message-filtering.html" title="Test Fan-Out and Message Filtering" class="dd-item ">
+        <a href="../fan-out-and-message-filtering/test-fan-out-and-message-filtering/test-fan-out-and-message-filtering.html">
+        9 Test Fan-Out and Message Filtering
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/fan-out-and-message-filtering/clean-up/clean-up.html" title="Clean up" class="dd-item ">
+        <a href="../fan-out-and-message-filtering/clean-up/clean-up.html">
+        10 Clean up
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/topic-queue-chaining-and-load-balancer.html" title="Topic-Queue Chaining &amp; Load Balancing" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../topic-queue-chaining-and-load-balancer.html">
+          Lab-2: Topic-Queue Chaining &amp; Load Balancing
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/topic-queue-chaining-and-load-balancer/bootstrap-initial-state/bootstrap-initial-state.html" title="Bootstrap the Initial State" class="dd-item ">
+        <a href="../topic-queue-chaining-and-load-balancer/bootstrap-initial-state/bootstrap-initial-state.html">
+        1 Bootstrap the Initial State
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/topic-queue-chaining-and-load-balancer/create-sns-topic/create-sns-topic.html" title="Create the Amazon SNS topic" class="dd-item ">
+        <a href="../topic-queue-chaining-and-load-balancer/create-sns-topic/create-sns-topic.html">
+        2 Create the Amazon SNS topic
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/topic-queue-chaining-and-load-balancer/create-customer-notification-service-subscription/create-customer-notification-service-subscription.html" title="Create Customer Notification Service Subscription" class="dd-item ">
+        <a href="../topic-queue-chaining-and-load-balancer/create-customer-notification-service-subscription/create-customer-notification-service-subscription.html">
+        3 Create Customer Notification Service Subscription
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/topic-queue-chaining-and-load-balancer/create-customer-accounting-service-subscription/create-customer-accounting-service-subscription.html" title="Create Customer Accounting Service Subscription" class="dd-item ">
+        <a href="../topic-queue-chaining-and-load-balancer/create-customer-accounting-service-subscription/create-customer-accounting-service-subscription.html">
+        4 Create Customer Accounting Service Subscription
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/topic-queue-chaining-and-load-balancer/create-customer-loyalty-service-subscription/create-customer-loyalty-service-subscription.html" title="Create Customer Loyalty Service Subscription" class="dd-item ">
+        <a href="../topic-queue-chaining-and-load-balancer/create-customer-loyalty-service-subscription/create-customer-loyalty-service-subscription.html">
+        5 Create Customer Loyalty Service Subscription
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/topic-queue-chaining-and-load-balancer/create-datalake-ingestion-service-subscription/create-datalake-ingestion-service-subscription.html" title="Create Datalake Ingestion Service Subscription" class="dd-item ">
+        <a href="../topic-queue-chaining-and-load-balancer/create-datalake-ingestion-service-subscription/create-datalake-ingestion-service-subscription.html">
+        6 Create Datalake Ingestion Service Subscription
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/topic-queue-chaining-and-load-balancer/create-extraordinary-rides-service-subscription/create-extraordinary-rides-service-subscription.html" title="Create Extraordinary Rides Service Subscription" class="dd-item ">
+        <a href="../topic-queue-chaining-and-load-balancer/create-extraordinary-rides-service-subscription/create-extraordinary-rides-service-subscription.html">
+        7 Create Extraordinary Rides Service Subscription
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/topic-queue-chaining-and-load-balancer/update-unicorn-management-service/update-unicorn-management-service.html" title="Update Unicorn Management Service" class="dd-item ">
+        <a href="../topic-queue-chaining-and-load-balancer/update-unicorn-management-service/update-unicorn-management-service.html">
+        8 Update Unicorn Management Service
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/topic-queue-chaining-and-load-balancer/test-topic-queue-chaining-and-load-balancer/test-topic-queue-chaining-and-load-balancing.html" title="Test Topic-Queue Chaining &amp; Load Balancing" class="dd-item ">
+        <a href="../topic-queue-chaining-and-load-balancer/test-topic-queue-chaining-and-load-balancer/test-topic-queue-chaining-and-load-balancing.html">
+        9 Test Topic-Queue Chaining &amp; Load Balancing
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/topic-queue-chaining-and-load-balancer/clean-up/clean-up.html" title="Clean up" class="dd-item ">
+        <a href="../topic-queue-chaining-and-load-balancer/clean-up/clean-up.html">
+        10 Clean up
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/scatter-gather.html" title="Scatter-Gather" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="../scatter-gather.html">
+          Lab-3: Scatter-Gather
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/scatter-gather/bootstrap-initial-state.html" title="Bootstrap the Initial State" class="dd-item ">
+        <a href="../scatter-gather/bootstrap-initial-state.html">
+        1 Bootstrap the Initial State
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/scatter-gather/test-scatter-and-gather.html" title="Test Scatter-Gather" class="dd-item active">
+        <a href="../scatter-gather/test-scatter-and-gather.html">
+        2 Test Scatter-Gather
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/scatter-gather/cleanup/clean-up.html" title="Cleanup" class="dd-item ">
+        <a href="../scatter-gather/cleanup/clean-up.html">
+        3 Cleanup
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+             
+            
+          
+             
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/orchestration-and-coordination.html" title="Orchestration and Coordination" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../orchestration-and-coordination.html">
+          Lab-4: Orchestration and Coordination
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/orchestration-and-coordination/bootstrap-initial-state/bootstrap-initial-state.html" title="Bootstrap the Initial State" class="dd-item ">
+        <a href="../orchestration-and-coordination/bootstrap-initial-state/bootstrap-initial-state.html">
+        1 Bootstrap the Initial State
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/orchestration-and-coordination/build-guide/build-guide.html" title="Build Guide" class="dd-item ">
+        <a href="../orchestration-and-coordination/build-guide/build-guide.html">
+        2 Build Guide
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/orchestration-and-coordination/executing/executing.html" title="Executing and Testing" class="dd-item ">
+        <a href="../orchestration-and-coordination/executing/executing.html">
+        3 Executing and Testing
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/orchestration-and-coordination/clean-up/clean-up.html" title="Clean up" class="dd-item ">
+        <a href="../orchestration-and-coordination/clean-up/clean-up.html">
+        4 Clean up
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+             
+            
+          
+             
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/cleanups.html" title="Clean up" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../cleanups.html">
+          Clean up
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/conclusion.html" title="Resources" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../conclusion.html">
+          Resources
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3></h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://github.com/aws-samples/asynchronous-messaging-workshop/"><i class='fab fa-github'></i> Github repo</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="footer">
+      <left>
+
+    <h5 class="copyright">&copy; 2019 Amazon Web Services, Inc. or its Affiliates. All rights reserved.<h5>
+
+</left>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+  <section id="body">
+    <div id="overlay"></div>
+    <div class="padding highlightable">
+      
+      <div>
+        <div id="top-bar">
+          
+          
+          
+          
+          <div id="top-github-link">
+            <a class="github-link" title='Edit this page' href="https://code.amazon.com/packages/AwsSaDeMsgPtnMcrSrv/trees/mainline/--/workshop/content/scatter-gather/test-scatter-and-gather.md"
+              target="blank">
+              <i class="fas fa-code-branch"></i>
+              <span id="top-github-link-text">Edit this page</span>
+            </a>
+          </div>
+          
+          
+          
+          <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                <i class="fa fa-bars"></i>
+              </a>
+            </span>
+            
+            <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+            
+            <span class="links">
+              
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href='../'>Decoupled Microservices</a> > <a href='../scatter-gather.html'>Scatter-Gather</a> > Test Scatter-Gather
+          
+          
+          
+          
+          
+          
+            </span>
+          </div>
+          
+          <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-get-api-gateway-endpoint-to-send-request-for-quotes">1. Get API Gateway endpoint to send request for quotes</a></li>
+        <li><a href="#2-send-the-request-for-quotes">2. Send the request for quotes</a></li>
+        <li><a href="#3-get-api-gateway-endpoint-to-query-responses">3. Get API Gateway endpoint to query responses</a></li>
+        <li><a href="#4-query-the-rfq-response-endpoint">4. Query the RFQ response endpoint</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+          
+        </div>
+      </div>
+      
+
+      
+        <div id="body-inner">
+          <h1>Test Scatter-Gather</h1>
+          
+          
+
+
+<h3 id="1-get-api-gateway-endpoint-to-send-request-for-quotes">1. Get API Gateway endpoint to send request for quotes</h3>
+<p>The lab 3 SAM template created two separate API gateway endpoints. They will be shown under the outputs tab of the cloudformation stack once deployment is completed. <strong>RideBookingApiSubmitInstantRideRfqEndpoint</strong> is the API endpoint to submit request for quotes and <strong>RideBookingApiQueryInstantRideRfqEndpoint</strong> is used to query the response from various ride operators. You can run the following command to retrieve the <strong>RideBookingApiSubmitInstantRideRfqEndpoint</strong> API Gateway Endpoint URL.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws cloudformation describe-stacks <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --stack-name wild-rydes-async-msg-3 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --query <span style="color:#e6db74">&#39;Stacks[].Outputs[?OutputKey==`RideBookingApiSubmitInstantRideRfqEndpoint`][OutputValue]&#39;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --output text</code></pre></div>
+<p>Let&rsquo;s store this request API Gateway endpoint URL in an environment variable, so we don&rsquo;t have to repeat it all the time:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export REQ_ENDPOINT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>aws cloudformation describe-stacks <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --stack-name wild-rydes-async-msg-3 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --query <span style="color:#e6db74">&#39;Stacks[].Outputs[?OutputKey==`RideBookingApiSubmitInstantRideRfqEndpoint`].OutputValue&#39;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --output text<span style="color:#66d9ef">)</span>
+</code></pre></div><h3 id="2-send-the-request-for-quotes">2. Send the request for quotes</h3>
+<p>The trigger point of the flow is a request message that is sent to get the quote. The following is the structure of the request event message.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">{</span>
+    <span style="color:#e6db74">&#34;from&#34;</span>: <span style="color:#e6db74">&#34;Frankfurt&#34;</span>,
+    <span style="color:#e6db74">&#34;to&#34;</span>: <span style="color:#e6db74">&#34;Las Vegas&#34;</span>,
+    <span style="color:#e6db74">&#34;customer&#34;</span>: <span style="color:#e6db74">&#34;cmr&#34;</span>
+<span style="color:#f92672">}</span></code></pre></div></p>
+<p>The from tag represents the starting point and to indicates the destination. The customer is an id for the end ussr.
+Execute the below commands to send a request for quote.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -XPOST -i -v -H <span style="color:#e6db74">&#34;Content-Type:application/json&#34;</span> -d @event.json $REQ_ENDPOINT</code></pre></div>
+<p>The output will have a <strong>rfq-id</strong> parameter. Save the value in a notepad as it will be used later to query the responses.</p>
+
+<div class="expand">
+    <div class="expand-label" style="cursor: pointer;" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fas fa-chevron-down' : 'fas fa-chevron-right';});});">
+        <i style="font-size:x-small;" class="fas fa-chevron-right"></i>
+        <span>
+        
+    	
+    	Screenshot
+    	
+    	</span>
+    </div>
+    <div class="expand-content" style="display: none;">
+        <p><img src="lab-3-step-8.png" alt="Step 4"></p>
+
+    </div>
+</div>
+<h3 id="3-get-api-gateway-endpoint-to-query-responses">3. Get API Gateway endpoint to query responses</h3>
+<p>Before we can query the quotes, we have to lookup the response query endpoint. Execute the following command to query the <strong>RideBookingApiQueryInstantRideRfqEndpoint</strong> output in Amazon CloudFormation stack via the CLI:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws cloudformation describe-stacks <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --stack-name wild-rydes-async-msg-3 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --query <span style="color:#e6db74">&#39;Stacks[].Outputs[?OutputKey==`RideBookingApiQueryInstantRideRfqEndpoint`][OutputValue]&#39;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --output text</code></pre></div>
+<p>Let&rsquo;s store this request API Gateway endpoint URL in an environment variable, so we don&rsquo;t have to repeat it all the time:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export RES_ENDPOINT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>aws cloudformation describe-stacks <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --stack-name wild-rydes-async-msg-3 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --query <span style="color:#e6db74">&#39;Stacks[].Outputs[?OutputKey==`RideBookingApiQueryInstantRideRfqEndpoint`].OutputValue&#39;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --output text | cut -d<span style="color:#e6db74">&#39;{&#39;</span> -f 1<span style="color:#66d9ef">)</span>
+</code></pre></div><h3 id="4-query-the-rfq-response-endpoint">4. Query the RFQ response endpoint</h3>
+<p>Replace the <strong>&laquo;rfq-id&raquo;</strong> in the below command with the value that was received in step 2. This is the correlation id to get the response quotes for the request that was sent. Execute the following command to query the responses:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -i -v -H <span style="color:#e6db74">&#34;Accept:application/json&#34;</span> <span style="color:#e6db74">${</span>RES_ENDPOINT<span style="color:#e6db74">}</span>&lt;&lt;rfq-id&gt;&gt;</code></pre></div>
+<p>The above call invokes a lambda function via API gateway end point. It queries the DynamoDB table to get the responses corresponding to the request id. The response will be a json payload showing the response quotes from different providers. A sample response is shown below:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">{</span>
+  <span style="color:#e6db74">&#34;quotes&#34;</span>: <span style="color:#f92672">[</span>
+    <span style="color:#f92672">{</span>
+      <span style="color:#e6db74">&#34;responder&#34;</span>: <span style="color:#e6db74">&#34;UnicornManagementResource10&#34;</span>,
+      <span style="color:#e6db74">&#34;quote&#34;</span>: <span style="color:#e6db74">&#34;45&#34;</span>
+    <span style="color:#f92672">}</span>,
+    <span style="color:#f92672">{</span>
+      <span style="color:#e6db74">&#34;responder&#34;</span>: <span style="color:#e6db74">&#34;UnicornManagementResource2&#34;</span>,
+      <span style="color:#e6db74">&#34;quote&#34;</span>: <span style="color:#e6db74">&#34;100&#34;</span>
+    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">]</span>,
+  <span style="color:#e6db74">&#34;rfq-id&#34;</span>: <span style="color:#e6db74">&#34;8b095f9e-cffc-4790-91a6-28353fa30e42&#34;</span>,
+  <span style="color:#e6db74">&#34;from&#34;</span>: <span style="color:#e6db74">&#34;Frankfurt&#34;</span>,
+  <span style="color:#e6db74">&#34;to&#34;</span>: <span style="color:#e6db74">&#34;Las Vegas&#34;</span>,
+  <span style="color:#e6db74">&#34;customer&#34;</span>: <span style="color:#e6db74">&#34;cmr&#34;</span>
+<span style="color:#f92672">}</span></code></pre></div>
+It shows the response quotes from two service providers. The function will need to be called in regular intervals if the service providers send responses at different times. You can also check the responses in the DynamoDB directly by querying based on the request id.
+
+<div class="notices tip" ><p><strong>How to verify the data is actually coming from DynamoDB?</strong><br>
+All responses for the quotes are received in a SQS queue. A lambda function receives the messages and stages them in a DynamoDB table. You can verify the response data by accessing the DynamoDB table in your specific region.
+<strong>Oregon</strong> | <a href="https://us-west-2.console.aws.amazon.com/dynamodb/home?region=us-west-2#tables:">Click here</a> |
+<strong>Ohio</strong> | <a href="https://us-east-2.console.aws.amazon.com/dynamodb/home?region=us-east-2#tables:">Click here</a> |
+<strong>Singapore</strong> | <a href="https://ap-southeast-1.console.aws.amazon.com/dynamodb/home?region=ap-southeast-1#tables:">Click here</a> |
+<strong>Frankfurt</strong> | <a href="https://eu-central-1.console.aws.amazon.com/dynamodb/home?region=eu-central-1#tables:">Click here</a> |
+<strong>Ireland</strong> | <a href="https://eu-west-1.console.aws.amazon.com/dynamodb/home?region=eu-west-1#tables:">Click here</a> |</p>
+</div>
+</p>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="../scatter-gather/bootstrap-initial-state.html" title="Bootstrap the Initial State"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="../scatter-gather/cleanup/clean-up.html" title="Cleanup" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="../js/clipboard.min.js"></script>
+    <script src="../js/perfect-scrollbar.min.js"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="../js/jquery.sticky.js"></script>
+    <script src="../js/featherlight.min.js"></script>
+    <script src="../js/html5shiv-printshiv.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../js/modernizr.custom-3.6.0.js"></script>
+    <script src="../js/learn.js"></script>
+    <script src="../js/hugo-learn.js"></script>
+
+    <link href="../mermaid/mermaid.css" rel="stylesheet" />
+    <script src="../mermaid/mermaid.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    
+  </body>
+</html>
+

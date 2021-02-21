@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Scatter-Gather on Wild Rydes Asynchronous Messaging Workshop</title>
+    <link>/scatter-gather.html</link>
+    <description>Recent content in Scatter-Gather on Wild Rydes Asynchronous Messaging Workshop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    
+	<atom:link href="/scatter-gather/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bootstrap the Initial State</title>
+      <link>/scatter-gather/bootstrap-initial-state.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/scatter-gather/bootstrap-initial-state.html</guid>
+      <description>First, we will build the SAM deployment template to create the deployment package for the python functions. The AWS Serverless Application Model (AWS SAM) is an open-source framework that you can use to build serverless applications on AWS.It will also generate deployment artifacts that target Lambda&amp;rsquo;s execution environment. It also helps with creating artifacts needed for running the tests using sam local. The inputs and outputs from the service are shown in the picture below.</description>
+    </item>
+    
+    <item>
+      <title>Test Scatter-Gather</title>
+      <link>/scatter-gather/test-scatter-and-gather.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/scatter-gather/test-scatter-and-gather.html</guid>
+      <description>1. Get API Gateway endpoint to send request for quotes The lab 3 SAM template created two separate API gateway endpoints. They will be shown under the outputs tab of the cloudformation stack once deployment is completed. RideBookingApiSubmitInstantRideRfqEndpoint is the API endpoint to submit request for quotes and RideBookingApiQueryInstantRideRfqEndpoint is used to query the response from various ride operators. You can run the following command to retrieve the RideBookingApiSubmitInstantRideRfqEndpoint API Gateway Endpoint URL.</description>
+    </item>
+    
+    <item>
+      <title>Cleanup</title>
+      <link>/scatter-gather/cleanup/clean-up.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/scatter-gather/cleanup/clean-up.html</guid>
+      <description>In this step, we will clean up all resources, we created during this lab, so that no further cost will occur.
+1. Delete the AWS SAM template In your Cloud9 IDE, run the following command to delete the resources we created with our AWS SAM template:
+cd ~/environment/wild-rydes-async-messaging/lab-3 aws cloudformation delete-stack \  --stack-name wild-rydes-async-msg-3 2. Delete the AWS Lambda created Amazon CloudWatch Log Group Run the following command to delete all the log groups associated with the labs.</description>
+    </item>
+    
+    <item>
+      <title>Console</title>
+      <link>/scatter-gather/cleanup/clean-up-console.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/scatter-gather/cleanup/clean-up-console.html</guid>
+      <description>3. Delete the Amazon S3 bucket In your Amazon S3 console, filter for the bucket you have created to upload your code artifacts with AWS SAM, select the bucket and click the Delete button in the top.
+  Detailed description     You are done!</description>
+    </item>
+    
+    <item>
+      <title>SAM</title>
+      <link>/scatter-gather/cleanup/clean-up-sam.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/scatter-gather/cleanup/clean-up-sam.html</guid>
+      <description>3. Delete the Amazon S3 bucket In your Cloud9 IDE, run the following command to delete the Amazon S3 bucket we created earlier:
+aws s3 rb s3://${BUCKET_NAME} —-force You are done!</description>
+    </item>
+    
+  </channel>
+</rss>

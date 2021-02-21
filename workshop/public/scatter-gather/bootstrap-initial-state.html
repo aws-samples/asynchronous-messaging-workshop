@@ -1,0 +1,2094 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<html lang="en" class="js csstransforms3d">
+<head>
+  <meta charset="utf-8">
+  <meta property="og:title" content="Wild Rydes Asynchronous Messaging Workshop" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="generator" content="Hugo 0.74.3" />
+  <meta name="description" content="Wild Rydes Asynchronous Messaging Workshop">
+<meta name="author" content="Jane Architect">
+
+  <link rel="shortcut icon" href="https://a0.awsstatic.com/libra-css/images/site/fav/favicon.ico" type="image/ico" />
+<link rel="icon" href="https://a0.awsstatic.com/libra-css/images/site/fav/favicon.ico" type="image/ico" />
+
+  <title>Bootstrap the Initial State :: Wild Rydes Asynchronous Messaging Workshop</title>
+
+  
+  <link href="../css/nucleus.css" rel="stylesheet">
+  <link href="../css/fontawesome-all.min.css" rel="stylesheet">
+  <link href="../css/hybrid.css" rel="stylesheet">
+  <link href="../css/featherlight.min.css" rel="stylesheet">
+  <link href="../css/perfect-scrollbar.min.css" rel="stylesheet">
+  <link href="../css/auto-complete.css" rel="stylesheet">
+  <link href="../css/atom-one-dark-reasonable.css" rel="stylesheet">
+  <link href="../css/theme.css" rel="stylesheet">
+  <link href="../css/hugo-theme.css" rel="stylesheet">
+  
+  <link href="../css/theme-aws.css" rel="stylesheet">
+  
+  <link href="../css/jquery-ui.min.css" rel="stylesheet">
+  <script src="../js/jquery-3.3.1.min.js"></script>
+  <script src="../js/jquery-ui-1.12.1.min.js"></script>
+  
+
+  <style>
+    :root #header + #content > #left > #rlblock_left{
+        display:none !important;
+    }
+    
+      :not(pre) > code + span.copy-to-clipboard {
+          display: none;
+      }
+    
+  </style>
+  
+</head>
+
+<body class="" data-url="../scatter-gather/bootstrap-initial-state.html">
+  <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <div>
+    <a href="../" title="Go home">
+        <img style="vertical-align:middle" src="../images/logo.png" height="70px" />
+    </a>
+</div>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="../js/lunr.min.js"></script>
+<script type="text/javascript" src="../js/auto-complete.js"></script>
+<script type="text/javascript">
+    
+        var baseurl = "";
+    
+</script>
+<script type="text/javascript" src="../js/search.js"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/prerequisites.html" title="Workshop Prerequisites" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../prerequisites.html">
+          Workshop Prerequisites
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/prerequisites/prerequisites-1.html" title="Bootstrap AWS Cloud9" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../prerequisites/prerequisites-1.html">
+          Bootstrap AWS Cloud9
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/prerequisites/prerequisites-2/prerequisites-2.html" title="Configure AWS Cloud9" class="dd-item ">
+        <a href="../prerequisites/prerequisites-2/prerequisites-2.html">
+        Configure AWS Cloud9
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/choose-your-own-advanture.html" title="Choose Your Own Adventure" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../choose-your-own-advanture.html">
+          Choose Your Own Adventure
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/fan-out-and-message-filtering.html" title="Fan-Out &amp; Message Filtering" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../fan-out-and-message-filtering.html">
+          Lab-1: Fan-Out &amp; Message Filtering
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/fan-out-and-message-filtering/bootstrap-initial-state/bootstrap-initial-state.html" title="Bootstrap the Initial State" class="dd-item ">
+        <a href="../fan-out-and-message-filtering/bootstrap-initial-state/bootstrap-initial-state.html">
+        1 Bootstrap the Initial State
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/fan-out-and-message-filtering/create-sns-topic/create-sns-topic.html" title="Create the Amazon SNS topic" class="dd-item ">
+        <a href="../fan-out-and-message-filtering/create-sns-topic/create-sns-topic.html">
+        2 Create the Amazon SNS topic
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/fan-out-and-message-filtering/create-customer-notification-service-subscription/create-customer-notification-service-subscription.html" title="Create Customer Notification Service Subscription" class="dd-item ">
+        <a href="../fan-out-and-message-filtering/create-customer-notification-service-subscription/create-customer-notification-service-subscription.html">
+        3 Create Customer Notification Service Subscription
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/fan-out-and-message-filtering/create-customer-accounting-service-subscription/create-customer-accounting-service-subscription.html" title="Create Customer Accounting Service Subscription" class="dd-item ">
+        <a href="../fan-out-and-message-filtering/create-customer-accounting-service-subscription/create-customer-accounting-service-subscription.html">
+        4 Create Customer Accounting Service Subscription
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/fan-out-and-message-filtering/create-customer-loyalty-service-subscription/create-customer-loyalty-service-subscription.html" title="Create Customer Loyalty Service Subscription" class="dd-item ">
+        <a href="../fan-out-and-message-filtering/create-customer-loyalty-service-subscription/create-customer-loyalty-service-subscription.html">
+        5 Create Customer Loyalty Service Subscription
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/fan-out-and-message-filtering/create-datalake-ingestion-service-subscription/create-datalake-ingestion-service-subscription.html" title="Create Datalake Ingestion Service Subscription" class="dd-item ">
+        <a href="../fan-out-and-message-filtering/create-datalake-ingestion-service-subscription/create-datalake-ingestion-service-subscription.html">
+        6 Create Datalake Ingestion Service Subscription
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/fan-out-and-message-filtering/create-extraordinary-rides-service-subscription/create-extraordinary-rides-service-subscription.html" title="Create Extraordinary Rides Service Subscription" class="dd-item ">
+        <a href="../fan-out-and-message-filtering/create-extraordinary-rides-service-subscription/create-extraordinary-rides-service-subscription.html">
+        7 Create Extraordinary Rides Service Subscription
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/fan-out-and-message-filtering/update-unicorn-management-service/update-unicorn-management-service.html" title="Update Unicorn Management Service" class="dd-item ">
+        <a href="../fan-out-and-message-filtering/update-unicorn-management-service/update-unicorn-management-service.html">
+        8 Update Unicorn Management Service
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/fan-out-and-message-filtering/test-fan-out-and-message-filtering/test-fan-out-and-message-filtering.html" title="Test Fan-Out and Message Filtering" class="dd-item ">
+        <a href="../fan-out-and-message-filtering/test-fan-out-and-message-filtering/test-fan-out-and-message-filtering.html">
+        9 Test Fan-Out and Message Filtering
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/fan-out-and-message-filtering/clean-up/clean-up.html" title="Clean up" class="dd-item ">
+        <a href="../fan-out-and-message-filtering/clean-up/clean-up.html">
+        10 Clean up
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/topic-queue-chaining-and-load-balancer.html" title="Topic-Queue Chaining &amp; Load Balancing" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../topic-queue-chaining-and-load-balancer.html">
+          Lab-2: Topic-Queue Chaining &amp; Load Balancing
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/topic-queue-chaining-and-load-balancer/bootstrap-initial-state/bootstrap-initial-state.html" title="Bootstrap the Initial State" class="dd-item ">
+        <a href="../topic-queue-chaining-and-load-balancer/bootstrap-initial-state/bootstrap-initial-state.html">
+        1 Bootstrap the Initial State
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/topic-queue-chaining-and-load-balancer/create-sns-topic/create-sns-topic.html" title="Create the Amazon SNS topic" class="dd-item ">
+        <a href="../topic-queue-chaining-and-load-balancer/create-sns-topic/create-sns-topic.html">
+        2 Create the Amazon SNS topic
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/topic-queue-chaining-and-load-balancer/create-customer-notification-service-subscription/create-customer-notification-service-subscription.html" title="Create Customer Notification Service Subscription" class="dd-item ">
+        <a href="../topic-queue-chaining-and-load-balancer/create-customer-notification-service-subscription/create-customer-notification-service-subscription.html">
+        3 Create Customer Notification Service Subscription
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/topic-queue-chaining-and-load-balancer/create-customer-accounting-service-subscription/create-customer-accounting-service-subscription.html" title="Create Customer Accounting Service Subscription" class="dd-item ">
+        <a href="../topic-queue-chaining-and-load-balancer/create-customer-accounting-service-subscription/create-customer-accounting-service-subscription.html">
+        4 Create Customer Accounting Service Subscription
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/topic-queue-chaining-and-load-balancer/create-customer-loyalty-service-subscription/create-customer-loyalty-service-subscription.html" title="Create Customer Loyalty Service Subscription" class="dd-item ">
+        <a href="../topic-queue-chaining-and-load-balancer/create-customer-loyalty-service-subscription/create-customer-loyalty-service-subscription.html">
+        5 Create Customer Loyalty Service Subscription
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/topic-queue-chaining-and-load-balancer/create-datalake-ingestion-service-subscription/create-datalake-ingestion-service-subscription.html" title="Create Datalake Ingestion Service Subscription" class="dd-item ">
+        <a href="../topic-queue-chaining-and-load-balancer/create-datalake-ingestion-service-subscription/create-datalake-ingestion-service-subscription.html">
+        6 Create Datalake Ingestion Service Subscription
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/topic-queue-chaining-and-load-balancer/create-extraordinary-rides-service-subscription/create-extraordinary-rides-service-subscription.html" title="Create Extraordinary Rides Service Subscription" class="dd-item ">
+        <a href="../topic-queue-chaining-and-load-balancer/create-extraordinary-rides-service-subscription/create-extraordinary-rides-service-subscription.html">
+        7 Create Extraordinary Rides Service Subscription
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/topic-queue-chaining-and-load-balancer/update-unicorn-management-service/update-unicorn-management-service.html" title="Update Unicorn Management Service" class="dd-item ">
+        <a href="../topic-queue-chaining-and-load-balancer/update-unicorn-management-service/update-unicorn-management-service.html">
+        8 Update Unicorn Management Service
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/topic-queue-chaining-and-load-balancer/test-topic-queue-chaining-and-load-balancer/test-topic-queue-chaining-and-load-balancing.html" title="Test Topic-Queue Chaining &amp; Load Balancing" class="dd-item ">
+        <a href="../topic-queue-chaining-and-load-balancer/test-topic-queue-chaining-and-load-balancer/test-topic-queue-chaining-and-load-balancing.html">
+        9 Test Topic-Queue Chaining &amp; Load Balancing
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/topic-queue-chaining-and-load-balancer/clean-up/clean-up.html" title="Clean up" class="dd-item ">
+        <a href="../topic-queue-chaining-and-load-balancer/clean-up/clean-up.html">
+        10 Clean up
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+             
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/scatter-gather.html" title="Scatter-Gather" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="../scatter-gather.html">
+          Lab-3: Scatter-Gather
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/scatter-gather/bootstrap-initial-state.html" title="Bootstrap the Initial State" class="dd-item active">
+        <a href="../scatter-gather/bootstrap-initial-state.html">
+        1 Bootstrap the Initial State
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/scatter-gather/test-scatter-and-gather.html" title="Test Scatter-Gather" class="dd-item ">
+        <a href="../scatter-gather/test-scatter-and-gather.html">
+        2 Test Scatter-Gather
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/scatter-gather/cleanup/clean-up.html" title="Cleanup" class="dd-item ">
+        <a href="../scatter-gather/cleanup/clean-up.html">
+        3 Cleanup
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+             
+            
+          
+             
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/orchestration-and-coordination.html" title="Orchestration and Coordination" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../orchestration-and-coordination.html">
+          Lab-4: Orchestration and Coordination
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/orchestration-and-coordination/bootstrap-initial-state/bootstrap-initial-state.html" title="Bootstrap the Initial State" class="dd-item ">
+        <a href="../orchestration-and-coordination/bootstrap-initial-state/bootstrap-initial-state.html">
+        1 Bootstrap the Initial State
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/orchestration-and-coordination/build-guide/build-guide.html" title="Build Guide" class="dd-item ">
+        <a href="../orchestration-and-coordination/build-guide/build-guide.html">
+        2 Build Guide
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/orchestration-and-coordination/executing/executing.html" title="Executing and Testing" class="dd-item ">
+        <a href="../orchestration-and-coordination/executing/executing.html">
+        3 Executing and Testing
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/orchestration-and-coordination/clean-up/clean-up.html" title="Clean up" class="dd-item ">
+        <a href="../orchestration-and-coordination/clean-up/clean-up.html">
+        4 Clean up
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+             
+            
+          
+             
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/cleanups.html" title="Clean up" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../cleanups.html">
+          Clean up
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/conclusion.html" title="Resources" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../conclusion.html">
+          Resources
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3></h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://github.com/aws-samples/asynchronous-messaging-workshop/"><i class='fab fa-github'></i> Github repo</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="footer">
+      <left>
+
+    <h5 class="copyright">&copy; 2019 Amazon Web Services, Inc. or its Affiliates. All rights reserved.<h5>
+
+</left>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+  <section id="body">
+    <div id="overlay"></div>
+    <div class="padding highlightable">
+      
+      <div>
+        <div id="top-bar">
+          
+          
+          
+          
+          <div id="top-github-link">
+            <a class="github-link" title='Edit this page' href="https://code.amazon.com/packages/AwsSaDeMsgPtnMcrSrv/trees/mainline/--/workshop/content/scatter-gather/bootstrap-initial-state.md"
+              target="blank">
+              <i class="fas fa-code-branch"></i>
+              <span id="top-github-link-text">Edit this page</span>
+            </a>
+          </div>
+          
+          
+          
+          <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                <i class="fa fa-bars"></i>
+              </a>
+            </span>
+            
+            <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+            
+            <span class="links">
+              
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href='../'>Decoupled Microservices</a> > <a href='../scatter-gather.html'>Scatter-Gather</a> > Bootstrap the Initial State
+          
+          
+          
+          
+          
+          
+            </span>
+          </div>
+          
+          <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-browse-to-your-aws-cloud9-ide">1. Browse to your AWS Cloud9 IDE</a></li>
+        <li><a href="#2-build-the-lab-artifacts-from-source">2. Build the lab artifacts from source</a></li>
+        <li><a href="#3-deploy-the-application">3. Deploy the application</a></li>
+        <li><a href="#4-wait-until-the-stack-is-successfully-deployed">4. Wait until the stack is successfully deployed</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+          
+        </div>
+      </div>
+      
+
+      
+        <div id="body-inner">
+          <h1>Bootstrap the Initial State</h1>
+          
+          
+
+
+<p>First, we will build the SAM deployment template to create the deployment package for the python functions. The AWS Serverless Application Model (AWS SAM) is an open-source framework that you can use to build serverless applications on AWS.It will also generate deployment artifacts that target Lambda&rsquo;s execution environment. It also helps with creating artifacts needed for running the tests using sam local. The inputs and outputs from the service are shown in the picture below. The overall deployment comprises of deploying API endpoints using Amazon API Gateway to send the rfq(request for quote) and get the response for the rfq, AWS lambda functions to process the request for quotes from end user and response for the quotes from service providers, Amazon DynamoDB to stage the response quotes and SQS queues to act as the message destination for request and responses.</p>
+<p><img src="lab-3-step-1.png" alt="Step 1"></p>
+<h3 id="1-browse-to-your-aws-cloud9-ide">1. Browse to your AWS Cloud9 IDE</h3>
+<p>Browse to your <a href="https://console.aws.amazon.com/cloud9/home">AWS Cloud9 Console</a> and select the environment called <strong>WildRydesAsyncMessaging</strong>. Open the IDE and go to the terminal window in lower right pane.</p>
+
+<div class="expand">
+    <div class="expand-label" style="cursor: pointer;" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fas fa-chevron-down' : 'fas fa-chevron-right';});});">
+        <i style="font-size:x-small;" class="fas fa-chevron-right"></i>
+        <span>
+        
+    	
+    	Screenshot
+    	
+    	</span>
+    </div>
+    <div class="expand-content" style="display: none;">
+        <p><img src="lab-3-step-2.png" alt="Step 1"></p>
+
+    </div>
+</div>
+<h3 id="2-build-the-lab-artifacts-from-source">2. Build the lab artifacts from source</h3>
+<p>We provide you with an <a href="https://aws.amazon.com/serverless/sam/">AWS SAM</a> template which we will use to bootstrap the initial state. In the <strong>bash tab</strong> (at the bottom) in you AWS Cloud9 IDE, run the following commands to build the lab code:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~/environment/wild-rydes-async-messaging/lab-3
+sam build</code></pre></div>
+
+<div class="expand">
+    <div class="expand-label" style="cursor: pointer;" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fas fa-chevron-down' : 'fas fa-chevron-right';});});">
+        <i style="font-size:x-small;" class="fas fa-chevron-right"></i>
+        <span>
+        
+    	
+    	Screenshot
+    	
+    	</span>
+    </div>
+    <div class="expand-content" style="display: none;">
+        <p><img src="lab-3-step-4.png" alt="Step 3"></p>
+
+    </div>
+</div>
+<h3 id="3-deploy-the-application">3. Deploy the application</h3>
+<p>Now we are ready to deploy the application, by running the following command in the <strong>lab-3</strong> directory:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sam deploy <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --guided <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --stack-name wild-rydes-async-msg-3 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --capabilities CAPABILITY_IAM</code></pre></div>
+<p>Confirm all proposed arguments by hitting <strong>ENTER</strong>.</p>
+<p>The application comprises of API Gateway endpoints and lambda functions which provide the ability to send request for quotes and query the responses. Service providers are subscribed to a SNS topic which is used to publish the request for quote. On receiving the RFQ message, service providers send their response for quotes in a queue. The queue triggers a lambda functions which loads the responses in a DynamoDB table. The response for quotes service queries all the responses based on request id. In a real world scenario, the service providers may respond at different times as a result client applications may need to consolidate their responses by polling responses multiple times.</p>
+<h3 id="4-wait-until-the-stack-is-successfully-deployed">4. Wait until the stack is successfully deployed</h3>
+<p>It usually takes less than 5 minutes until the stack launched. You can monitor the progress of the <strong>wild-rydes-async-msg-3</strong> stack in your <a href="https://console.aws.amazon.com/cloudformation">AWS CloudFormation Console</a>. When the stack is launched, the status will change from <strong>CREATE_IN_PROGRESS</strong> to <strong>CREATE_COMPLETE</strong>.</p>
+
+<div class="expand">
+    <div class="expand-label" style="cursor: pointer;" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fas fa-chevron-down' : 'fas fa-chevron-right';});});">
+        <i style="font-size:x-small;" class="fas fa-chevron-right"></i>
+        <span>
+        
+    	
+    	Screenshot
+    	
+    	</span>
+    </div>
+    <div class="expand-content" style="display: none;">
+        <p><img src="lab-3-step-7.png" alt="Step 6"></p>
+
+    </div>
+</div>
+<p>In the meantime while your waiting, you may want to have a look at the AWS SAM template to make yourself familiar with the stack we launched. Just click on the <strong>template.yaml</strong> attachment below to see the content. Once complete, you can also look at the lambda functions that will request the quotes and process responses. The created queues can also be explored from the console.</p>
+
+<section class="attachments ">
+	<label>
+		<i class="fas fa-paperclip" aria-hidden="true"></i>
+		Related files
+	</label>
+	
+		
+	
+	<div class="attachments-files">
+	
+		
+		
+			
+				<li>
+					<a href="../scatter-gather/bootstrap-initial-state.files/template.yaml" >
+						template.yaml
+					</a>
+					(11 kb)
+				</li>
+			
+		
+	
+	<div>
+	
+</section>
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="../scatter-gather.html" title="Scatter-Gather"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="../scatter-gather/test-scatter-and-gather.html" title="Test Scatter-Gather" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="../js/clipboard.min.js"></script>
+    <script src="../js/perfect-scrollbar.min.js"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="../js/jquery.sticky.js"></script>
+    <script src="../js/featherlight.min.js"></script>
+    <script src="../js/html5shiv-printshiv.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../js/modernizr.custom-3.6.0.js"></script>
+    <script src="../js/learn.js"></script>
+    <script src="../js/hugo-learn.js"></script>
+
+    <link href="../mermaid/mermaid.css" rel="stylesheet" />
+    <script src="../mermaid/mermaid.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    
+  </body>
+</html>
+

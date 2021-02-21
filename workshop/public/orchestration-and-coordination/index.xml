@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Orchestration and Coordination on Wild Rydes Asynchronous Messaging Workshop</title>
+    <link>/orchestration-and-coordination.html</link>
+    <description>Recent content in Orchestration and Coordination on Wild Rydes Asynchronous Messaging Workshop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    
+	<atom:link href="/orchestration-and-coordination/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bootstrap the Initial State</title>
+      <link>/orchestration-and-coordination/bootstrap-initial-state/bootstrap-initial-state.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/orchestration-and-coordination/bootstrap-initial-state/bootstrap-initial-state.html</guid>
+      <description>1. Browse to your AWS Cloud9 IDE Browse to your AWS Cloud9 Console and select the environment called WildRydesAsyncMessaging.
+  Screenshot     Once the editor is open, navigate into the lab-4 directory
+cd ~/environment/wild-rydes-async-messaging/lab-4 2. Build the lab artifacts from source We provide you with an AWS SAM template which we will use to bootstrap the initial state. In the bash tab (at the bottom) in you AWS Cloud9 IDE, run the following commands to build the lab code:</description>
+    </item>
+    
+    <item>
+      <title>Build Guide</title>
+      <link>/orchestration-and-coordination/build-guide/build-guide.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/orchestration-and-coordination/build-guide/build-guide.html</guid>
+      <description>Once you have bootstrapped this workshop, you will be presented with AWS Step Function State Machine, as a starting point wild-rydes-async-msg-4. The bootstrap created two state machine resources wild-rydes-async-msg-4-start-here and wild-rydes-async-msg-4-completed. Use the &amp;ldquo;wild-rydes-async-msg-4start-here&amp;rdquo; state machine to begin your work. You can use the completed state machine as a reference if you get stuck.
+The AWS Lambda functions, Amazon DynamoDB table, and Amazon SNS topic with Amazon SQS subscriptions have been created for you during the bootstrapping process, and you can find their resources in the AWS CloudFormation Output panel.</description>
+    </item>
+    
+    <item>
+      <title>Executing and Testing</title>
+      <link>/orchestration-and-coordination/executing/executing.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/orchestration-and-coordination/executing/executing.html</guid>
+      <description>Executing the state machine To begin testing your application, open the state machine and click Start execution
+Copy and paste the fare payload into the Input field and click Start Execution. An execution will be successful if you invoke it with the following payload (you are free to update the values):
+{ &amp;#34;customerId&amp;#34;: &amp;#34;3&amp;#34;, &amp;#34;fareId&amp;#34;: &amp;#34;wr_563&amp;#34;, &amp;#34;fareAmount&amp;#34;: &amp;#34;$20.00&amp;#34;, &amp;#34;cc&amp;#34;: &amp;#34;2424 2424 2424 2424&amp;#34;, &amp;#34;expiryDate&amp;#34;: &amp;#34;12/22&amp;#34;, &amp;#34;cvv&amp;#34;: &amp;#34;111&amp;#34; } Testing failures You can easily force custom exceptions from the Lambda functions by appending one of the following suffixes to the customerId.</description>
+    </item>
+    
+    <item>
+      <title>Clean up</title>
+      <link>/orchestration-and-coordination/clean-up/clean-up.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/orchestration-and-coordination/clean-up/clean-up.html</guid>
+      <description>In this step, we will clean up all resources, we created during this lab, so that no further cost will occur.
+1. Delete the AWS SAM template In your Cloud9 IDE, run the following command to delete the resources we created with our AWS SAM template:
+cd ~/environment/wild-rydes-async-messaging/lab-4 aws cloudformation delete-stack \  --stack-name wild-rydes-async-msg-4 2. Delete the AWS Lambda created Amazon CloudWatch Log Group Follow this deep link to list the Amazon CloudWatch Log Groups with the name /aws/lambda/wild-rydes, AWS Lambda created during this lab.</description>
+    </item>
+    
+    <item>
+      <title>Console</title>
+      <link>/orchestration-and-coordination/clean-up/clean-up-console.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/orchestration-and-coordination/clean-up/clean-up-console.html</guid>
+      <description>Delete the Amazon S3 bucket In your Amazon S3 console, filter for the bucket you have created to upload your code artifacts with AWS SAM, select the bucket and click the Delete button in the top.
+  Detailed description     You are done!</description>
+    </item>
+    
+    <item>
+      <title>SAM</title>
+      <link>/orchestration-and-coordination/clean-up/clean-up-sam.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/orchestration-and-coordination/clean-up/clean-up-sam.html</guid>
+      <description>Delete the Amazon S3 bucket In your Cloud9 IDE, run the following command to delete the Amazon S3 bucket we created earlier:
+aws s3 rb s3://${BUCKET_NAME} —-force You are done!</description>
+    </item>
+    
+  </channel>
+</rss>

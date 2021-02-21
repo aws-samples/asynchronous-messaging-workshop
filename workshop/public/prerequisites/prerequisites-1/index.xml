@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bootstrap AWS Cloud9 on Wild Rydes Asynchronous Messaging Workshop</title>
+    <link>/prerequisites/prerequisites-1.html</link>
+    <description>Recent content in Bootstrap AWS Cloud9 on Wild Rydes Asynchronous Messaging Workshop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    
+	<atom:link href="/prerequisites/prerequisites-1/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ireland</title>
+      <link>/prerequisites/prerequisites-1/eu-central-1.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/prerequisites/prerequisites-1/eu-central-1.html</guid>
+      <description>Create your AWS Cloud9 Environment by launching this CloudFormation template in Frankfurt, with clicking on the below Launch button.
+   AWS CloudFormation launch template Launch in Frankfurt     AWS Cloud9 IDE  Launch     </description>
+    </item>
+    
+    <item>
+      <title>Ireland</title>
+      <link>/prerequisites/prerequisites-1/eu-west-1.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/prerequisites/prerequisites-1/eu-west-1.html</guid>
+      <description>Create your AWS Cloud9 Environment by launching this CloudFormation template in Ireland, with clicking on the below Launch button.
+   AWS CloudFormation launch template Launch in Ireland     AWS Cloud9 IDE  Launch     </description>
+    </item>
+    
+    <item>
+      <title>Ohio</title>
+      <link>/prerequisites/prerequisites-1/us-east-2.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/prerequisites/prerequisites-1/us-east-2.html</guid>
+      <description>Create your AWS Cloud9 Environment by launching this CloudFormation template in Ohio, with clicking on the below Launch button.
+   AWS CloudFormation launch template Launch in Ohio     AWS Cloud9 IDE  Launch     </description>
+    </item>
+    
+    <item>
+      <title>Oregon</title>
+      <link>/prerequisites/prerequisites-1/us-west-2.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/prerequisites/prerequisites-1/us-west-2.html</guid>
+      <description>Create your AWS Cloud9 Environment by launching this CloudFormation template in Oregon, with clicking on the below Launch button.
+   AWS CloudFormation launch template Launch in Oregon     AWS Cloud9 IDE  Launch     </description>
+    </item>
+    
+    <item>
+      <title>Singapore</title>
+      <link>/prerequisites/prerequisites-1/ap-southeast-1.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/prerequisites/prerequisites-1/ap-southeast-1.html</guid>
+      <description>Create your AWS Cloud9 Environment by launching this CloudFormation template in Singapore, with clicking on the below Launch button.
+   AWS CloudFormation launch template Launch in Singapore     AWS Cloud9 IDE  Launch     </description>
+    </item>
+    
+  </channel>
+</rss>

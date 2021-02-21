@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Workshop Prerequisites on Wild Rydes Asynchronous Messaging Workshop</title>
+    <link>/prerequisites.html</link>
+    <description>Recent content in Workshop Prerequisites on Wild Rydes Asynchronous Messaging Workshop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    
+	<atom:link href="/prerequisites/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Configure AWS Cloud9</title>
+      <link>/prerequisites/prerequisites-2/prerequisites-2.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/prerequisites/prerequisites-2/prerequisites-2.html</guid>
+      <description>Ad blockers, javascript disabler, and tracking blockers should be disabled for the cloud9 domain, or connecting to the workspace might be impacted. Cloud9 requires third-party-cookies. You can whitelist the specific domains.
+ 1. Browse to your AWS Cloud9 development environment Open your CloudFormation Console and select the stack at the bottom (the name could vary). The Outputs tab exposes the Cloud9DevEnvUrl parameter. Click at the corresponding URL in the value column and open your AWS Cloud9 development environment in a new tab.</description>
+    </item>
+    
+  </channel>
+</rss>

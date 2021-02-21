@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Resources on Wild Rydes Asynchronous Messaging Workshop</title>
+    <link>/conclusion.html</link>
+    <description>Recent content in Resources on Wild Rydes Asynchronous Messaging Workshop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    
+	<atom:link href="/conclusion/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+  </channel>
+</rss>
