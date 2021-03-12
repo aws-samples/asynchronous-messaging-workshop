@@ -4,6 +4,12 @@ Description: >
   The Wild Rydes Asynchronous Messaging Workshop is a collection of individual labs covering 
   different aspects and patterns of asynchronous messaging. 
 
+Parameters:
+   UserPrefix:
+    Description: A unique (within this account) prefix to distinguish your objects from those of other users (10 characters or less)
+    Type: String
+    Default: wildrydes001 
+
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
@@ -49,7 +55,7 @@ Resources:
   WildRydesStateMachineStart:
     Type: "AWS::Serverless::StateMachine" # More info about State Machine Resource: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-statemachine.html
     Properties:
-      Name: !Sub ${AWS::StackName}-start-here
+      Name: !Sub ${UserPrefix}-start-here
       Definition:
         StartAt: RegisterFare
         States:
@@ -66,7 +72,7 @@ Resources:
   WildRydesStateMachine:
     Type: "AWS::Serverless::StateMachine" # More info about State Machine Resource: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-statemachine.html
     Properties:
-      Name: !Sub ${AWS::StackName}-complete
+      Name: !Sub ${UserPrefix}-complete
       DefinitionUri: state-machine.asl.json
       DefinitionSubstitutions:
         PaymentChargeFunctionArn: !GetAtt PaymentChargeFunction.Arn
@@ -95,7 +101,7 @@ Resources:
   WildRydesFareProcessingTopic:
     Type: AWS::SNS::Topic
     Properties:
-      TopicName: wild-rydes-fares
+      TopicName: !Sub "${UserPrefix}-wild-rydes-fares"
       Tags:
       - Key: project
         Value: wild-rydes
@@ -105,7 +111,7 @@ Resources:
   WildRydesFailedTransactionsQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: wild-rydes-fares-failed
+      QueueName: !Sub "${UserPrefix}-wild-rydes-fares-failed"
       Tags:
       - Key: project
         Value: wild-rydes
@@ -115,7 +121,7 @@ Resources:
   WildRydesSuccessfulTransactionsQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: wild-rydes-fares-success
+      QueueName: !Sub "${UserPrefix}-wild-rydes-fares-success"
       Tags:
       - Key: project
         Value: wild-rydes
