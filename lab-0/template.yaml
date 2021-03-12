@@ -6,36 +6,36 @@ Description: >
   Template to setup the AWS Cloud9 environment for the workshop.
 
 Parameters:
-  Cloud9CidrBlock:
-    Description: The CIDR block range for your Cloud9 IDE VPC
+  UserPrefix:
+    Description: A unique (within this account) prefix to distinguish your objects from those of other users (10 characters or less)
     Type: String
-    Default: 10.43.0.0/28
+    Default: wildrydes001
+  CidrBlockPrefix:
+    Description: The first 2 sections of the CIDR block range for VPC (so 10.43 will produce a VPC CIDR of 10.43.0.0/20 and subnets with CIDRS 10.43.0.0/24, 10.43.1.0/24 and 10.43.2.0/24
+    Type: String
+    Default: 10.43
   GitRepositoryURL:
     Description: The Git repository URL for the project we are cloning
     Type: String
     Default: https://github.com/aws-samples/asynchronous-messaging-workshop.git
 
 Resources:
-  SamTemplateArtifactS3Bucket:
-    Type: AWS::S3::Bucket
-    DeletionPolicy: Delete
-
   VPC:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock: !Ref Cloud9CidrBlock
+      CidrBlock: !Sub "${CidrBlockPrefix}.0.0/20"
       EnableDnsSupport: true
       EnableDnsHostnames: true
       Tags:
         - Key: Name
-          Value: !Sub "${AWS::StackName}-VPC"
+          Value: !Sub "${UserPrefix}-VPC"
 
   InternetGateway:
     Type: AWS::EC2::InternetGateway
     Properties:
       Tags:
         - Key: Name
-          Value: !Sub "${AWS::StackName}-InternetGateway"
+          Value: !Sub "${UserPrefix}-InternetGateway"
 
   AttachGateway:
     Type: AWS::EC2::VPCGatewayAttachment
@@ -49,7 +49,7 @@ Resources:
       VpcId: !Ref 'VPC'
       Tags:
         - Key: Name
-          Value: !Sub "${AWS::StackName}-RouteTable"
+          Value: !Sub "${UserPrefix}-RouteTable"
 
   Route:
     Type: AWS::EC2::Route
@@ -59,17 +59,35 @@ Resources:
       DestinationCidrBlock: '0.0.0.0/0'
       GatewayId: !Ref 'InternetGateway'
 
-  PublicSubnet1:
+  PublicSubnet0:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref 'VPC'
-      CidrBlock: !Ref Cloud9CidrBlock
+      CidrBlock: !Sub "${CidrBlockPrefix}.0.0/24"
       AvailabilityZone: !Select
         - '0'
         - !GetAZs ''
       Tags:
         - Key: Name
-          Value: !Sub "${AWS::StackName}-PublicSubnet1"
+          Value: !Sub "${UserPrefix}-PublicSubnet0"
+
+  PublicSubnet0RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnet0
+      RouteTableId: !Ref RouteTable
+
+  PublicSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref 'VPC'
+      CidrBlock: !Sub "${CidrBlockPrefix}.1.0/24"
+      AvailabilityZone: !Select
+        - '0'
+        - !GetAZs ''
+      Tags:
+        - Key: Name
+          Value: !Sub "${UserPrefix}-PublicSubnet1"
 
   PublicSubnet1RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
@@ -77,19 +95,55 @@ Resources:
       SubnetId: !Ref PublicSubnet1
       RouteTableId: !Ref RouteTable
 
+  PublicSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref 'VPC'
+      CidrBlock: !Sub "${CidrBlockPrefix}.2.0/24"
+      AvailabilityZone: !Select
+        - '1'
+        - !GetAZs ''
+      Tags:
+        - Key: Name
+          Value: !Sub "${UserPrefix}-PublicSubnet2"
+
+  PublicSubnet2RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnet2
+      RouteTableId: !Ref RouteTable
+      
   Cloud9:
     Type: AWS::Cloud9::EnvironmentEC2
     Properties:
       AutomaticStopTimeMinutes: 30
       Description: Wild Rydes Async Messaging Workspace
       InstanceType: t2.micro
-      Name: !Sub "WildRydesAsyncMessaging-${AWS::StackName}"
+      Name: !Sub "WildRydesAsyncMessaging-${UserPrefix}"
       Repositories:
         - PathComponent: /wild-rydes-async-messaging
           RepositoryUrl: !Ref GitRepositoryURL
-      SubnetId: !Ref PublicSubnet1
+      SubnetId: !Ref PublicSubnet0
+      Tags:
+        - Key: UserPrefix
+          Value: !Sub "${UserPrefix}"        
 
 Outputs:
   Cloud9DevEnvUrl:
     Description: Cloud9 Development Environment
     Value: !Sub "https://${AWS::Region}.console.aws.amazon.com/cloud9/ide/${Cloud9}"
+  VPC:
+    Description: lab VPC
+    Value: !Sub "${VPC}"
+    Export: 
+        Name: !Sub "${UserPrefix}-VPC"
+  PublicSubnet1:
+    Description: lab PublicSubnet1
+    Value: !Sub "${PublicSubnet1}"
+    Export: 
+        Name: !Sub "${UserPrefix}-PublicSubnet1"
+  PublicSubnet2:
+    Description: lab PublicSubnet2
+    Value: !Sub "${PublicSubnet2}"
+    Export: 
+        Name: !Sub "${UserPrefix}-PublicSubnet2"
