@@ -6,6 +6,12 @@ Description: >
 
   Sample SAM Template for re:invent2019 ARC314-R Lab-2
 
+Parameters:
+   UserPrefix:
+    Description: A unique (within this account) prefix to distinguish your objects from those of other users (10 characters or less)
+    Type: String
+    Default: wildrydes001 
+
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
@@ -50,7 +56,7 @@ Resources:
   RidesTable:
     Type: AWS::Serverless::SimpleTable
     Properties:
-      TableName: Rides
+      TableName: !Sub "${UserPrefix}-Rides"
       PrimaryKey:
         Name: id
         Type: String
