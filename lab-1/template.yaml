@@ -3,6 +3,12 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   SAM template to bootstrap the Wild Rydes Async Messaging Workshop Lab-1
 
+Parameters:
+   UserPrefix:
+    Description: A unique (within this account) prefix to distinguish your objects from those of other users (10 characters or less)
+    Type: String
+    Default: wildrydes001 
+
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
@@ -47,7 +53,7 @@ Resources:
   RidesTable:
     Type: AWS::Serverless::SimpleTable
     Properties:
-      TableName: Rides
+      TableName: !Sub "${UserPrefix}-Rides"
       PrimaryKey:
         Name: id
         Type: String
@@ -83,82 +89,11 @@ Resources:
   ##  BACKEND MICROSERVICES BASED ON AWS FARGATE  ##
   ##################################################
 
-  VPC:
-    Type: AWS::EC2::VPC
-    Properties:
-      CidrBlock: 10.11.0.0/16
-      EnableDnsSupport: true
-      EnableDnsHostnames: true
-      Tags:
-      - Key: Name
-        Value: !Join [ ':', [ !Ref 'AWS::StackName', 'VPC' ] ]
-
-  InternetGateway:
-    Type: AWS::EC2::InternetGateway
-    Properties:
-      Tags:
-      - Key: Name
-        Value: !Join [ ':', [ !Ref 'AWS::StackName', 'InternetGateway' ] ]
-
-  VPCGatewayAttachment:
-    Type: AWS::EC2::VPCGatewayAttachment
-    Properties:
-      VpcId: !Ref VPC
-      InternetGatewayId: !Ref InternetGateway
-
-  RouteTable:
-    DependsOn: VPCGatewayAttachment
-    Type: AWS::EC2::RouteTable
-    Properties:
-      VpcId: !Ref VPC
-      Tags:
-      - Key: Name
-        Value: !Join [ ':', [ !Ref 'AWS::StackName', 'RouteTable' ] ]
-
-  Route:
-    Type: AWS::EC2::Route
-    Properties:
-      RouteTableId: !Ref RouteTable
-      DestinationCidrBlock: 0.0.0.0/0
-      GatewayId: !Ref InternetGateway
-
-  PublicSubnet1:
-    Type: AWS::EC2::Subnet
-    Properties:
-      VpcId: !Ref VPC
-      CidrBlock: 10.11.0.0/24
-      AvailabilityZone: !Select [0, !GetAZs '']
-      Tags:
-      - Key: Name
-        Value: !Join [ ':', [ !Ref 'AWS::StackName', 'PublicSubnet1' ] ]
-
-  PublicSubnet2:
-    Type: AWS::EC2::Subnet
-    Properties:
-      VpcId: !Ref VPC
-      CidrBlock: 10.11.1.0/24
-      AvailabilityZone: !Select [1, !GetAZs '']
-      Tags:
-      - Key: Name
-        Value: !Join [ ':', [ !Ref 'AWS::StackName', 'PublicSubnet2' ] ]
-
-  PublicSubnet1RouteTableAssociation:
-    Type: AWS::EC2::SubnetRouteTableAssociation
-    Properties:
-      SubnetId: !Ref PublicSubnet1
-      RouteTableId: !Ref RouteTable
-
-  PublicSubnet2RouteTableAssociation:
-    Type: AWS::EC2::SubnetRouteTableAssociation
-    Properties:
-      SubnetId: !Ref PublicSubnet2
-      RouteTableId: !Ref RouteTable
-
   SecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Limits security group ingress and egress traffic for the ECS tasks running in AWS Fargate
-      VpcId: !Ref VPC
+      VpcId: {"Fn::ImportValue" : {"Fn::Sub" : "${UserPrefix}-VPC"}}
       SecurityGroupIngress:
       - IpProtocol: tcp
         FromPort: 80
@@ -181,12 +116,12 @@ Resources:
   ECSCluster:
     Type: AWS::ECS::Cluster
     Properties:
-      ClusterName: wild-rides-cluster
+      ClusterName: !Sub "${UserPrefix}-wild-rides-cluster"
 
   CustomerAccountingServiceECSTaskDefinition:
     Type: AWS::ECS::TaskDefinition
     Properties:
-      Family: customer-accounting-service-task
+      Family: !Sub "${UserPrefix}-customer-accounting-service-task"
       Cpu: 512
       Memory: 1024
       NetworkMode: awsvpc
@@ -194,13 +129,13 @@ Resources:
         - FARGATE
       ExecutionRoleArn: !Ref ECSTaskExecutionRole
       ContainerDefinitions:
-        - Name: customer-accounting-service-task
+        - Name: !Sub "${UserPrefix}-customer-accounting-service-task"
           Cpu: 512
           Memory: 1024
           Image: !Sub '689573718314.dkr.ecr.eu-central-1.amazonaws.com/wild-rydes/generic-backend-microservice:latest'
           Environment:
             - Name: SERVICE_NAME
-              Value: customer-accounting-service
+              Value: !Sub "${UserPrefix}-customer-accounting-service"
           PortMappings:
             - ContainerPort: 80
           LogConfiguration:
@@ -208,12 +143,12 @@ Resources:
             Options:
               awslogs-group: !Ref WildRidesCloudWatchLogsGroup
               awslogs-region: !Ref AWS::Region
-              awslogs-stream-prefix: customer-accounting-service
+              awslogs-stream-prefix: !Sub "${UserPrefix}-customer-accounting-service"
 
   CustomerNotificationServiceECSTaskDefinition:
     Type: AWS::ECS::TaskDefinition
     Properties:
-      Family: customer-notification-service-task
+      Family: !Sub "${UserPrefix}-customer-notification-service-task"
       Cpu: 512
       Memory: 1024
       NetworkMode: awsvpc
@@ -221,13 +156,13 @@ Resources:
         - FARGATE
       ExecutionRoleArn: !Ref ECSTaskExecutionRole
       ContainerDefinitions:
-        - Name: customer-notification-service-task
+        - Name: !Sub "${UserPrefix}-customer-notification-service-task"
           Cpu: 512
           Memory: 1024
           Image: !Sub '689573718314.dkr.ecr.eu-central-1.amazonaws.com/wild-rydes/generic-backend-microservice:latest'
           Environment:
             - Name: SERVICE_NAME
-              Value: customer-notification-service
+              Value: !Sub "${UserPrefix}-customer-notification-service"
           PortMappings:
             - ContainerPort: 80
           LogConfiguration:
@@ -235,12 +170,12 @@ Resources:
             Options:
               awslogs-group: !Ref WildRidesCloudWatchLogsGroup
               awslogs-region: !Ref AWS::Region
-              awslogs-stream-prefix: customer-notification-service
+              awslogs-stream-prefix: !Sub "${UserPrefix}-customer-notification-service"
 
   ExtraordinaryRidesServiceECSTaskDefinition:
     Type: AWS::ECS::TaskDefinition
     Properties:
-      Family: extraordinary-rides-service-task
+      Family: !Sub "${UserPrefix}-extraordinary-rides-service-task"
       Cpu: 512
       Memory: 1024
       NetworkMode: awsvpc
@@ -248,13 +183,13 @@ Resources:
         - FARGATE
       ExecutionRoleArn: !Ref ECSTaskExecutionRole
       ContainerDefinitions:
-        - Name: extraordinary-rides-service-task
+        - Name: !Sub "${UserPrefix}-extraordinary-rides-service-task"
           Cpu: 512
           Memory: 1024
           Image: !Sub '689573718314.dkr.ecr.eu-central-1.amazonaws.com/wild-rydes/generic-backend-microservice:latest'
           Environment:
             - Name: SERVICE_NAME
-              Value: extraordinary-rides-service
+              Value: !Sub "${UserPrefix}-extraordinary-rides-service"
           PortMappings:
             - ContainerPort: 80
           LogConfiguration:
@@ -262,16 +197,17 @@ Resources:
             Options:
               awslogs-group: !Ref WildRidesCloudWatchLogsGroup
               awslogs-region: !Ref AWS::Region
-              awslogs-stream-prefix: extraordinary-rides-service
+              awslogs-stream-prefix: !Sub "${UserPrefix}-extraordinary-rides-service"
 
   # ALB added to facade the containers for back end services - Customer accounting
   CustomerAccountingLoadBalancer:
+    # DependsOn: VPCGatewayAttachment
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties:
       Name: !Sub "caslb-${AWS::StackName}"
       Subnets:
-        - !Ref PublicSubnet1
-        - !Ref PublicSubnet2
+        - {"Fn::ImportValue" : {"Fn::Sub" : "${UserPrefix}-PublicSubnet1"}}
+        - {"Fn::ImportValue" : {"Fn::Sub" : "${UserPrefix}-PublicSubnet2"}}
       SecurityGroups:
         - !Ref SecurityGroup
       Tags:
@@ -291,7 +227,7 @@ Resources:
   CustomerAccountingTargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
-      VpcId: !Ref VPC
+      VpcId: {"Fn::ImportValue" : {"Fn::Sub" : "${UserPrefix}-VPC"}}
       Port: 80
       Protocol: HTTP
       Matcher:
@@ -305,12 +241,13 @@ Resources:
 
   # ALB added to facade the containers for back end services - Customer notification
   CustomerNotifyLoadBalancer:
+    # DependsOn: VPCGatewayAttachment
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties:
       Name: !Sub "cnslb-${AWS::StackName}"
       Subnets:
-        - !Ref PublicSubnet1
-        - !Ref PublicSubnet2
+        - {"Fn::ImportValue" : {"Fn::Sub" : "${UserPrefix}-PublicSubnet1"}}
+        - {"Fn::ImportValue" : {"Fn::Sub" : "${UserPrefix}-PublicSubnet2"}}
       SecurityGroups:
         - !Ref SecurityGroup
       Tags:
@@ -330,7 +267,7 @@ Resources:
   CustomerNotifyTargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
-      VpcId: !Ref VPC
+      VpcId: {"Fn::ImportValue" : {"Fn::Sub" : "${UserPrefix}-VPC"}}
       Port: 80
       Protocol: HTTP
       Matcher:
@@ -344,12 +281,13 @@ Resources:
 
   # ALB added to facade the containers for back end services - extraordinary rides
   ExtraordinaryRidesLoadBalancer:
+    # DependsOn: VPCGatewayAttachment
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties:
       Name: !Sub "erslb-${AWS::StackName}"
       Subnets:
-        - !Ref PublicSubnet1
-        - !Ref PublicSubnet2
+        - {"Fn::ImportValue" : {"Fn::Sub" : "${UserPrefix}-PublicSubnet1"}}
+        - {"Fn::ImportValue" : {"Fn::Sub" : "${UserPrefix}-PublicSubnet2"}}
       SecurityGroups:
         - !Ref SecurityGroup
       Tags:
@@ -369,7 +307,7 @@ Resources:
   ExtraordinaryRidesTargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
-      VpcId: !Ref VPC
+      VpcId: {"Fn::ImportValue" : {"Fn::Sub" : "${UserPrefix}-VPC"}}
       Port: 80
       Protocol: HTTP
       Matcher:
@@ -385,7 +323,7 @@ Resources:
     Type: AWS::ECS::Service
     DependsOn: CustomerAccountingLoadBalancerListener
     Properties:
-      ServiceName: customer-accounting-service-service
+      ServiceName: !Sub "${UserPrefix}-customer-accounting-service-service"
       Cluster: !Ref ECSCluster
       LaunchType: FARGATE
       DeploymentConfiguration:
@@ -398,11 +336,11 @@ Resources:
           SecurityGroups:
             - !Ref SecurityGroup
           Subnets:
-            - !Ref PublicSubnet1
-            - !Ref PublicSubnet2
+          - {"Fn::ImportValue" : {"Fn::Sub" : "${UserPrefix}-PublicSubnet1"}}
+          - {"Fn::ImportValue" : {"Fn::Sub" : "${UserPrefix}-PublicSubnet2"}}
       TaskDefinition: !Ref CustomerAccountingServiceECSTaskDefinition
       LoadBalancers:
-        - ContainerName: "customer-accounting-service-task"
+        - ContainerName: !Sub "${UserPrefix}-customer-accounting-service-task"
           ContainerPort: 80
           TargetGroupArn: !Ref CustomerAccountingTargetGroup
 
@@ -410,7 +348,7 @@ Resources:
     Type: AWS::ECS::Service
     DependsOn: CustomerNotifyLoadBalancerListener
     Properties:
-      ServiceName: customer-notification-service-service
+      ServiceName: !Sub "${UserPrefix}-customer-notification-service-service"
       Cluster: !Ref ECSCluster
       LaunchType: FARGATE
       DeploymentConfiguration:
@@ -423,11 +361,11 @@ Resources:
           SecurityGroups:
             - !Ref SecurityGroup
           Subnets:
-            - !Ref PublicSubnet1
-            - !Ref PublicSubnet2
+          - {"Fn::ImportValue" : {"Fn::Sub" : "${UserPrefix}-PublicSubnet1"}}
+          - {"Fn::ImportValue" : {"Fn::Sub" : "${UserPrefix}-PublicSubnet2"}}
       TaskDefinition: !Ref CustomerNotificationServiceECSTaskDefinition
       LoadBalancers:
-        - ContainerName: "customer-notification-service-task"
+        - ContainerName: !Sub "${UserPrefix}-customer-notification-service-task"
           ContainerPort: 80
           TargetGroupArn: !Ref CustomerNotifyTargetGroup
 
@@ -435,7 +373,7 @@ Resources:
     Type: AWS::ECS::Service
     DependsOn: ExtraordinaryRidesLoadBalancerListener
     Properties:
-      ServiceName: extraordinary-rides-service-service
+      ServiceName: !Sub "${UserPrefix}-extraordinary-rides-service-service"
       Cluster: !Ref ECSCluster
       LaunchType: FARGATE
       DeploymentConfiguration:
@@ -448,18 +386,18 @@ Resources:
           SecurityGroups:
             - !Ref SecurityGroup
           Subnets:
-            - !Ref PublicSubnet1
-            - !Ref PublicSubnet2
+          - {"Fn::ImportValue" : {"Fn::Sub" : "${UserPrefix}-PublicSubnet1"}}
+          - {"Fn::ImportValue" : {"Fn::Sub" : "${UserPrefix}-PublicSubnet2"}}
       TaskDefinition: !Ref ExtraordinaryRidesServiceECSTaskDefinition
       LoadBalancers:
-        - ContainerName: "extraordinary-rides-service-task"
+        - ContainerName: !Sub "${UserPrefix}-extraordinary-rides-service-task"
           ContainerPort: 80
           TargetGroupArn: !Ref ExtraordinaryRidesTargetGroup
 
   WildRidesCloudWatchLogsGroup:
     Type: AWS::Logs::LogGroup
     Properties:
-      LogGroupName: ecs/wild-rides/async-msg
+      LogGroupName: !Sub "ecs/wild-rides/${UserPrefix}-async-msg"
       RetentionInDays: 30
 
 Outputs:
@@ -474,7 +412,7 @@ Outputs:
     Description: "SubmitRideCompletionFunction Lambda Function ARN"
     Value: !GetAtt SubmitRideCompletionFunction.Arn
     Export:
-      Name: 'WILD-RIDES:RIDES-COMPLETION-FUNCTION'
+      Name: !Sub "WILD-RIDES:${UserPrefix}-RIDES-COMPLETION-FUNCTION"
 
   SubmitRideCompletionFunctionIamRole:
     Description: "Implicit IAM Role created for SubmitRideCompletion function"
