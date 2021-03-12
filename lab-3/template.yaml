@@ -5,6 +5,12 @@ Description: >
 
   Sample SAM Template for re:invent2019 ARC314-R Lab-3
 
+Parameters:
+   UserPrefix:
+    Description: A unique (within this account) prefix to distinguish your objects from those of other users (10 characters or less)
+    Type: String
+    Default: wildrydes001 
+
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
@@ -62,7 +68,7 @@ Resources:
   RidesBookingTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: RidesBookingTable
+      TableName: !Sub "${UserPrefix}-RidesBookingTable"
       AttributeDefinitions:
       - AttributeName: id
         AttributeType: S
@@ -78,12 +84,12 @@ Resources:
   RequestForQuotesTopic:
     Type: AWS::SNS::Topic
     Properties:
-      TopicName: request-for-quotes-topic
+      TopicName: !Sub "${UserPrefix}-request-for-quotes-topic"
 
   RequestForQuotesResponseQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: RequestForQuotesResponseQueue
+      QueueName: !Sub "${UserPrefix}-RequestForQuotesResponseQueue"
       VisibilityTimeout: 120
 
   UnicornManagementResource1:
@@ -322,4 +328,4 @@ Outputs:
     Description: "Amazon SNS topic ARN for RequestForQuotes topic"
     Value: !Ref RequestForQuotesTopic
     Export:
-      Name: 'WILD-RIDES:REQUEST-FOR-QUOTES-TOPIC'
+      Name: !Sub "${UserPrefix}-WILD-RIDES:REQUEST-FOR-QUOTES-TOPIC"
