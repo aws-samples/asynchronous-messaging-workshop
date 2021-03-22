@@ -7,7 +7,7 @@ SERVICE_NAME = os.environ['SERVICE_NAME']
 
 def process(event):
     print('{} process: {}'.format(SERVICE_NAME, event))
-    message_id = event['MessageId']
+    message_id = event['id']
 
     # will fail randomly to show the Amazon SNS redelivery feature
     if random.choice([True, False]):
