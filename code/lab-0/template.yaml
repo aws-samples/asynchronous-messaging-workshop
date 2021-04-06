@@ -1,8 +1,8 @@
 AWSTemplateFormatVersion: '2010-09-09'
 
 Description: >
-  Wild Rydes async messaging lab 0
-
+  Wild Rydes Asynchronous Messaging Workshop - Lab 0
+  
   Template to setup the AWS Cloud9 environment for the workshop.
 
 Parameters:

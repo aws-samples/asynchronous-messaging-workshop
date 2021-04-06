@@ -1,9 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  re:invent2019 ARC314-R Lab-3
-
-  Sample SAM Template for re:invent2019 ARC314-R Lab-3
+  Wild Rydes Asynchronous Messaging Workshop - Lab 3
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
