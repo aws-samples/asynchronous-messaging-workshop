@@ -29,7 +29,7 @@ In your Cloud9 IDE for this workshop, open the SAM template file 'wild-rydes-asy
 Run the following command to build the lab again, after we have added the Amazon SNS subscription:
 
 {{< highlight bash >}}
-cd ~/environment/wild-rydes-async-messaging/code/lab-1
+cd ~/environment/wild-rydes-async-messaging/lab-1
 sam build
 
 {{< /highlight >}}

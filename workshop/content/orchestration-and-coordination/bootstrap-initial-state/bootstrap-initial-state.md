@@ -15,7 +15,7 @@ Browse to your [AWS Cloud9 Console](https://console.aws.amazon.com/cloud9/home) 
 Once the editor is open, navigate into the `lab-4` directory
 
 {{< highlight bash >}}
-cd ~/environment/wild-rydes-async-messaging/code/lab-4
+cd ~/environment/wild-rydes-async-messaging/lab-4
 {{< /highlight >}}
 
 ### 2. Build the lab artifacts from source

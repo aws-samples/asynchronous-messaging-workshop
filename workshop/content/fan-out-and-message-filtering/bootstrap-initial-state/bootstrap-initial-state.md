@@ -38,7 +38,7 @@ aws iam create-service-linked-role --aws-service-name ecs.amazonaws.com
 We provide you with an [AWS SAM](https://aws.amazon.com/serverless/sam/) template which we will use to bootstrap the initial state. In the **bash tab** (at the bottom) in you AWS Cloud9 IDE, run the following commands to build the lab code:  
 
 {{< highlight bash >}}
-cd ~/environment/wild-rydes-async-messaging/code/lab-1
+cd ~/environment/wild-rydes-async-messaging/lab-1
 sam build
 {{< /highlight >}}
 

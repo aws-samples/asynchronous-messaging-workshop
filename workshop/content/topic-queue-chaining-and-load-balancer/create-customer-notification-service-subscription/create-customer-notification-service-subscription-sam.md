@@ -86,7 +86,7 @@ Last but not least, we have to declare the **CustomerNotificationServiceQueue** 
 Run the following command to build the lab again, after we have added the Amazon SQS queue and the Amazon SNS subscription:
 
 {{< highlight bash >}}
-cd ~/environment/wild-rydes-async-messaging/code/lab-2
+cd ~/environment/wild-rydes-async-messaging/lab-2
 sam build
 
 {{< /highlight >}}

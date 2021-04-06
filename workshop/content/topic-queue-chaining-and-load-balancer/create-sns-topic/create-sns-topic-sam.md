@@ -28,7 +28,7 @@ In your Cloud9 IDE for this workshop, open the SAM template file `wild-rydes-asy
 Run the following command to build the lab again, after we have added the Amazon SNS topic:
 
 {{< highlight bash >}}
-cd ~/environment/wild-rydes-async-messaging/code/lab-2
+cd ~/environment/wild-rydes-async-messaging/lab-2
 sam build
 
 {{< /highlight >}}

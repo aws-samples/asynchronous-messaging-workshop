@@ -82,7 +82,7 @@ After the put item DynamoDB statement and before we are sending the response bac
 Run the following command to build the lab again, after we have added the additional policy:
 
 {{< highlight bash >}}
-cd ~/environment/wild-rydes-async-messaging/code/lab-1
+cd ~/environment/wild-rydes-async-messaging/lab-1
 sam build
 
 {{< /highlight >}}

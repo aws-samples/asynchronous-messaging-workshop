@@ -31,7 +31,7 @@ Don't forget to provide the subscription filter policy!
 Run the following command to build the lab again, after we have added the Amazon SNS subscription:
 
 {{< highlight bash >}}
-cd ~/environment/wild-rydes-async-messaging/code/lab-1
+cd ~/environment/wild-rydes-async-messaging/lab-1
 sam build
 
 {{< /highlight >}}
