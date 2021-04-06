@@ -14,3 +14,8 @@ sudo python get-pip.py
 sudo /usr/local/bin/pip install awscli
 sudo /usr/local/bin/pip install aws-sam-cli
 sudo /usr/local/bin/pip install cfn-lint
+
+
+rm -fr ~/environment/wild-rydes-async-messaging/workshop/
+mv ~/environment/wild-rydes-async-messaging/code/lab-* ~/environment/wild-rydes-async-messaging/
+rm -fr ~/environment/wild-rydes-async-messaging/code/
