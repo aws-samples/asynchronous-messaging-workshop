@@ -1,0 +1,195 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Wild Rydes Asynchronous Messaging Workshop - Lab 4
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+    Runtime: python3.6
+    MemorySize: 512
+    Tracing: Active
+    Tags:
+      project: wild-rydes
+      workshop: asynchronous-messaging-workshop
+      author: aws
+
+Resources:
+  PaymentChargeFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: charge.lambda_handler
+      CodeUri: payment_charge/
+
+  PaymentRefundFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: refund.lambda_handler
+      CodeUri: payment_refund/
+
+  AccountCreditFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: credit.lambda_handler
+      CodeUri: account_credit/
+
+  FaresTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: fareId
+        Type: String
+      Tags:
+        project: wild-rydes
+        workshop: asynchronous-messaging-workshop
+        author: aws
+
+  WildRydesStateMachineStart:
+    Type: "AWS::Serverless::StateMachine" # More info about State Machine Resource: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-statemachine.html
+    Properties:
+      Name: !Sub ${AWS::StackName}-start-here
+      Definition:
+        StartAt: RegisterFare
+        States:
+          RegisterFare:
+            Type: Pass
+            End: true
+      Policies:
+        - CloudWatchPutMetricPolicy: {}
+      Tags:
+        project: wild-rydes
+        workshop: asynchronous-messaging-workshop
+        author: aws
+
+  WildRydesStateMachine:
+    Type: "AWS::Serverless::StateMachine" # More info about State Machine Resource: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-statemachine.html
+    Properties:
+      Name: !Sub ${AWS::StackName}-complete
+      DefinitionUri: state-machine.asl.json
+      DefinitionSubstitutions:
+        PaymentChargeFunctionArn: !GetAtt PaymentChargeFunction.Arn
+        PaymentRefundFunctionArn: !GetAtt PaymentRefundFunction.Arn
+        AccountCreditFunctionArn: !GetAtt AccountCreditFunction.Arn
+        FareProcessingTable: !Ref FaresTable
+        FareProcessingTopicArn: !Ref WildRydesFareProcessingTopic
+      Policies:
+        - LambdaInvokePolicy:
+            FunctionName: !Ref PaymentChargeFunction
+        - LambdaInvokePolicy:
+            FunctionName: !Ref PaymentRefundFunction
+        - LambdaInvokePolicy:
+            FunctionName: !Ref AccountCreditFunction
+        - DynamoDBWritePolicy:
+            TableName: !Ref FaresTable
+        - DynamoDBReadPolicy:
+            TableName: !Ref FaresTable
+        - SNSPublishMessagePolicy:
+            TopicName: !GetAtt WildRydesFareProcessingTopic.TopicName
+      Tags:
+        project: wild-rydes
+        workshop: asynchronous-messaging-workshop
+        author: aws
+
+  WildRydesFareProcessingTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: wild-rydes-fares
+      Tags:
+      - Key: project
+        Value: wild-rydes
+      - Key: workshop
+        Value: asynchronous-messaging-workshop
+
+  WildRydesFailedTransactionsQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: wild-rydes-fares-failed
+      Tags:
+      - Key: project
+        Value: wild-rydes
+      - Key: workshop
+        Value: asynchronous-messaging-workshop
+
+  WildRydesSuccessfulTransactionsQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: wild-rydes-fares-success
+      Tags:
+      - Key: project
+        Value: wild-rydes
+      - Key: workshop
+        Value: asynchronous-messaging-workshop
+
+  WildRydesFaresQueuePolicy:
+      Type: AWS::SQS::QueuePolicy
+      Properties:
+        Queues:
+          - !Ref WildRydesFailedTransactionsQueue
+          - !Ref WildRydesSuccessfulTransactionsQueue
+        PolicyDocument:
+          Statement:
+            Effect: Allow
+            Principal: '*'
+            Action: sqs:*
+            Resource: '*'
+            Condition:
+              ArnEquals:
+                aws:SourceArn: !Ref WildRydesFareProcessingTopic
+
+  WildRydesFaresFailedSubscription:
+      Type: AWS::SNS::Subscription
+      Properties:
+        Endpoint: !GetAtt WildRydesFailedTransactionsQueue.Arn
+        Protocol: sqs
+        RawMessageDelivery: true
+        TopicArn: !Ref WildRydesFareProcessingTopic
+        FilterPolicy:
+          IsSuccessful:
+            - "false"
+
+  WildRydesFaresSuccessfulSubscription:
+      Type: AWS::SNS::Subscription
+      Properties:
+        Endpoint: !GetAtt WildRydesSuccessfulTransactionsQueue.Arn
+        Protocol: sqs
+        RawMessageDelivery: true
+        TopicArn: !Ref WildRydesFareProcessingTopic
+        FilterPolicy:
+          IsSuccessful:
+            - "true"
+
+
+Outputs:
+
+  PaymentChargeFunctionArn:
+    Description: "Payment Charge Function ARN"
+    Value: !GetAtt PaymentChargeFunction.Arn
+
+  PaymentRefundFunctionArn:
+    Description: "Payment Refund Function ARN"
+    Value: !GetAtt PaymentRefundFunction.Arn
+
+  AccountCreditFunctionArn:
+    Description: "Account Credit Function ARN"
+    Value: !GetAtt AccountCreditFunction.Arn
+
+  WildRyesFareTableArn:
+    Description: "DynamoDB fare table ARN"
+    Value: !GetAtt FaresTable.Arn
+
+  WildRydesStepFunctionArn:
+    Description: "State Machine ARN"
+    Value: !Ref WildRydesStateMachine
+
+  WildRydesFareProcessingTopic:
+    Description: "Fare Processing Topic"
+    Value: !Ref WildRydesFareProcessingTopic
+
+  WildRydesFailedTransactionsQueue:
+    Description: "SQS queue for failed transactions"
+    Value: !Ref WildRydesFailedTransactionsQueue
+
+  WildRydesSuccessfulTransactionsQueue:
+    Description: "SQS queue for successful transactions"
+    Value: !Ref WildRydesSuccessfulTransactionsQueue
