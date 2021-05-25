@@ -9,7 +9,7 @@ TOPIC_ARN = os.environ['TOPIC_ARN']
 
 config = Config(connect_timeout=5, read_timeout=5, retries={'max_attempts': 1})
 dynamodb = boto3.client('dynamodb', config=config)
-#sns = boto3.client('sns', config=config)
+# sns = boto3.client('sns', config=config)
 
 def is_invalid(request):
     # TODO: validate request
@@ -45,20 +45,20 @@ def lambda_handler(event, context):
         }
     )
 
-#    response = sns.publish(
-#        TopicArn=TOPIC_ARN,
-#        Message=json.dumps(request),
-#        MessageAttributes = {
-#            'fare': {
-#                'DataType': 'Number',
-#                'StringValue': str(request['fare'])
-#            },
-#            'distance': {
-#                'DataType': 'Number',
-#                'StringValue': str(request['distance'])
-#            }
-#        }
-#    )
+    # response = sns.publish(
+    #     TopicArn=TOPIC_ARN,
+    #     Message=json.dumps(request),
+    #     MessageAttributes = {
+    #         'fare': {
+    #            'DataType': 'Number',
+    #            'StringValue': str(request['fare'])
+    #         },
+    #         'distance': {
+    #            'DataType': 'Number',
+    #            'StringValue': str(request['distance'])
+    #         }
+    #    }
+    # )
 
     return {
         'statusCode': 201,
