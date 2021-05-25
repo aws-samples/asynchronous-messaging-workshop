@@ -33,16 +33,12 @@ sam build
 
 {{< /highlight >}}
 
-
 Now we are ready to update the application, by running the following command to deploy the change:  
 
 {{< highlight bash >}}
-sam deploy \
-    --guided \
-    --stack-name wild-rydes-async-msg-1 \
-    --capabilities CAPABILITY_IAM
+sam deploy
 {{< /highlight >}}
 
-Confirm the first 4 proposed arguments by hitting **ENTER**. When you get asked **SubmitRideCompletionFunction may not have authorization defined, Is this okay? [y/N]:**, enter `y` and hit **ENTER** again 2 times.  
+**Note:** you do not need to provide the arguments for the deployment, because AWS SAM saved the parameter values in a configuration file called **samconfig.toml**. See the **[documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-config.html)** more information on the AWS SAM CLI configuration file.
 
 Because AWS SAM will only deploy/update/delete resources which are changed, it only takes a couple of seconds to deploy the new Amazon SNS topic.
