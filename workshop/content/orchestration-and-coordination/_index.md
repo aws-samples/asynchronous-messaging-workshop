@@ -34,6 +34,8 @@ AWS Step Functions provide us with a mechanism for dealing with long-lived trans
 
 The core objective for this lab is to **build a state machine** that implements a Saga for the Wild Rydes Fare Collection process.
 
+![Module 4](orchestration-and-coordination/module-4.png)
+
 The process consists of three discrete transactions that need to be treated as a single, distributed transaction.
 
 1. **Register Fare**: register the fare in a DynamoDB table.

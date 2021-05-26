@@ -4,7 +4,9 @@ weight = 41
 pre = "1 "
 +++
 
-First, we will build the SAM deployment template to create the deployment package for the python functions. The AWS Serverless Application Model (AWS SAM) is an open-source framework that you can use to build serverless applications on AWS.It will also generate deployment artifacts that target Lambda's execution environment. It also helps with creating artifacts needed for running the tests using sam local. The inputs and outputs from the service are shown in the picture below. The overall deployment comprises of deploying API endpoints using Amazon API Gateway to send the rfq(request for quote) and get the response for the rfq, AWS lambda functions to process the request for quotes from end user and response for the quotes from service providers, Amazon DynamoDB to stage the response quotes and SQS queues to act as the message destination for request and responses.
+First, we will build the AWS Serverless Application Model (AWS SAM) deployment template to create the deployment package for the Python functions. AWS SAM is an open-source framework that you can use to build serverless applications on AWS. It will also generate deployment artifacts that target AWS Lambda's execution environment. It also helps with creating artifacts needed for running the tests using sam local.
+
+The inputs and outputs from the service are shown in the picture below. The overall deployment comprises of deploying API endpoints using Amazon API Gateway to send the RFQ (request for quote) and get the response for the RFQ, AWS Lambda functions to process the request for quotes from end user and response for the quotes from service providers, Amazon DynamoDB to stage the response quotes and SQS queues to act as the message destination for request and responses.
 
 
 
