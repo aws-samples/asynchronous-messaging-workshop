@@ -40,5 +40,5 @@ In this lab, you will acquire the following skills:
 
 {{% notice tip %}}
 **Lab source code**  
-If you are curious and would like to dive into the lab's source code, you are more than welcome to do so. You will find the source code of this lab in our Github repo **[here](https://github.com/aws-samples/asynchronous-messaging-workshop/tree/master/lab-1)**.
+If you are curious and would like to dive into the lab's source code, you are more than welcome to do so. You will find the source code of this lab in our Github repo **[here](https://github.com/aws-samples/asynchronous-messaging-workshop/tree/master/code/lab-1)**.
 {{% /notice %}}
