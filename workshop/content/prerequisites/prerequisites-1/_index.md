@@ -28,6 +28,7 @@ account user.
 {{< tab name="Oregon" include="us-west-2" />}}
 {{< tab name="Ohio" include="us-east-2" />}}
 {{< tab name="Singapore" include="ap-southeast-1" />}}
+{{< tab name="Sydney" include="ap-southeast-2" />}}
 {{< /tabs >}}
 
 
