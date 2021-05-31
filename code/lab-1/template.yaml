@@ -473,9 +473,7 @@ Outputs:
   SubmitRideCompletionFunction:
     Description: "SubmitRideCompletionFunction Lambda Function ARN"
     Value: !GetAtt SubmitRideCompletionFunction.Arn
-    Export:
-      Name: 'WILD-RIDES:RIDES-COMPLETION-FUNCTION'
-
+    
   SubmitRideCompletionFunctionIamRole:
     Description: "Implicit IAM Role created for SubmitRideCompletion function"
     Value: !GetAtt SubmitRideCompletionFunctionRole.Arn
