@@ -7,14 +7,14 @@ Description: >
 Globals:
   Function:
     Timeout: 70
-
+    Runtime: python3.6
+    Handler: app.lambda_handler 
+    
 Resources:
   RequestForQuotesService:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: request-for-quotes-service/
-      Handler: app.lambda_handler
-      Runtime: python3.6
       Environment:
         Variables:
           TABLE_NAME: !Ref RidesBookingTable
@@ -37,8 +37,6 @@ Resources:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: query-for-quotes-service/
-      Handler: app.lambda_handler
-      Runtime: python3.6
       Environment:
         Variables:
           TABLE_NAME: !Ref RidesBookingTable
@@ -60,7 +58,6 @@ Resources:
   RidesBookingTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: RidesBookingTable
       AttributeDefinitions:
       - AttributeName: id
         AttributeType: S
@@ -75,21 +72,16 @@ Resources:
 
   RequestForQuotesTopic:
     Type: AWS::SNS::Topic
-    Properties:
-      TopicName: request-for-quotes-topic
 
   RequestForQuotesResponseQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: RequestForQuotesResponseQueue
       VisibilityTimeout: 120
 
   UnicornManagementResource1:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: generic-unicorn-management-service/
-      Handler: app.lambda_handler
-      Runtime: python3.6
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource1
@@ -108,8 +100,6 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: generic-unicorn-management-service/
-      Handler: app.lambda_handler
-      Runtime: python3.6
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource2
@@ -128,8 +118,6 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: generic-unicorn-management-service/
-      Handler: app.lambda_handler
-      Runtime: python3.6
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource3
@@ -148,8 +136,6 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: generic-unicorn-management-service/
-      Handler: app.lambda_handler
-      Runtime: python3.6
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource4
@@ -168,8 +154,6 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: generic-unicorn-management-service/
-      Handler: app.lambda_handler
-      Runtime: python3.6
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource5
@@ -188,8 +172,6 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: generic-unicorn-management-service/
-      Handler: app.lambda_handler
-      Runtime: python3.6
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource6
@@ -208,8 +190,6 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: generic-unicorn-management-service/
-      Handler: app.lambda_handler
-      Runtime: python3.6
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource7
@@ -228,8 +208,6 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: generic-unicorn-management-service/
-      Handler: app.lambda_handler
-      Runtime: python3.6
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource8
@@ -248,8 +226,6 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: generic-unicorn-management-service/
-      Handler: app.lambda_handler
-      Runtime: python3.6
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource9
@@ -268,8 +244,6 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: generic-unicorn-management-service/
-      Handler: app.lambda_handler
-      Runtime: python3.6
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource10
@@ -288,8 +262,6 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: quotes-response-service/
-      Handler: app.lambda_handler
-      Runtime: python3.6
       Environment:
         Variables:
           TABLE_NAME: !Ref RidesBookingTable
@@ -314,10 +286,9 @@ Outputs:
 #  RideBookingService:
 #    Description: "RideBookingService Lambda Function ARN"
 #    Value: !GetAtt RideBookingService.Arn
-#    Export:
-#      Name: 'WILD-RIDES:RIDE-BOOKING-SERVICE'
   RequestForQuotesTopic:
     Description: "Amazon SNS topic ARN for RequestForQuotes topic"
     Value: !Ref RequestForQuotesTopic
-    Export:
-      Name: 'WILD-RIDES:REQUEST-FOR-QUOTES-TOPIC'
+  RidesBookingTable:
+    Description: "Rides Booking table ID"
+    Value: !Ref RidesBookingTable

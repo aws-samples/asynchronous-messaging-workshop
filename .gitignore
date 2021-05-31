@@ -251,3 +251,5 @@ $RECYCLE.BIN/
 
 .vscode
 workshop/public
+code/lab-2/samconfig.toml
+code/lab-3/samconfig.toml
