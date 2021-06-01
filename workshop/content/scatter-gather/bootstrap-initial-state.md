@@ -36,14 +36,15 @@ sam build
 Now we are ready to deploy the application, by running the following command in the **lab-3** directory:  
 
 {{< highlight bash >}}
-
-sam deploy \
-    --guided \
-    --stack-name wild-rydes-async-msg-3 \
-    --capabilities CAPABILITY_IAM
+sam deploy --guided --stack-name wild-rydes-async-msg-3 --capabilities CAPABILITY_IAM
 {{< /highlight >}}
 
-Confirm all proposed arguments by hitting **ENTER**.
+Confirm all proposed arguments by hitting **ENTER**. Yu will be asked to confirm whether or not you want to proceed without authorisation for two services. Enter **y** for these and continue with the default arguments.
+
+{{< highlight bash >}}
+RequestForQuotesService may not have authorization defined, Is this okay? [y/N]: y
+QueryForQuotesService may not have authorization defined, Is this okay? [y/N]: y
+{{< /highlight >}}
 
 The application comprises of API Gateway endpoints and lambda functions which provide the ability to send request for quotes and query the responses. Service providers are subscribed to a SNS topic which is used to publish the request for quote. On receiving the RFQ message, service providers send their response for quotes in a queue. The queue triggers a lambda functions which loads the responses in a DynamoDB table. The response for quotes service queries all the responses based on request id. In a real world scenario, the service providers may respond at different times as a result client applications may need to consolidate their responses by polling responses multiple times.
 
