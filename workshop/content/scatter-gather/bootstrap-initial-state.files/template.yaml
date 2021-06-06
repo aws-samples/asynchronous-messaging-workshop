@@ -316,10 +316,6 @@ Outputs:
 #  RideBookingService:
 #    Description: "RideBookingService Lambda Function ARN"
 #    Value: !GetAtt RideBookingService.Arn
-#    Export:
-#      Name: 'WILD-RIDES:RIDE-BOOKING-SERVICE'
   RequestForQuotesTopic:
     Description: "Amazon SNS topic ARN for RequestForQuotes topic"
     Value: !Ref RequestForQuotesTopic
-    Export:
-      Name: 'WILD-RIDES:REQUEST-FOR-QUOTES-TOPIC'
