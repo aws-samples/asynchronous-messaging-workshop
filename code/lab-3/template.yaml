@@ -7,8 +7,12 @@ Description: >
 Globals:
   Function:
     Timeout: 70
-    Runtime: python3.6
+    Runtime: python3.7
     Handler: app.lambda_handler 
+    Tags:
+      project: wild-rydes
+      workshop: asynchronous-messaging-workshop
+      author: aws
     
 Resources:
   RequestForQuotesService:
@@ -72,7 +76,13 @@ Resources:
 
   RequestForQuotesTopic:
     Type: AWS::SNS::Topic
-
+    Properties:
+      Tags:
+      - Key: project
+        Value: wild-rydes
+      - Key: workshop
+        Value: asynchronous-messaging-workshop
+        
   RequestForQuotesResponseQueue:
     Type: AWS::SQS::Queue
     Properties:
