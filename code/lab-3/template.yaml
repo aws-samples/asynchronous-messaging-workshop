@@ -76,6 +76,7 @@ Resources:
 
   RequestForQuotesTopic:
     Type: AWS::SNS::Topic
+<<<<<<< HEAD
     Properties:
       Tags:
       - Key: project
@@ -83,6 +84,9 @@ Resources:
       - Key: workshop
         Value: asynchronous-messaging-workshop
         
+=======
+
+>>>>>>> sliedig/ws-fixes
   RequestForQuotesResponseQueue:
     Type: AWS::SQS::Queue
     Properties:
