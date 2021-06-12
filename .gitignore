@@ -5,6 +5,7 @@
 packaged.yaml
 .aws-sam/
 .idea/
+samconfig.toml
 
 ### Linux ###
 *~

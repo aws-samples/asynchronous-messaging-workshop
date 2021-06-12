@@ -14,14 +14,16 @@ After selecting the topic **RideCompletionTopic**, click the **Create subscripti
 
 #### 2. Configure the subscription
 
-In the next page, select **HTTP** as the subscription protocol.  
+In the next page, select **AWS Lambda** as the subscription protocol.  In the **Endpoint** dropdown type **CustomerNotification**, and select the ARN of the Lambda function.
 
-To look-up the subscription endpoint, navigate back to your CloudFormation console, select the stack **wild-rydes-async-msg-1** and select the **Outputs** tab. Select the value, corresponding to the key **ExtraordinaryRidesServiceLBURL**. It should look similar like **http://erslb-...elb.amazonaws.com**.  
-You can also look-up the value by running the following command:  
+To look-up the subscription endpoint, navigate back to your CloudFormation console, select the stack **wild-rydes-async-msg-1** and select the **Outputs** tab. Select the value, corresponding to the key **ExtraordinaryRidesFunction**. It should look similar like `arn:aws:lambda...ExtraordinaryRidesFunction-3DzmsnujRS2Q`.  
+
+You can also look-up the value by running the following command:
+
 ```bash
 aws cloudformation describe-stacks \
     --stack-name wild-rydes-async-msg-1 \
-    --query 'Stacks[].Outputs[?OutputKey==`ExtraordinaryRidesServiceLBURL`].OutputValue' \
+    --query 'Stacks[].Outputs[?OutputKey==`ExtraordinaryRidesFunction`].OutputValue' \
     --output text
 ```
 
@@ -54,4 +56,10 @@ Our provided Customer Notification Service handles this automatically for us. Th
 
 {{%expand "Detailed description" %}}
 ![Step 3](step-3-console.png)
+{{% /expand%}}
+
+To validate that the trigger was created for the Lambda function, navigate to the [AWS Lambda console](https://console.aws.amazon.com/lambda/home?/functions). Open the **Extraordinary Rides function**. In the function overview you should see the SNS service icon. Click on the icon and make sure you have the **RideCompletionTopic** trigger listed.
+
+{{%expand "Detailed description" %}}
+![Step 4](step-4-console.png)
 {{% /expand%}}

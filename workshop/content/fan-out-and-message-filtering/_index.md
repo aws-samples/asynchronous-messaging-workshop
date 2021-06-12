@@ -31,10 +31,8 @@ This use case obviously cries for making use of publish/subscribe messaging, whi
 In this lab, you will acquire the following skills:  
 
 + **How to create an Amazon SNS topic?**
-+ **How to add an HTTP(S) subscription to an Amazon SNS topic?**
++ **How to add a AWS Lambda subscription to an Amazon SNS topic?**
 + **How to define a subscription filter in an Amazon SNS subscriptions?**
-+ **How to confirm an HTTP(S) subscription automatically in your application?**
-+ **How to verify, the published message is really coming from Amazon SNS?**
 + **How to call Amazon SNS from AWS Lambda?**
 
 

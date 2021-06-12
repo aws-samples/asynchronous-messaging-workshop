@@ -4,7 +4,7 @@ weight = 21
 pre = "1 "
 +++
 
-First, we will setup the initial state, including the integrating of the **Unicorn Management Service** (leveraging [Amazon API Gateway](https://aws.amazon.com/api-gateway/) and [AWS Lambda](https://aws.amazon.com/lambda/)), the **Rides Store** (leveraging [Amazon DynamoDB](https://aws.amazon.com/dynamodb/)) and all **3 backend services** listed above (leveraging [AWS Fargate](https://aws.amazon.com/fargate/) behind [Application Load Balancer](https://aws.amazon.com/elasticloadbalancing/)).
+First, we will setup the initial state, including the integrating of the **Unicorn Management Service** (leveraging [Amazon API Gateway](https://aws.amazon.com/api-gateway/) and [AWS Lambda](https://aws.amazon.com/lambda/)), the **Rides Store** (leveraging [Amazon DynamoDB](https://aws.amazon.com/dynamodb/)) and three Serverless backend services - **Customer notification**, **Customer accounting**, and the **Extraordinary rides** service.
 
 ![Step 1](step-1.png)
 
@@ -17,23 +17,6 @@ Browse to your [AWS Cloud9 Console](https://console.aws.amazon.com/cloud9/home) 
 {{% /expand%}}
 
 #### 2. Build the lab artifacts from source
-
-First, test whether there is already the Amazon ECS service linked role in you account by running the following command in the bash tab (at the bottom) in your AWS Cloud9 IDE:
-
-{{< highlight bash >}}
-aws iam get-role --role-name AWSServiceRoleForECS
-
-{{< /highlight >}}
-
-If this reports an error, please create the Amazon ECS service linked role as described in the hidden section below.
-
-{{%expand "Create ECS service linked role" %}}
-Run the following command in the bash tab in your AWS Cloud9 IDE:
-
-```bash
-aws iam create-service-linked-role --aws-service-name ecs.amazonaws.com
-```
-{{% /expand%}}
 
 We provide you with an [AWS SAM](https://aws.amazon.com/serverless/sam/) template which we will use to bootstrap the initial state. In the **bash tab** (at the bottom) in you AWS Cloud9 IDE, run the following commands to build the lab code:  
 
@@ -59,7 +42,9 @@ sam deploy \
     --guided
 {{< /highlight >}}
 
-Confirm the first 4 proposed arguments by hitting **ENTER**. When you get asked **SubmitRideCompletionFunction may not have authorization defined, Is this okay? [y/N]:**, enter `y` and hit **ENTER** again 2 times.  
+Confirm the first 4 proposed arguments by hitting **ENTER**. 
+
+When you get asked **SubmitRideCompletionFunction may not have authorization defined, Is this okay? [y/N]:**, enter `y` and hit **ENTER** again 3 times.  
 
 #### 4. Wait until the stack is successfully deployed
 

@@ -43,7 +43,7 @@ curl -XPOST -i -H "Content-Type:application/json" -d '{ "from": "Berlin", "to": 
 
 #### 3. Validate the message reception
 
-Go to your [Amazon CloudWatch Log console](https://console.aws.amazon.com/cloudwatch/home?#logStream:group=ecs/wild-rides/async-msg) and your **Log Group** `ecs/wild-rides/async-msg`. Select the Log Group to see all **Log Streams** available for this Log Group.
+Go to your [Amazon CloudWatch Log console](https://console.aws.amazon.com/cloudwatch/home?#logsV2:log-groups) and your **Log Groups** beginning with `/aws/lambda/wild-rydes-async-msg-1-`. Select a Log Group to see all **Log Streams** available for that Log Group.
 
 {{%expand "Detailed description" %}}
 ![Step 2](step-2.png)

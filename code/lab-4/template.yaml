@@ -7,7 +7,7 @@ Description: >
 Globals:
   Function:
     Timeout: 3
-    Runtime: python3.6
+    Runtime: python3.7
     MemorySize: 512
     Tracing: Active
     Tags:
@@ -94,7 +94,6 @@ Resources:
   WildRydesFareProcessingTopic:
     Type: AWS::SNS::Topic
     Properties:
-      TopicName: wild-rydes-fares
       Tags:
       - Key: project
         Value: wild-rydes
@@ -104,7 +103,6 @@ Resources:
   WildRydesFailedTransactionsQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: wild-rydes-fares-failed
       Tags:
       - Key: project
         Value: wild-rydes
@@ -114,7 +112,6 @@ Resources:
   WildRydesSuccessfulTransactionsQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: wild-rydes-fares-success
       Tags:
       - Key: project
         Value: wild-rydes

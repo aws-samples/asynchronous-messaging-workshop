@@ -102,9 +102,7 @@ All responses for the quotes are received in a SQS queue. A lambda function rece
 **Oregon** | [Click here](https://us-west-2.console.aws.amazon.com/dynamodb/home?region=us-west-2#tables:) | 
 **Ohio** | [Click here](https://us-east-2.console.aws.amazon.com/dynamodb/home?region=us-east-2#tables:) | 
 **Singapore** | [Click here](https://ap-southeast-1.console.aws.amazon.com/dynamodb/home?region=ap-southeast-1#tables:) | 
+**Sydney** | [Click here](https://ap-southeast-2.console.aws.amazon.com/dynamodb/home?region=ap-southeast-2#tables:) | 
 **Frankfurt** | [Click here](https://eu-central-1.console.aws.amazon.com/dynamodb/home?region=eu-central-1#tables:) | 
 **Ireland** | [Click here](https://eu-west-1.console.aws.amazon.com/dynamodb/home?region=eu-west-1#tables:) | 
 {{% /notice %}}
-
-
-

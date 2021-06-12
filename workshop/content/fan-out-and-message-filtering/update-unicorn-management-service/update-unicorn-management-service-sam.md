@@ -12,8 +12,8 @@ In your Cloud9 IDE for this workshop, open the SAM template file `wild-rydes-asy
 {{%expand "Cheat Sheet" %}}
 
 ```yaml
-        - SNSPublishMessagePolicy:
-            TopicName: !GetAtt RideCompletionTopic.TopicName
+- SNSPublishMessagePolicy:
+    TopicName: !GetAtt RideCompletionTopic.TopicName
 ```
 
 {{% /expand%}}
@@ -30,7 +30,7 @@ In your Cloud9 IDE for this workshop, open the SAM template file `wild-rydes-asy
 {{%expand "Cheat Sheet" %}}
 
 ```yaml
-          TOPIC_ARN: !Ref RideCompletionTopic
+TOPIC_ARN: !Ref RideCompletionTopic
 ```
 
 {{% /expand%}} 
@@ -84,17 +84,14 @@ Run the following command to build the lab again, after we have added the additi
 {{< highlight bash >}}
 cd ~/environment/wild-rydes-async-messaging/lab-1
 sam build
-
 {{< /highlight >}}
-
 
 Now we are ready to update the application, by running the following command to deploy the change:  
 
 {{< highlight bash >}}
-sam deploy \
-    --guided \
-    --stack-name wild-rydes-async-msg-1 \
-    --capabilities CAPABILITY_IAM
+sam deploy
 {{< /highlight >}}
 
-Because AWS SAM will only deploy/update/delete resources which are changed, it only takes a couple of seconds to deploy the new version.
+**Note:** you do not need to provide the arguments for the deployment, because AWS SAM saved the parameter values in a configuration file called **samconfig.toml**. See the **[documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-config.html)** more information on the AWS SAM CLI configuration file.
+
+Because AWS SAM will only deploy/update/delete resources which are changed, it only takes a couple of seconds to deploy the new Amazon SNS topic.
