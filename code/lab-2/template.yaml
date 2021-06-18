@@ -38,6 +38,7 @@ Resources:
   RidesTable:
     Type: AWS::Serverless::SimpleTable
     Properties:
+      TableName: !Sub "Rides-${AWS::StackName}"
       PrimaryKey:
         Name: id
         Type: String
