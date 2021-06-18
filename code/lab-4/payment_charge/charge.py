@@ -1,14 +1,6 @@
-import boto3
 import random
 import os
 import string
-from aws_xray_sdk.core import xray_recorder
-from aws_xray_sdk.core import patch_all  # Patch all supported libraries for X-Ray - More info: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-python-patching.html
-
-
-if "AWS_SAM_LOCAL" not in os.environ:
-    patch_all()
-
 
 class PaymentAuthException(Exception):
     def __init__(self, message, info):

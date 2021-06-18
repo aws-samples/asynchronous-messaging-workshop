@@ -1,13 +1,5 @@
-import boto3
 import json
 import os
-from aws_xray_sdk.core import xray_recorder
-from aws_xray_sdk.core import patch_all  # Patch all supported libraries for X-Ray - More info: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-python-patching.html
-
-# Only instrument libraries if not running locally
-if 'AWS_SAM_LOCAL' not in os.environ:
-    patch_all()
-
 
 class AccountCreditException(Exception):
     def __init__(self, message=None, info=None):
