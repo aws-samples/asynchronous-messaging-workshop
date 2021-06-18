@@ -9,7 +9,6 @@ Globals:
     Timeout: 3
     Runtime: python3.7
     MemorySize: 512
-    Tracing: Active
     Tags:
       project: wild-rydes
       workshop: asynchronous-messaging-workshop
@@ -37,6 +36,7 @@ Resources:
   FaresTable:
     Type: AWS::Serverless::SimpleTable
     Properties:
+      TableName: !Sub "FaresTable-${AWS::StackName}"
       PrimaryKey:
         Name: fareId
         Type: String
