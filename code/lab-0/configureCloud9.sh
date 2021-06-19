@@ -2,7 +2,7 @@
 sudo yum update -y
 
 # Install cf-lint
-sudo pip install cfn-lint
+pip install cfn-lint --use-feature=2020-resolver
 
 #cleanup
 rm -fr ~/environment/wild-rydes-async-messaging/workshop/
