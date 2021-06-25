@@ -20,13 +20,13 @@ Enter `CustomerNotificationServiceQueue` as **Queue Name**, make sure **Standard
 
 #### 2. Create a new subscription
 
-After selecting the queue **CustomerNotificationServiceQueue**, click the **Queue Actions** drop down in the top left corner and chose **Subscribe Queue to SNS Topic**.
+After creating the queue **CustomerNotificationServiceQueue**, click the **Subscribe to Amazon SNS Topic** button in the SNS Subscriptions tab.
 
 {{%expand "Detailed description" %}}
 ![Step 3](step-3-console.png)
 {{% /expand%}}
 
-In the pop up window, select the **RideCompletionTopic** and click **Subscribe**. Click **Ok** in the confirmation dialog.
+In the Subscribe to Amazon SNS topic window, select the **RideCompletionTopic** and click **Save**.
 
 {{%expand "Detailed description" %}}
 ![Step 4](step-4-console.png)
@@ -35,17 +35,31 @@ In the pop up window, select the **RideCompletionTopic** and click **Subscribe**
 {{% notice tip %}}
 You may wondering why we don't create the subscription from the Amazon SNS console as shown below. If we create a subscription from Amazon SNS to Amazon SQS, Amazon SNS will send a confirmation message first to Amazon SQS. As long as this subscription is not confirmed, Amazon SNS will not start sending messages to Amazon SQS.
 By initiating the subscription from the subscriber side, this is not necessary.
-![Tip](tip.png)
 {{% /notice %}}
 
-#### 3. Validate the subscription confirmation
+#### 3. Validate the subscription and add the filter to the subscription
 
-Browse to your **[Amazon SNS console](https://console.aws.amazon.com/sns/v3/home?#/topics)** to list your existing topics. Select the **RideCompletionTopic** and verify, the subscription has the status **Confirmed**.
+Select the newly created subscription from the SNS subscriptions list and click the **View in SNS** button (this should open a new tab to the subscription in the **[Amazon SNS console](https://console.aws.amazon.com/sns/v3/home?#/topics)**).
 
 {{%expand "Detailed description" %}}
-![Step 5](step-5-console.png)
+![Step 4](step-5-console.png)
 {{% /expand%}}
 
+Confirm that the Status of the subscription is **Confirmed**.
+
+{{%expand "Detailed description" %}}
+![Step 4](step-5-1-console.png)
+{{% /expand%}}
+
+Click **Edit** to modify the subscription.
+
+In the Edit subscription screen, click **Enable raw message delivery**. Click **Save Changes**
+
+{{%expand "Detailed description" %}}
+![Step 6](step-5-2-console.png)
+{{% /expand%}}
+
+Now that we have updated the subscription, let's set the IAM policy for our Lambda function to access the queue.
 
 #### 4. Grant permissions to our function to access the Amazon SQS queue
 
