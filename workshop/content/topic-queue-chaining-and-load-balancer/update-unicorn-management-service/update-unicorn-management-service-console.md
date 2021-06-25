@@ -42,7 +42,7 @@ Select the **JSON** tab and passed the following policy statement into it, after
 Make sure you provide the AWS ACCOUNT ID in the form of XXXXXXXXXXXX and not XXXX-XXXX-XXXX!
 {{% /notice %}}
 
-Click **Review policy** and enter the **Name** `SubmitRideCompletionFunctionRolePolicy1`. Click **Create policy**. To validate this step, select on the role again and your should see 2 policies attached to your role, including the one you just have created:  
+Click **Review policy** and enter the **Name** `SubmitRideCompletionFunctionRolePolicy1`. Click **Create policy**. To validate this step, select on the role again and your should see 3 policies attached to your role, including the one you just have created:  
 
 {{%expand "Detailed description" %}}
 ![Step 3](step-3-console.png)
