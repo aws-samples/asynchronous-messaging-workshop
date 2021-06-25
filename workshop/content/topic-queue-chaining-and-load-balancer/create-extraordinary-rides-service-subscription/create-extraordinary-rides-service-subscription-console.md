@@ -20,42 +20,52 @@ Enter `ExtraordinaryRidesServiceQueue` as **Queue Name**, make sure **Standard Q
 
 #### 2. Create a new subscription
 
-After selecting the queue **ExtraordinaryRidesServiceQueue**, click the **Queue Actions** drop down in the top left corner and chose **Subscribe Queue to SNS Topic**.
+After creating the queue **ExtraordinaryRidesServiceQueue**, click the **Subscribe to Amazon SNS Topic** button in the SNS Subscriptions tab.
 
 {{%expand "Detailed description" %}}
 ![Step 3](step-3-console.png)
 {{% /expand%}}
 
-In the pop up window, select the **RideCompletionTopic** and click **Subscribe**. Click **Ok** in the confirmation dialog.
+In the Subscribe to Amazon SNS topic window, select the **RideCompletionTopic** and click **Save**.
 
 {{%expand "Detailed description" %}}
 ![Step 4](step-4-console.png)
 {{% /expand%}}
 
-#### 3. Validate the subscription confirmation
+#### 3. Validate the subscription and add the filter to the subscription
 
-Browse to your **[Amazon SNS console](https://console.aws.amazon.com/sns/v3/home?#/topics)** to list your existing topics. Select the **RideCompletionTopic** and verify, the subscription has the status **Confirmed**.
+Select the newly created subscription from the SNS subscriptions list and click the **View in SNS** button (this should open a new tab to the subscription in the **[Amazon SNS console](https://console.aws.amazon.com/sns/v3/home?#/topics)**).
 
 {{%expand "Detailed description" %}}
-![Step 5](step-5-console.png)
+![Step 4](step-5-console.png)
 {{% /expand%}}
 
-#### 4. Add the filter to the subscription
+Confirm that the Status of the subscription is **Confirmed**.
 
-Click on the subscription id for the **ExtraordinaryRidesServiceQueue subscription** and click on **Edit** to add our subscription filter policy. In the subscription filter policy section, add out filter policy. Click **Save changes**.
+{{%expand "Detailed description" %}}
+![Step 4](step-5-1-console.png)
+{{% /expand%}}
 
-{{%expand "cheat sheet" %}}
-```
+Click **Edit** to modify the subscription.
+
+In the Edit subscription screen, click **Enable raw message delivery**.
+
+In the subscription filter policy section, add the filter policy. Click **Save changes**.
+
+
+{{< highlight json >}}
 {
    "fare": [{"numeric": [">=", 50]}],
    "distance": [{"numeric": [">=", 20]}]
 }
-```
-{{% /expand%}}
+{{< /highlight >}}
+
 
 {{%expand "Detailed description" %}}
 ![Step 6](step-6-console.png)
 {{% /expand%}}
+
+Now that we have updated the subscription, let's set the IAM policy for our Lambda function to access the queue.
 
 #### 5. Grant permissions to our function to access the Amazon SQS queue
 
@@ -98,14 +108,14 @@ Select the **JSON** tab and passed the following policy statement into it, after
 Make sure you provide the AWS ACCOUNT ID in the form of XXXXXXXXXXXX and not XXXX-XXXX-XXXX!
 {{% /notice %}}
 
-Click **Review policy** and enter the **Name** `ExtraordinaryRidesServiceRolePolicy0`. Click **Create policy**. To validate this step, select on the role again and your should see 3 policies attached to your role, including the one you just have created:  
+Click **Review policy** and enter the **Name** `ExtraordinaryRidesServiceRolePolicy0`. Click **Create policy**. To validate this step, select on the role again and your should see 2 policies attached to your role, including the one you just have created:  
 
 {{%expand "Detailed description" %}}
 ![Step 9](step-9-console.png)
 {{% /expand%}}
 
 
-#### 6. Add the Amazon SQS queue as event source for your Customer Notification Service AWS Lambda function
+#### 6. Add the Amazon SQS queue as event source for your Extraordinary Rides Service AWS Lambda function
 
 Open your **[AWS Lambda console](https://console.aws.amazon.com/lambda/home?#/functions)** and select **Functions** in the left navigation. Click on the function with the name **wild-rydes-async-msg-2-ExtraordinaryRides...** (assuming your have chosen `wild-rydes-async-msg-2` as your stack name). Click on the **+ Add Trigger** button on the left side of the page:
 
