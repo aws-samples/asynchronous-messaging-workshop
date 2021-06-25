@@ -105,7 +105,7 @@ Click **Review policy** and enter the **Name** `ExtraordinaryRidesServiceRolePol
 {{% /expand%}}
 
 
-#### 6. Add the Amazon SQS queue as event source for your Customer Notification Service AWS Lambda function
+#### 6. Add the Amazon SQS queue as event source for your Extraordinary Rides Service AWS Lambda function
 
 Open your **[AWS Lambda console](https://console.aws.amazon.com/lambda/home?#/functions)** and select **Functions** in the left navigation. Click on the function with the name **wild-rydes-async-msg-2-ExtraordinaryRides...** (assuming your have chosen `wild-rydes-async-msg-2` as your stack name). Click on the **+ Add Trigger** button on the left side of the page:
 

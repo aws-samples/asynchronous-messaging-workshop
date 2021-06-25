@@ -89,7 +89,7 @@ Click **Review policy** and enter the **Name** `CustomerAccountingServiceRolePol
 {{% /expand%}}
 
 
-#### 5. Add the Amazon SQS queue as event source for your Customer Notification Service AWS Lambda function
+#### 5. Add the Amazon SQS queue as event source for your Customer Accounting Service AWS Lambda function
 
 Open your **[AWS Lambda console](https://console.aws.amazon.com/lambda/home?#/functions)** and select **Functions** in the left navigation. Click on the function with the name **wild-rydes-async-msg-2-CustomerAccounting...** (assuming your have chosen `wild-rydes-async-msg-2` as your stack name). Click on the **+ Add Trigger** button on the left side of the page:
 
