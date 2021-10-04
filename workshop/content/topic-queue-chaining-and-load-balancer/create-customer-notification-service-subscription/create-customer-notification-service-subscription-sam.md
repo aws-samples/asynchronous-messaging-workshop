@@ -6,7 +6,7 @@ hidden = true
 
 #### 1. Update the AWS SAM template
 
-In your Cloud9 IDE for this workshop, open the SAM template file 'wild-rydes-async-messaging/lab-2/template.yaml'. In the **Resources** section, add the definition for an Amazon SQS queue with the name **CustomerNotificationServiceQueue**, the **CustomerNotificationService** will use to consume messages from. You can find the AWS CloudFormation documentation to do so **[here](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html)**.
+In your Cloud9 IDE for this workshop, open the SAM template file `wild-rydes-async-messaging/lab-2/template.yaml`. In the **Resources** section, add the definition for an Amazon SQS queue with the name **CustomerNotificationServiceQueue**, the **CustomerNotificationService** will use to consume messages from. You can find the AWS CloudFormation documentation to do so **[here](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html)**.
 
 {{%expand "Cheat Sheet" %}}
 ```yaml
@@ -95,10 +95,7 @@ sam build
 Now we are ready to update the application, by running the following command to deploy the change:  
 
 {{< highlight bash >}}
-sam deploy \
-    --guided \
-    --stack-name wild-rydes-async-msg-2 \
-    --capabilities CAPABILITY_IAM
+sam deploy
 {{< /highlight >}}
 
 In the meantime while your waiting, you may want to have a look at the AWS SAM template to make yourself familiar with the stack we launched. Just click on the **template.yaml** attachment below to see the content.

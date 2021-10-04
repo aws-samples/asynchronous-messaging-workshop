@@ -12,23 +12,20 @@ Browse to your [AWS Cloud9 Console](https://console.aws.amazon.com/cloud9/home) 
 ![Step 1](lab-4-step-1.png)
 {{% /expand%}}
 
-Once the editor is open, navigate into the `lab-4` directory
-
-{{< highlight bash >}}
-cd ~/environment/wild-rydes-async-messaging/lab-4
-{{< /highlight >}}
 
 ### 2. Build the lab artifacts from source
 
 We provide you with an [AWS SAM](https://aws.amazon.com/serverless/sam/) template which we will use to bootstrap the initial state. In the **bash tab** (at the bottom) in you AWS Cloud9 IDE, run the following commands to build the lab code:  
 
 {{< highlight bash >}}
+cd ~/environment/wild-rydes-async-messaging/lab-4
 sam build
 {{< /highlight >}}
 
 {{%expand "Screenshot" %}}
 ![Step 3](lab-4-step-3.png)
 {{% /expand%}}
+
 
 ### 3. Deploy the application
 

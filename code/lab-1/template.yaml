@@ -91,6 +91,8 @@ Resources:
 
   # RideCompletionTopic:
   #   Type: AWS::SNS::Topic
+  #   Properties:
+  #     TopicName: RideCompletionTopic
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function

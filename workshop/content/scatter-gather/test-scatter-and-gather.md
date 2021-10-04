@@ -39,7 +39,7 @@ Execute the below commands to send a request for quote.
 
 {{< highlight bash >}}
 
-curl -XPOST -i -v -H "Content-Type:application/json" -d @event.json $REQ_ENDPOINT
+curl -XPOST -i -H "Content-Type:application/json" -d @event.json $REQ_ENDPOINT
 {{< /highlight >}}
 
 The output will have a **rfq-id** parameter. Save the value in a notepad as it will be used later to query the responses.
@@ -73,7 +73,7 @@ Replace the **<<rfq-id>>** in the below command with the value that was received
 
 {{< highlight bash >}}
 
-curl -i -v -H "Accept:application/json" ${RES_ENDPOINT}<<rfq-id>>
+curl -i -H "Accept:application/json" ${RES_ENDPOINT}<<rfq-id>>
 {{< /highlight >}}
 
 The above call invokes a lambda function via API gateway end point. It queries the DynamoDB table to get the responses corresponding to the request id. The response will be a json payload showing the response quotes from different providers. A sample response is shown below:

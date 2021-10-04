@@ -45,6 +45,8 @@ Resources:
 
   # RideCompletionTopic:
   #   Type: AWS::SNS::Topic
+  #   Properties:
+  #     TopicName: RideCompletionTopic
 
   CustomerAccountingService:
     Type: AWS::Serverless::Function

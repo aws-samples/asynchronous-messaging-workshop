@@ -97,21 +97,3 @@ After the put item DynamoDB statement and before we are sending the response bac
 {{%expand "Detailed description" %}}
 ![Step 6](step-6-console.png)
 {{% /expand%}}
-
-{{% notice tip %}}
-**Using AWS Lambda Layers**  
-If you are wondering why the uploaded AWS Lambda function archive is less then 1 kB, but it requires boto3 to run, here comes the answer. We are using a custom AWS Lambda layer with Python 3.6 and boto3 1.9.248. To create this layer, we only run the script below in our 'lambda-layers' sub-folder. In our AWS SAM template, we make use of this zip file to create the layer. Stay curious and have a look into the file 'wild-rydes-async-messaging/lab-1/template.yaml'.
-```bash
-pipenv --python 3.6
-pipenv shell
-pipenv install boto3
-PY_DIR='build/python/lib/python3.6/site-packages'
-mkdir -p $PY_DIR
-pipenv lock -r > requirements.txt
-pip install -r requirements.txt --no-deps -t $PY_DIR
-cd build
-zip -r ../python_layer_with_boto3.zip .
-cd ..
-rm -r build
-```
-{{% /notice %}}

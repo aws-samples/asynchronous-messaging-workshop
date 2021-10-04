@@ -93,10 +93,7 @@ sam build
 
 
 {{< highlight bash >}}
-sam deploy \
-    --guided \
-    --stack-name wild-rydes-async-msg-2 \
-    --capabilities CAPABILITY_IAM
+sam deploy
 {{< /highlight >}}
 
 In the meantime while your waiting, you may want to have a look at the AWS SAM template to make yourself familiar with the stack we launched. Just click on the **template.yaml** attachment below to see the content.

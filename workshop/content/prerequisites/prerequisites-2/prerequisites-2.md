@@ -12,7 +12,7 @@ Cloud9 requires third-party-cookies. You can whitelist the [specific domains]( h
 
 ### 1. Browse to your AWS Cloud9 development environment
 
-Open your [CloudFormation Console](https://console.aws.amazon.com/cloudformation/home?#/stacks) and select the stack at the bottom (the name could vary). The `Outputs` tab exposes the `Cloud9DevEnvUrl` parameter. Click at the corresponding URL in the value column and open your AWS Cloud9 development environment in a new tab.
+Open your [CloudFormation Console](https://console.aws.amazon.com/cloudformation/home?#/stacks) and select the stack with the description ”Wild Rydes Asynchronous Messaging Workshop“ (the name could vary). The `Outputs` tab exposes the `Cloud9DevEnvUrl` parameter. Click at the corresponding URL in the value column and open your AWS Cloud9 development environment in a new tab.
 
 {{%expand "Detailed description" %}}
 ![Step 1](step-1.png)
@@ -32,7 +32,7 @@ chmod +x configureCloud9.sh
 ![Step 2](step-2.png)
 {{% /expand%}}
 
-It takes usually less then 3 minutes, until the AWS Cloud9 IDE is updated. In the meantime while your waiting, you may want to have a look at some handy AWS Cloud9 shortcuts, like the **[multiple cursors](https://docs.c9.io/docs/multiple-cursors)** or the AWS Cloud9 **[keybindings](https://docs.c9.io/docs/keybindings)**.
+It takes usually less then 1 minute, until the AWS Cloud9 IDE is updated. In the meantime while your waiting, you may want to have a look at some handy AWS Cloud9 shortcuts, like the **[multiple cursors](https://docs.c9.io/docs/multiple-cursors)** or the AWS Cloud9 **[keybindings](https://docs.c9.io/docs/keybindings)**.
 
 ![Get Started](magic.gif)
 

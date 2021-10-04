@@ -44,7 +44,7 @@ sam deploy \
 
 Confirm the first 4 proposed arguments by hitting **ENTER**. 
 
-When you get asked **SubmitRideCompletionFunction may not have authorization defined, Is this okay? [y/N]:**, enter `y` and hit **ENTER** again 3 times.  
+When you get asked **SubmitRideCompletionFunction may not have authorization defined, Is this okay? [y/N]:**, enter `y` and hit **ENTER** again 4 times.  
 
 #### 4. Wait until the stack is successfully deployed
 
