@@ -6,6 +6,7 @@ import uuid
 
 TABLE_NAME = os.environ['TABLE_NAME']
 TOPIC_ARN = os.environ['TOPIC_ARN']
+RESPONSE_QUEUE_URL = os.environ['RESPONSE_QUEUE_URL']
 
 config = Config(connect_timeout=5, read_timeout=5, retries={'max_attempts': 1})
 dynamodb = boto3.client('dynamodb', config=config)
@@ -29,6 +30,7 @@ def lambda_handler(event, context):
 
     rfq_id = str(uuid.uuid4())
     request['rfq-id'] = rfq_id
+    request['response-queue-url'] = RESPONSE_QUEUE_URL
 
     response = dynamodb.put_item(
         TableName = TABLE_NAME, 
