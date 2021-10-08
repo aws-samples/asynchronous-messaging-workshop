@@ -63,13 +63,13 @@ Now that we have updated the subscription, let's set the IAM policy for our Lamb
 
 #### 4. Grant permissions to our function to access the Amazon SQS queue
 
-In your **[Amazon IAM console](https://console.aws.amazon.com/iam)**, select **Roles** in the left navigation. Use the filter text box to find the role with the name **wild-rydes-async-msg-2-CustomerNotificationService-...** (assuming your have chosen `wild-rydes-async-msg-2` as your stack name).  
+In your **[Amazon IAM console](https://console.aws.amazon.com/iam)**, select **Roles** in the left navigation. Use the filter text box to find the role with the name **wild-rydes-async-msg-2-CustomerNotificationService-...** (assuming your have chosen `wild-rydes-async-msg-2` as your stack name).
 
 {{%expand "Detailed description" %}}
 ![Step 6](step-6-console.png)
 {{% /expand%}}
 
-Click on the role name and click **Add inline policy** to attache another one.
+Click on the role name and click **Add inline policy** to attach another one.
 
 {{%expand "Detailed description" %}}
 ![Step 7](step-7-console.png)
@@ -102,12 +102,11 @@ Select the **JSON** tab and passed the following policy statement into it, after
 Make sure you provide the AWS ACCOUNT ID in the form of XXXXXXXXXXXX and not XXXX-XXXX-XXXX!
 {{% /notice %}}
 
-Click **Review policy** and enter the **Name** `CustomerNotificationServiceRolePolicy0`. Click **Create policy**. To validate this step, select on the role again and your should see 2 policies attached to your role, including the one you just have created:  
+Click **Review policy** and enter the **Name** `CustomerNotificationServiceRolePolicy0`. Click **Create policy**. To validate this step, select on the role again and your should see 2 policies attached to your role, including the one you just have created:
 
 {{%expand "Detailed description" %}}
 ![Step 8](step-8-console.png)
 {{% /expand%}}
-
 
 #### 5. Add the Amazon SQS queue as event source for your Customer Notification Service AWS Lambda function
 

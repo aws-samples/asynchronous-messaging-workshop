@@ -50,7 +50,7 @@ Now we are ready to create the Amazon SNS subscription for the **CustomerNotific
 ```
 {{% /expand%}}
 
-The next step is to attache an AWS IAM policy tou our **CustomerNotificationService** AWS Lambda function, which grants permission to access our previously created Amazon SQS queue, to consume the messages. You can find the AWS SAM documentation to do so **[here](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-template.html#serverless-sam-template-function)** and **[here](https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json)**.
+The next step is to attach an AWS IAM policy tou our **CustomerNotificationService** AWS Lambda function, which grants permission to access our previously created Amazon SQS queue, to consume the messages. You can find the AWS SAM documentation to do so **[here](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-template.html#serverless-sam-template-function)** and **[here](https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json)**.
 
 {{%expand "Cheat Sheet" %}}
 ```yaml
@@ -73,13 +73,11 @@ Last but not least, we have to declare the **CustomerNotificationServiceQueue** 
 ```
 {{% /expand%}}
 
-
 {{%expand "Detailed description" %}}
 ![Step 1](step-1-sam.png)
 
 ![Step 2](step-2-sam.png)
 {{% /expand%}}
-
 
 #### 2. Deploy the updated AWS SAM template
 
@@ -91,8 +89,7 @@ sam build
 
 {{< /highlight >}}
 
-
-Now we are ready to update the application, by running the following command to deploy the change:  
+Now we are ready to update the application, by running the following command to deploy the change:
 
 {{< highlight bash >}}
 sam deploy
