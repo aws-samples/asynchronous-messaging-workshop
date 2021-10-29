@@ -1,7 +1,7 @@
 +++
 title = "Executing and Testing"
-weight = 53
-pre = "3 "
+weight = 55
+pre = "6 "
 +++
 
 #### Executing the state machine
@@ -40,7 +40,7 @@ You can easily force custom exceptions from the Lambda functions by appending on
 }
 {{< /highlight >}}
 
-| State | customerIs Suffix | Exception
+| State | customerId Suffix | Exception
 | ------ | ----------- | ---------- |
 | ChargeFare | _fail_auth | PaymentAuthException|
 | ChargeFare | _fail_charge | PaymentChargeException |
@@ -50,3 +50,13 @@ You can easily force custom exceptions from the Lambda functions by appending on
 Here are some examples of the execution path your state machine will have when errors are invoked, and what a successful execution path looks like. 
 
 ![Step 3](lab-4-failures.png)
+
+#### Examining Notifications
+
+You can examine success and failed notifications that are consumed from the SNS Topic by the respective SQS queues. Navigate to the [SQS Console](https://console.aws.amazon.com/sqs/) and look at **messages available**. 
+
+![Step 4](lab-4-sqs-queues.png)
+
+You can also click on one the queues and then click on the **Send and Receive messages** to then Receive messages and examine the content and attributes for the notification messages sent by the State machine. Notice that these messages contain the JSON state we propagated from each state. We can easily transform this JSON in Step Functions using JSON Path if needed.
+
+![Step 4](lab-4-sqs-queue-messages.png)
