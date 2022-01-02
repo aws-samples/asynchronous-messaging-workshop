@@ -11,26 +11,26 @@
       },
       "TimeoutSeconds": 5,
       "Retry": [
-          {
-              "ErrorEquals": [
-                  "ProvisionedThroughputExceededException",
-                  "RequestLimitExceeded",
-                  "ServiceUnavailable",
-                  "ThrottlingException"
-              ],
-              "IntervalSeconds": 1,
-              "BackoffRate": 2,
-              "MaxAttempts": 2
-          }
+        {
+          "ErrorEquals": [
+            "ProvisionedThroughputExceededException",
+            "RequestLimitExceeded",
+            "ServiceUnavailable",
+            "ThrottlingException"
+          ],
+          "IntervalSeconds": 1,
+          "BackoffRate": 2,
+          "MaxAttempts": 2
+        }
       ],
       "Catch": [
-          {
-              "ErrorEquals": [
-                  "States.ALL"
-              ],
-              "ResultPath": "$.registerError",
-              "Next": "NotifyFailure"
-          }
+        {
+          "ErrorEquals": [
+            "States.ALL"
+          ],
+          "ResultPath": "$.registerError",
+          "Next": "NotifyFailure"
+        }
       ],
       "ResultPath": "$.dynamodbResult",
       "Next": "ChargeFare"
@@ -55,7 +55,6 @@
           "BackoffRate": 2
         }
       ],
-      "Next": "CreditCustomerAccount",
       "Catch": [
         {
           "ErrorEquals": [
@@ -65,7 +64,8 @@
           "ResultPath": "$.chargeError",
           "Next": "SetFareStatusFailed"
         }
-      ]
+      ],
+      "Next": "CreditCustomerAccount"
     },
     "CreditCustomerAccount": {
       "Type": "Task",
@@ -87,7 +87,6 @@
           "BackoffRate": 2
         }
       ],
-      "Next": "SetFareStatusCompleted",
       "Catch": [
         {
           "ErrorEquals": [
@@ -96,7 +95,8 @@
           "Next": "RefundFare",
           "ResultPath": "$.creditError"
         }
-      ]
+      ],
+      "Next": "SetFareStatusCompleted"
     },
     "SetFareStatusCompleted": {
       "Type": "Task",
@@ -116,7 +116,8 @@
         }
       },
       "TimeoutSeconds": 5,
-      "Retry": [{
+      "Retry": [
+        {
           "ErrorEquals": [
             "ProvisionedThroughputExceededException",
             "RequestLimitExceeded",
@@ -128,7 +129,7 @@
           "MaxAttempts": 2
         }
       ],
-      "ResultPath": "$.dynamodbResult", 
+      "ResultPath": "$.dynamodbResult",
       "Next": "NotifySuccess"
     },
     "SetFareStatusFailed": {
@@ -149,7 +150,8 @@
         }
       },
       "TimeoutSeconds": 5,
-      "Retry": [{
+      "Retry": [
+        {
           "ErrorEquals": [
             "ProvisionedThroughputExceededException",
             "RequestLimitExceeded",
