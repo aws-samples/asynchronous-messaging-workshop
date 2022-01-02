@@ -1,10 +1,10 @@
 +++
 title = "Clean up"
-weight = 54
-pre = "4 "
+weight = 56
+pre = "7 "
 +++
 
-In this step, we will clean up all resources, we created during this lab, so that no further cost will occur.
+In this step, we will clean up all resources we created during the lab to prevent further cost.
 
 #### 1. Delete the AWS SAM template
 
@@ -12,10 +12,10 @@ In your Cloud9 IDE, run the following command to delete the resources we created
 
 {{< highlight bash >}}
 cd ~/environment/wild-rydes-async-messaging/lab-4
-aws cloudformation delete-stack \
-    --stack-name wild-rydes-async-msg-4
+sam delete --stack-name wild-rydes-async-msg-4
 {{< /highlight >}}
 
+Enter (Y)es for each confirmation of the resources that SAM will delete. This includes the resources created explicitly by the SAM template as well as the supporting resources that SAM uses, such as the resources S3 bucket.
 
 #### 2. Delete the AWS Lambda created Amazon CloudWatch Log Group
 
@@ -25,10 +25,3 @@ Follow **[this deep link](https://console.aws.amazon.com/cloudwatch/home?#logs:p
 ![Step 1](lab-4-step-1.png)
 
 {{% /expand%}}
-
-
-#### 2. Delete other resources
-{{< tabs name="Style" >}}
-{{< tab name="Console" include="clean-up-console" />}}
-{{< tab name="SAM" include="clean-up-sam" />}}
-{{< /tabs >}}

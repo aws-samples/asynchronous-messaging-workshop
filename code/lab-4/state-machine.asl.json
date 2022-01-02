@@ -36,29 +36,67 @@
       "Next": "ChargeFare"
     },
     "ChargeFare": {
-      "Comment": "Add comment...",
       "Type": "Task",
-      "Resource": "${PaymentChargeFunctionArn}",
-      "Next": "CustomerAccountCredit",
-      "Catch": [{
-        "ErrorEquals": [
-          "PaymentAuthException",
-          "PaymentChargeException"
-        ],
-        "Next": "SetFareStatusFailed",
-        "ResultPath": "$.chargeError"
-      }]
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "OutputPath": "$.Payload",
+      "Parameters": {
+        "Payload.$": "$",
+        "FunctionName": "${PaymentChargeFunctionArn}"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "Lambda.ServiceException",
+            "Lambda.AWSLambdaException",
+            "Lambda.SdkClientException"
+          ],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 6,
+          "BackoffRate": 2
+        }
+      ],
+      "Next": "CreditCustomerAccount",
+      "Catch": [
+        {
+          "ErrorEquals": [
+            "PaymentAuthException",
+            "PaymentChargeException"
+          ],
+          "ResultPath": "$.chargeError",
+          "Next": "SetFareStatusFailed"
+        }
+      ]
     },
-    "CustomerAccountCredit": {
-      "Comment": "Add comment...",
+    "CreditCustomerAccount": {
       "Type": "Task",
-      "Resource": "${AccountCreditFunctionArn}",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "OutputPath": "$.Payload",
+      "Parameters": {
+        "Payload.$": "$",
+        "FunctionName": "${AccountCreditFunctionArn}"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "Lambda.ServiceException",
+            "Lambda.AWSLambdaException",
+            "Lambda.SdkClientException"
+          ],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 6,
+          "BackoffRate": 2
+        }
+      ],
       "Next": "SetFareStatusCompleted",
-      "Catch": [{
-        "ErrorEquals": ["AccountCreditException"],
-        "Next": "RefundFare",
-        "ResultPath": "$.creditError"
-      }]
+      "Catch": [
+        {
+          "ErrorEquals": [
+            "AccountCreditException"
+          ],
+          "Next": "RefundFare",
+          "ResultPath": "$.creditError"
+        }
+      ]
     },
     "SetFareStatusCompleted": {
       "Type": "Task",
@@ -147,9 +185,25 @@
       "Type": "Succeed"
     },
     "RefundFare": {
-      "Comment": "Add comment...",
       "Type": "Task",
-      "Resource": "${PaymentRefundFunctionArn}",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "OutputPath": "$.Payload",
+      "Parameters": {
+        "Payload.$": "$",
+        "FunctionName": "${PaymentRefundFunctionArn}"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "Lambda.ServiceException",
+            "Lambda.AWSLambdaException",
+            "Lambda.SdkClientException"
+          ],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 6,
+          "BackoffRate": 2
+        }
+      ],
       "Next": "SetFareStatusFailed"
     },
     "NotifyFailure": {

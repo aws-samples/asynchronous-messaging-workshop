@@ -1,6 +1,6 @@
 +++
 title = "Bootstrap the Initial State"
-weight = 51
+weight = 50
 pre = "1 "
 +++
 
@@ -41,6 +41,7 @@ sam deploy \
 {{< /highlight >}}
 
 Confirm all proposed arguments by hitting **ENTER**.
+
 
 ### 4. Wait until the stack is successfully deployed
 

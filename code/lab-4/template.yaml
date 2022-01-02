@@ -7,7 +7,7 @@ Description: >
 Globals:
   Function:
     Timeout: 3
-    Runtime: python3.7
+    Runtime: python3.9
     MemorySize: 512
     Tags:
       project: wild-rydes
@@ -57,6 +57,18 @@ Resources:
             End: true
       Policies:
         - CloudWatchPutMetricPolicy: {}
+        - LambdaInvokePolicy:
+            FunctionName: !Ref PaymentChargeFunction
+        - LambdaInvokePolicy:
+            FunctionName: !Ref PaymentRefundFunction
+        - LambdaInvokePolicy:
+            FunctionName: !Ref AccountCreditFunction
+        - DynamoDBWritePolicy:
+            TableName: !Ref FaresTable
+        - DynamoDBReadPolicy:
+            TableName: !Ref FaresTable
+        - SNSPublishMessagePolicy:
+            TopicName: !GetAtt WildRydesFareProcessingTopic.TopicName
       Tags:
         project: wild-rydes
         workshop: asynchronous-messaging-workshop
@@ -74,6 +86,7 @@ Resources:
         FareProcessingTable: !Ref FaresTable
         FareProcessingTopicArn: !Ref WildRydesFareProcessingTopic
       Policies:
+        - CloudWatchPutMetricPolicy: {}
         - LambdaInvokePolicy:
             FunctionName: !Ref PaymentChargeFunction
         - LambdaInvokePolicy:
