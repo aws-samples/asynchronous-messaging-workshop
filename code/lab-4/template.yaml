@@ -7,7 +7,7 @@ Description: >
 Globals:
   Function:
     Timeout: 3
-    Runtime: python3.9
+    Runtime: python3.7
     MemorySize: 512
     Tags:
       project: wild-rydes
