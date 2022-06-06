@@ -6,7 +6,7 @@ hidden = true
 
 #### 1. Update the AWS SAM template
 
-In your Cloud9 IDE for this workshop, open the SAM template file `wild-rydes-async-messaging/lab-2/template.yaml`. In the **Resources** section, add the definition for an Amazon SQS queue with the name **CustomerNotificationServiceQueue**, the **CustomerNotificationService** will use to consume messages from. You can find the AWS CloudFormation documentation to do so **[here](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html)**.
+In your Cloud9 IDE for this workshop, open the SAM template file `wild-rydes-async-messaging/code/lab-2/template.yaml`. In the **Resources** section, add the definition for an Amazon SQS queue with the name **CustomerNotificationServiceQueue**, the **CustomerNotificationService** will use to consume messages from. You can find the AWS CloudFormation documentation to do so **[here](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html)**.
 
 {{%expand "Cheat Sheet" %}}
 ```yaml
@@ -86,7 +86,7 @@ Last but not least, we have to declare the **CustomerNotificationServiceQueue** 
 Run the following command to build the lab again, after we have added the Amazon SQS queue and the Amazon SNS subscription:
 
 {{< highlight bash >}}
-cd ~/environment/wild-rydes-async-messaging/lab-2
+cd ~/environment/wild-rydes-async-messaging/code/lab-2
 sam build
 
 {{< /highlight >}}

@@ -7,7 +7,7 @@ hidden = true
 
 #### 1. Grant additional IAM permissions to Lambda
 
-In your Cloud9 IDE for this workshop, open the SAM template file `wild-rydes-async-messaging/lab-2/template.yaml`. In the **Resources** section, look for the **SubmitRideCompletionFunction** definition. It already contains one policies entry called **DynamoDBCrudPolicy**. Directly below, add a policy entry which grants Amazon SNS publish message permission. You can look up the supported policies **[here](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-policy-templates.html)**.
+In your Cloud9 IDE for this workshop, open the SAM template file `wild-rydes-async-messaging/code/lab-2/template.yaml`. In the **Resources** section, look for the **SubmitRideCompletionFunction** definition. It already contains one policies entry called **DynamoDBCrudPolicy**. Directly below, add a policy entry which grants Amazon SNS publish message permission. You can look up the supported policies **[here](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-policy-templates.html)**.
 
 {{%expand "Cheat Sheet" %}}
 
@@ -25,7 +25,7 @@ In your Cloud9 IDE for this workshop, open the SAM template file `wild-rydes-asy
 
 #### 2. Provide the Amazon SNS topic ARN to Lambda
 
-In your Cloud9 IDE for this workshop, open the SAM template file `wild-rydes-async-messaging/lab-2/template.yaml`. In the **Resources** section, look for the **SubmitRideCompletionFunction** definition. It already contains one environment variables entry called **TABLE_NAME**. Directly below, add an additional variable with the key **TOPIC_ARN** and the corresponding value.  
+In your Cloud9 IDE for this workshop, open the SAM template file `wild-rydes-async-messaging/code/lab-2/template.yaml`. In the **Resources** section, look for the **SubmitRideCompletionFunction** definition. It already contains one environment variables entry called **TABLE_NAME**. Directly below, add an additional variable with the key **TOPIC_ARN** and the corresponding value.  
 
 {{%expand "Cheat Sheet" %}}
 
@@ -42,7 +42,7 @@ In your Cloud9 IDE for this workshop, open the SAM template file `wild-rydes-asy
 
 #### 3. Update your Lambda function to call Amazon SNS
 
-In your Cloud9 IDE, open the Python based AWS Lambda function `wild-rydes-async-messaging/lab-2/unicorn-management-service/app.py`.  
+In your Cloud9 IDE, open the Python based AWS Lambda function `wild-rydes-async-messaging/code/lab-2/unicorn-management-service/app.py`.  
 Add the definition of the sns client directly after the dynamodb client:  
 
 {{%expand "Cheat Sheet" %}}
@@ -82,7 +82,7 @@ After the put item DynamoDB statement and before we are sending the response bac
 Run the following command to build the lab again, after we have added the additional policy:
 
 {{< highlight bash >}}
-cd ~/environment/wild-rydes-async-messaging/lab-2
+cd ~/environment/wild-rydes-async-messaging/code/lab-2
 sam build
 
 {{< /highlight >}}

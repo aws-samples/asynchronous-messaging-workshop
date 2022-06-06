@@ -6,7 +6,7 @@ hidden = true
 
 #### 1. Update the AWS SAM template
 
-In your Cloud9 IDE for this workshop, open the SAM template file `wild-rydes-async-messaging/lab-1/template.yaml`. In the **Resources** section, uncomment the Amazon SNS event source for the **CustomerAccountingFunction**. You can find the AWS SAM documentation to do so **[here](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-function-sns.html)**.
+In your Cloud9 IDE for this workshop, open the SAM template file `wild-rydes-async-messaging/code/lab-1/template.yaml`. In the **Resources** section, uncomment the Amazon SNS event source for the **CustomerAccountingFunction**. You can find the AWS SAM documentation to do so **[here](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-function-sns.html)**.
 
 {{%expand "Cheat Sheet" %}}
 ```yaml
@@ -28,7 +28,7 @@ Events:
 Run the following command to build the lab again, after we have added the Amazon SNS subscription:
 
 {{< highlight bash >}}
-cd ~/environment/wild-rydes-async-messaging/lab-1
+cd ~/environment/wild-rydes-async-messaging/code/lab-1
 sam build
 {{< /highlight >}}
 

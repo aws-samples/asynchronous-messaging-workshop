@@ -18,7 +18,7 @@ Browse to your [AWS Cloud9 Console](https://console.aws.amazon.com/cloud9/home) 
 We provide you with an [AWS SAM](https://aws.amazon.com/serverless/sam/) template which we will use to bootstrap the initial state. In the **bash tab** (at the bottom) in you AWS Cloud9 IDE, run the following commands to build the lab code:  
 
 {{< highlight bash >}}
-cd ~/environment/wild-rydes-async-messaging/lab-4
+cd ~/environment/wild-rydes-async-messaging/code/lab-4
 sam build
 {{< /highlight >}}
 

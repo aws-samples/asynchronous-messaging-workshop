@@ -7,7 +7,7 @@ hidden = true
 
 #### 1. Update the AWS SAM template
 
-In your Cloud9 IDE for this workshop, open the SAM template file `wild-rydes-async-messaging/lab-2/template.yaml`. In the **Resources** section, add the definition for an Amazon SNS topic with the name RideCompletionTopic. You can find the AWS CloudFormation documentation to do so **[here](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html)**.
+In your Cloud9 IDE for this workshop, open the SAM template file `wild-rydes-async-messaging/code/lab-2/template.yaml`. In the **Resources** section, add the definition for an Amazon SNS topic with the name RideCompletionTopic. You can find the AWS CloudFormation documentation to do so **[here](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html)**.
 
 {{%expand "Cheat Sheet" %}}
 ```
@@ -28,7 +28,7 @@ In your Cloud9 IDE for this workshop, open the SAM template file `wild-rydes-asy
 Run the following command to build the lab again, after we have added the Amazon SNS topic:
 
 {{< highlight bash >}}
-cd ~/environment/wild-rydes-async-messaging/lab-2
+cd ~/environment/wild-rydes-async-messaging/code/lab-2
 sam build
 
 {{< /highlight >}}
