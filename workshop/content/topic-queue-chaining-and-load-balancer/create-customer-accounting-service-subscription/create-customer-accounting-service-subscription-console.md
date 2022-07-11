@@ -12,7 +12,7 @@ In your **[Amazon SQS console](https://console.aws.amazon.com/sqs/home?)**, sele
 ![Step 1](step-1-console.png)
 {{% /expand%}}
 
-Enter `CustomerAccountingServiceQueue` as **Queue Name**, make sure **Standard Queue** is highlighted and click **Quick-Create Queue**.
+Enter `CustomerAccountingServiceQueue` as **Queue Name**, make sure **Standard Queue** is highlighted and click **Create Queue**.
 
 {{%expand "Screenshot" %}}
 ![Step 2](step-2-console.png)
