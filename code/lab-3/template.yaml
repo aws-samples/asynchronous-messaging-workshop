@@ -23,6 +23,7 @@ Resources:
         Variables:
           TABLE_NAME: !Ref RidesBookingTable
           TOPIC_ARN: !Ref RequestForQuotesTopic
+          RESPONSE_QUEUE_URL: !Ref RequestForQuotesResponseQueue
       Policies:
         - DynamoDBCrudPolicy: # https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json
             TableName:
@@ -90,12 +91,11 @@ Resources:
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource1
-          QUEUE_URL: !Ref RequestForQuotesResponseQueue
       Policies:
         - AWSLambdaExecute
         - SQSSendMessagePolicy: # https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json
             QueueName:
-              !GetAtt RequestForQuotesResponseQueue.QueueName
+              '*-RequestForQuotesResponseQueue-*'
       Events:
         SqsJobQueue:
           Type: SNS
@@ -109,12 +109,11 @@ Resources:
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource2
-          QUEUE_URL: !Ref RequestForQuotesResponseQueue
       Policies:
         - AWSLambdaExecute
         - SQSSendMessagePolicy: # https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json
             QueueName:
-              !GetAtt RequestForQuotesResponseQueue.QueueName
+              '*-RequestForQuotesResponseQueue-*'
       Events:
         SqsJobQueue:
           Type: SNS
@@ -128,12 +127,11 @@ Resources:
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource3
-          QUEUE_URL: !Ref RequestForQuotesResponseQueue
       Policies:
         - AWSLambdaExecute
         - SQSSendMessagePolicy: # https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json
             QueueName:
-              !GetAtt RequestForQuotesResponseQueue.QueueName
+              '*-RequestForQuotesResponseQueue-*'
       Events:
         SqsJobQueue:
           Type: SNS
@@ -147,12 +145,11 @@ Resources:
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource4
-          QUEUE_URL: !Ref RequestForQuotesResponseQueue
       Policies:
         - AWSLambdaExecute
         - SQSSendMessagePolicy: # https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json
             QueueName:
-              !GetAtt RequestForQuotesResponseQueue.QueueName
+              '*-RequestForQuotesResponseQueue-*'
       Events:
         SqsJobQueue:
           Type: SNS
@@ -166,12 +163,11 @@ Resources:
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource5
-          QUEUE_URL: !Ref RequestForQuotesResponseQueue
       Policies:
         - AWSLambdaExecute
         - SQSSendMessagePolicy: # https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json
             QueueName:
-              !GetAtt RequestForQuotesResponseQueue.QueueName
+              '*-RequestForQuotesResponseQueue-*'
       Events:
         SqsJobQueue:
           Type: SNS
@@ -185,12 +181,11 @@ Resources:
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource6
-          QUEUE_URL: !Ref RequestForQuotesResponseQueue
       Policies:
         - AWSLambdaExecute
         - SQSSendMessagePolicy: # https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json
             QueueName:
-              !GetAtt RequestForQuotesResponseQueue.QueueName
+              '*-RequestForQuotesResponseQueue-*'
       Events:
         SqsJobQueue:
           Type: SNS
@@ -204,12 +199,11 @@ Resources:
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource7
-          QUEUE_URL: !Ref RequestForQuotesResponseQueue
       Policies:
         - AWSLambdaExecute
         - SQSSendMessagePolicy: # https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json
             QueueName:
-              !GetAtt RequestForQuotesResponseQueue.QueueName
+              '*-RequestForQuotesResponseQueue-*'
       Events:
         SqsJobQueue:
           Type: SNS
@@ -223,12 +217,11 @@ Resources:
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource8
-          QUEUE_URL: !Ref RequestForQuotesResponseQueue
       Policies:
         - AWSLambdaExecute
         - SQSSendMessagePolicy: # https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json
             QueueName:
-              !GetAtt RequestForQuotesResponseQueue.QueueName
+              '*-RequestForQuotesResponseQueue-*'
       Events:
         SqsJobQueue:
           Type: SNS
@@ -242,12 +235,11 @@ Resources:
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource9
-          QUEUE_URL: !Ref RequestForQuotesResponseQueue
       Policies:
         - AWSLambdaExecute
         - SQSSendMessagePolicy: # https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json
             QueueName:
-              !GetAtt RequestForQuotesResponseQueue.QueueName
+              '*-RequestForQuotesResponseQueue-*'
       Events:
         SqsJobQueue:
           Type: SNS
@@ -261,12 +253,11 @@ Resources:
       Environment:
         Variables:
           SERVICE_NAME: UnicornManagementResource10
-          QUEUE_URL: !Ref RequestForQuotesResponseQueue
       Policies:
         - AWSLambdaExecute
         - SQSSendMessagePolicy: # https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json
             QueueName:
-              !GetAtt RequestForQuotesResponseQueue.QueueName
+              '*-RequestForQuotesResponseQueue-*'
       Events:
         SqsJobQueue:
           Type: SNS

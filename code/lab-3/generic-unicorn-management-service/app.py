@@ -6,7 +6,6 @@ import random
 import time
 
 SERVICE_NAME = os.environ['SERVICE_NAME']
-QUEUE_URL = os.environ['QUEUE_URL']
 
 config = Config(connect_timeout=5, read_timeout=5, retries={'max_attempts': 1})
 sqs = boto3.client('sqs', config=config)
@@ -32,8 +31,11 @@ def lambda_handler(event, context):
         'quote': random.randint(0,100)
     })
 
+    # extract return address from the payload
+    responseQueueUrl = message['response-queue-url']
+
     response = sqs.send_message(
-        QueueUrl = QUEUE_URL,
+        QueueUrl = responseQueueUrl,
         MessageBody = response_message
     )
 
