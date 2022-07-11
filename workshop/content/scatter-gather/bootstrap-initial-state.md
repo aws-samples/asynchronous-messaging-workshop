@@ -8,8 +8,6 @@ First, we will build the AWS Serverless Application Model (AWS SAM) deployment t
 
 The inputs and outputs from the service are shown in the picture below. The overall deployment comprises of deploying API endpoints using Amazon API Gateway to send the RFQ (request for quote) and get the response for the RFQ, AWS Lambda functions to process the request for quotes from end user and response for the quotes from service providers, Amazon DynamoDB to stage the response quotes and SQS queues to act as the message destination for request and responses.
 
-
-
 ![Step 1](lab-3-step-1.png)
 
 ### 1. Browse to your AWS Cloud9 IDE
@@ -22,7 +20,7 @@ Browse to your [AWS Cloud9 Console](https://console.aws.amazon.com/cloud9/home) 
 
 ### 2. Build the lab artifacts from source
 
-We provide you with an [AWS SAM](https://aws.amazon.com/serverless/sam/) template which we will use to bootstrap the initial state. In the **bash tab** (at the bottom) in you AWS Cloud9 IDE, run the following commands to build the lab code:  
+We provide you with an [AWS SAM](https://aws.amazon.com/serverless/sam/) template which we will use to bootstrap the initial state. In the **bash tab** (at the bottom) in you AWS Cloud9 IDE, run the following commands to build the lab code:
 
 {{< highlight bash >}}
 cd ~/environment/wild-rydes-async-messaging/lab-3
@@ -35,13 +33,13 @@ sam build
 
 ### 3. Deploy the application
 
-Now we are ready to deploy the application, by running the following command in the **lab-3** directory:  
+Now we are ready to deploy the application, by running the following command in the **lab-3** directory:
 
 {{< highlight bash >}}
 sam deploy --guided --stack-name wild-rydes-async-msg-3 --capabilities CAPABILITY_IAM
 {{< /highlight >}}
 
-Confirm all proposed arguments by hitting **ENTER**. Yu will be asked to confirm whether or not you want to proceed without authorisation for two services. Enter **y** for these and continue with the default arguments.
+Confirm all proposed arguments by hitting **ENTER**. You will be asked to confirm whether or not you want to proceed without authorisation for two services. Enter **y** for these and continue with the default arguments.
 
 {{< highlight bash >}}
 RequestForQuotesService may not have authorization defined, Is this okay? [y/N]: y
@@ -58,11 +56,6 @@ It usually takes less than 5 minutes until the stack launched. You can monitor t
 ![Step 6](lab-3-step-7.png)
 {{% /expand%}}
 
-
 In the meantime while your waiting, you may want to have a look at the AWS SAM template to make yourself familiar with the stack we launched. Just click on the **template.yaml** attachment below to see the content. Once complete, you can also look at the lambda functions that will request the quotes and process responses. The created queues can also be explored from the console.
 
-
 {{%attachments title="Related files" pattern=".*(yaml)"/%}}
-
-
-
