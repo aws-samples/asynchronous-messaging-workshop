@@ -61,11 +61,11 @@ Resources:
       #   - SQSPollerPolicy: # https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json
       #       QueueName: !Ref CustomerAccountingServiceQueue
       # Events:
-      #    CustomerAccountingServiceJobQueue:
-      #      Type: SQS
-      #      Properties:
-      #        Queue: !GetAtt CustomerAccountingServiceQueue.Arn
-      #        BatchSize: 1
+      #   CustomerAccountingServiceJobQueue:
+      #     Type: SQS
+      #     Properties:
+      #       Queue: !GetAtt CustomerAccountingServiceQueue.Arn
+      #       BatchSize: 1
 
   CustomerNotificationService:
     Type: AWS::Serverless::Function
