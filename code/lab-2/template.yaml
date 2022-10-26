@@ -57,15 +57,15 @@ Resources:
       Environment:
         Variables:
           SERVICE_NAME: CustomerAccountingService
-    #   Policies:
-    #     - SQSPollerPolicy: # https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json
-    #         QueueName: !Ref CustomerAccountingServiceQueue
-    # Events:
-    #    CustomerAccountingServiceJobQueue:
-    #      Type: SQS
-    #      Properties:
-    #        Queue: !GetAtt CustomerAccountingServiceQueue.Arn
-    #        BatchSize: 1
+      # Policies:
+      #   - SQSPollerPolicy: # https://github.com/awslabs/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json
+      #       QueueName: !Ref CustomerAccountingServiceQueue
+      # Events:
+      #   CustomerAccountingServiceJobQueue:
+      #     Type: SQS
+      #     Properties:
+      #       Queue: !GetAtt CustomerAccountingServiceQueue.Arn
+      #       BatchSize: 1
 
   CustomerNotificationService:
     Type: AWS::Serverless::Function
